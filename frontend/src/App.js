@@ -13,9 +13,8 @@ function App() {
       <Routes>
         <Route path="/" element={<HomeContainer />}></Route>
 
-        <Route path="withdraw" element={<WithdrawConatiner />}>
-          <Route path="details" element={<WithdrawDetailsContainers />} />
-        </Route>
+        <Route path="withdraw" element={<WithdrawConatiner />}></Route>
+        <Route path="withdraw/details" element={<WithdrawDetailsContainers />} />
 
         <Route path="*" element={<NotFound />} />
       </Routes>
