@@ -1,7 +1,11 @@
+import * as S from "./Style";
+
 export function AccountAuth() {
   return(
     <div>
-      계좌 인증 페이지
+      <S.MainText>
+        정산 받을 계좌를<br />hi
+      </S.MainText>
     </div>
   )
 }

@@ -1,7 +1,17 @@
+import { AccountAuth } from "components/withdraw/AccountAuth";
+import { Withdraw } from "components/withdraw/Withdraw";
+import { useState } from "react"
+
 export function WithdrawConatiner() {
+  const [isAccount, setIsAccount] = useState(false);
+
   return (
-    <div>
-      WithdrawConatiner
+    <div className="container">
+      {isAccount ?
+        <Withdraw />
+      :
+        <AccountAuth />
+      }
     </div>
   )
 }
