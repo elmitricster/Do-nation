@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const mainText = styled.h1`
   text-align: center;
@@ -13,4 +14,14 @@ const kakaoLogin = styled.img`
   margin-top: 5vh;
 `;
 
-export { mainText, kakaoLogin };
+const switchLink = styled(Link)`
+  text-decoration: none;
+  color: grey;
+`;
+
+const box = styled.div`
+  text-align: center;
+  margin-top: 10vh;
+`;
+
+export { mainText, kakaoLogin, switchLink, box };
