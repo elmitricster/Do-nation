@@ -64,7 +64,7 @@ export const Contents = styled.div`
   }
 
   @media ( min-width: 992px ) {
-    width: 30%;
+    width: 40%;
     margin: 7rem auto;
     font-size: 1rem;
   }
@@ -91,7 +91,7 @@ export const ContentText3 = styled.div`
 `
 
 export const Input = styled.input`
-  margin: 0.5rem;
+  margin: 0.5rem auto;
   border: solid 1px black;
   border-radius: 0.3rem;
   height: 2rem;

@@ -125,7 +125,7 @@ export function Navigation() {
                       사용방법
                     </NavLink>
                     <NavLink
-                      to=""
+                      to="profile/edit"
                       onClick={handleClose}
                       style={S.navLinkStyle}
                     >

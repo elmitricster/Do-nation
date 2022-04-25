@@ -3,8 +3,8 @@ import { Row, Col } from 'react-bootstrap';
 import * as S from './Style';
 
 export function DateSearch() {
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
+  const [startDate, setStartDate] = useState();
+  const [endDate, setEndDate] = useState();
 
   function range(start, end) {
     var arr = [];

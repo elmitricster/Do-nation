@@ -1,6 +1,6 @@
 import { useState } from "react";
 import * as S from "./Style";
-import { Row, Col, Input, Alert, Button } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 
 export function AccountAuth() {
   const [name, setName] = useState('');
@@ -43,8 +43,8 @@ export function AccountAuth() {
         <S.MainText>입력해주세요</S.MainText>
       </S.MainTextBox>
 
-      <S.Contents onKeyPress={handleKeyPress}>
-        <Row className="justify-content-center">
+      <Row>
+        <S.Contents onKeyPress={handleKeyPress}>
           <Col style={{marginBottom: "1rem"}}>
             <S.ContentText>이름</S.ContentText>
             <S.Input
@@ -54,8 +54,6 @@ export function AccountAuth() {
               onChange={onNameHandler}
             />
           </Col>
-        </Row>
-        <Row className="justify-content-center">
           <Col style={{marginBottom: "1rem"}}>
             <S.ContentText>생년월일</S.ContentText>
             <S.Input
@@ -65,8 +63,6 @@ export function AccountAuth() {
               onChange={onBirthdayHandler}
             />
           </Col>
-        </Row>
-        <Row className="justify-content-center">
           <Col style={{marginBottom: "1rem"}}>
             <S.ContentText>은행</S.ContentText>
             <S.Input
@@ -76,8 +72,6 @@ export function AccountAuth() {
               onChange={onBankHandler}
             />
           </Col>
-        </Row>
-        <Row className="justify-content-center">
           <Col style={{marginBottom: "1rem"}}>
             <S.ContentText>계좌번호</S.ContentText>
             <S.Input
@@ -87,8 +81,6 @@ export function AccountAuth() {
               onChange={onAccountNumHandler}
             />
           </Col>
-        </Row>
-        <Row className="justify-content-center">
           <Col style={{marginBottom: "1rem"}}>
             <S.MyButton
               style={{width: "100%", marginBottom: "1rem"}}
@@ -97,8 +89,8 @@ export function AccountAuth() {
               인증하기
             </S.MyButton>
           </Col>
-        </Row>
-      </S.Contents>
+        </S.Contents>
+      </Row>
     </div>
   )
 }

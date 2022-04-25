@@ -5,6 +5,8 @@ import { WithdrawConatiner } from './containers/withdraw/WithdrawContainer';
 import { WithdrawDetailsContainers } from './containers/withdraw/WithdrawDetailsContainer';
 import { NotFound } from './common/notfound/NotFound';
 import { Navigation } from './common/navigation/Navigation';
+import { ProfileEditContainer } from 'containers/profile/ProfileEditContainer';
+import { ProfileConatiner } from 'containers/profile/ProfileContainer';
 
 function App() {
   return (
@@ -12,6 +14,9 @@ function App() {
       <Navigation />
       <Routes>
         <Route path="/" element={<HomeContainer />}></Route>
+
+        <Route path="profile" element={<ProfileConatiner />}></Route>
+        <Route path="profile/edit" element={<ProfileEditContainer />} />
 
         <Route path="withdraw" element={<WithdrawConatiner />}></Route>
         <Route path="withdraw/details" element={<WithdrawDetailsContainers />} />
