@@ -1,7 +1,7 @@
 package com.example.payment.service;
 
 import com.example.payment.domain.PaymentRecord;
-import com.example.payment.domain.User;
+import com.example.undefined.domain.User;
 import com.example.payment.dto.KakaoPayApiResponse;
 import com.example.payment.dto.PaymentPointRequest;
 import com.example.payment.dto.PaymentPointResponse;
@@ -15,7 +15,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDateTime;

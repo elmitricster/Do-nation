@@ -1,7 +1,7 @@
 package com.example.payment.domain;
 
-import com.example.payment.dto.PaymentPointRequest;
 import com.example.payment.util.TaxCalculator;
+import com.example.undefined.domain.User;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;

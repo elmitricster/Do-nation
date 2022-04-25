@@ -2,18 +2,17 @@ package com.example.payment.service;
 
 
 import com.example.payment.domain.PaymentRecord;
-import com.example.payment.domain.User;
+import com.example.undefined.domain.User;
 import com.example.payment.dto.KakaoPayApiResponse;
 import com.example.payment.dto.PaymentPointRequest;
 import com.example.payment.dto.PaymentPointResponse;
 import com.example.payment.dto.PaymentRecordResponse;
-import com.example.payment.exception.NotFoundUserException;
+import com.example.undefined.exception.NotFoundUserException;
 import com.example.payment.repository.PaymentRecordRepository;
 import com.example.payment.repository.UserRepository;
 import com.example.payment.util.PointConvertCalculator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

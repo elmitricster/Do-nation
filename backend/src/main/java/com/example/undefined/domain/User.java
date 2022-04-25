@@ -1,4 +1,4 @@
-package com.example.payment.domain;
+package com.example.undefined.domain;
 
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
