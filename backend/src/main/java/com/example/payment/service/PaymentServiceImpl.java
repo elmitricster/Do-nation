@@ -9,7 +9,7 @@ import com.example.payment.dto.PaymentPointResponse;
 import com.example.payment.dto.PaymentRecordResponse;
 import com.example.undefined.exception.NotFoundUserException;
 import com.example.payment.repository.PaymentRecordRepository;
-import com.example.payment.repository.UserRepository;
+import com.example.undefined.repository.UserRepository;
 import com.example.payment.util.PointConvertCalculator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

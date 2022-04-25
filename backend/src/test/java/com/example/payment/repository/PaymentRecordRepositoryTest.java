@@ -2,6 +2,7 @@ package com.example.payment.repository;
 
 import com.example.payment.domain.PaymentRecord;
 import com.example.undefined.domain.User;
+import com.example.undefined.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,7 +19,7 @@ class PaymentRecordRepositoryTest {
     @Autowired
     PaymentRecordRepository paymentRecordRepository;
     @Autowired
-    UserRepository  userRepository;
+    UserRepository userRepository;
 
 
     User user;

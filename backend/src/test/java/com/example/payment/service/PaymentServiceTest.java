@@ -7,7 +7,7 @@ import com.example.payment.dto.PaymentPointRequest;
 import com.example.payment.dto.PaymentPointResponse;
 import com.example.payment.dto.PaymentRecordResponse;
 import com.example.payment.repository.PaymentRecordRepository;
-import com.example.payment.repository.UserRepository;
+import com.example.undefined.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
