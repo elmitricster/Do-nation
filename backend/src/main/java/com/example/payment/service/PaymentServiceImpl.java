@@ -7,6 +7,7 @@ import com.example.payment.dto.KakaoPayApiResponse;
 import com.example.payment.dto.PaymentPointRequest;
 import com.example.payment.dto.PaymentPointResponse;
 import com.example.payment.dto.PaymentRecordResponse;
+import com.example.payment.exception.NotFoundUserException;
 import com.example.payment.repository.PaymentRecordRepository;
 import com.example.payment.repository.UserRepository;
 import com.example.payment.util.PointConvertCalculator;
@@ -27,11 +28,11 @@ public class PaymentServiceImpl implements PaymentService{
     private final UserRepository userRepository;
     private final KakaoPayService kakaoPayService;
     //TODO jwt 관련 인증을 해야할거임. 우선 작업은 햇다고 가정하고 함.
-
+    //TODO userRepository 익셉셥 한곳으로 모으기.
 
     @Override
     public PaymentPointResponse paymentPoint(long id, PaymentPointRequest request) {
-        User user =  userRepository.findById(id).orElseThrow(()->new RuntimeException("회원이 없는데 접근했어요."));
+        User user =  userRepository.findById(id).orElseThrow(()->new NotFoundUserException());
         if(!PointConvertCalculator.isEqualExchangeRate(request))
             throw new RuntimeException("잘못된 접근입니다.");
 
@@ -53,7 +54,7 @@ public class PaymentServiceImpl implements PaymentService{
     @Override
     @Transactional(readOnly = true)
     public List<PaymentRecordResponse> fetchPayments(long id) {
-        User user =  userRepository.findById(id).orElseThrow(()->new RuntimeException("엄준식"));
+        User user =  userRepository.findById(id).orElseThrow(()->new NotFoundUserException());
         return PaymentRecordResponse.convertList(paymentRecordRepository.findAllByUserOrderByPaymentTimeDesc(user));
     }
 }
