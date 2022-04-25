@@ -7,6 +7,8 @@ import { NotFound } from './common/notfound/NotFound';
 import { Navigation } from './common/navigation/Navigation';
 import { ProfileEditContainer } from 'containers/profile/ProfileEditContainer';
 import { ProfileConatiner } from 'containers/profile/ProfileContainer';
+import { PaymentContainer } from 'containers/payment/PaymentContainer';
+import { PaymentDetailsContainer } from 'containers/payment/PaymentDetailsContainer'
 
 function App() {
   return (
@@ -20,6 +22,9 @@ function App() {
 
         <Route path="withdraw" element={<WithdrawConatiner />}></Route>
         <Route path="withdraw/details" element={<WithdrawDetailsContainers />} />
+
+        <Route path="payment" element={<PaymentContainer />}></Route>
+        <Route path="payment/details" element={<PaymentDetailsContainer />} />
 
         <Route path="*" element={<NotFound />} />
       </Routes>
