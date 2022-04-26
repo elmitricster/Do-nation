@@ -1,0 +1,26 @@
+pipeline {
+    agent any
+    tools {nodejs "nodejs 18.0.0"}
+    stages {
+        stage("git clone"){
+            steps{
+              git branch: 'frontend', credentialsId: 'ssafyid', url: 'https://lab.ssafy.com/s06-final/S06P31C101'
+            }
+        }
+        stage('build& image push') {
+                    steps{
+                        dir("./frontend"){
+                            sh "npm install --force && CI=false npm run build"
+                            script{
+                                docker.withRegistry('https://registry.hub.docker.com/', 'dockerhubId') {
+                                    def customImage = docker.build("wjdgustn15/ssafy_donation_service:fe")
+                                    customImage.push()
+                                }
+                            }
+                        }
+                    }
+
+        }
+
+    }
+}
