@@ -22,6 +22,12 @@ services:
       MYSQL_ROOT_PASSWORD: example
     ports:
       - "3306:3306"
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 3300:8080
+    
   jenkins:
       image: jenkins/jenkins:lts
       volumes:
