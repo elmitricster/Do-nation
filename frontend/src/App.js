@@ -7,6 +7,8 @@ import { NotFound } from './common/notfound/NotFound';
 import { Navigation } from './common/navigation/Navigation';
 import { ProfileEditContainer } from 'containers/profile/ProfileEditContainer';
 import { ProfileConatiner } from 'containers/profile/ProfileContainer';
+import { ArticlesContainer } from 'containers/profile/ArticlesContainer';
+import { DonationListContainer } from 'containers/profile/DonationListContainer';
 
 function App() {
   return (
@@ -15,7 +17,10 @@ function App() {
       <Routes>
         <Route path="/" element={<HomeContainer />}></Route>
 
-        <Route path="profile" element={<ProfileConatiner />}></Route>
+        <Route path="profile/:nickname" element={<ProfileConatiner />}>
+          <Route path="articles" element={<ArticlesContainer />} />
+          <Route path="donations" element={<DonationListContainer />} />
+        </Route>
         <Route path="profile/edit" element={<ProfileEditContainer />} />
 
         <Route path="withdraw" element={<WithdrawConatiner />}></Route>
