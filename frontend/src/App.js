@@ -12,6 +12,8 @@ import { ProfileEditContainer } from 'containers/profile/ProfileEditContainer';
 import { ProfileConatiner } from 'containers/profile/ProfileContainer';
 import { PaymentContainer } from 'containers/payment/PaymentContainer';
 import { PaymentDetailsContainer } from 'containers/payment/PaymentDetailsContainer';
+import { ArticlesContainer } from 'containers/profile/ArticlesContainer';
+import { DonationListContainer } from 'containers/profile/DonationListContainer';
 
 function App() {
   return (
@@ -23,7 +25,10 @@ function App() {
         <Route path="/user/kakao/callback" element={<AuthContainer />}></Route>
         <Route path="/user/signup" element={<SignupContainer />}></Route>
 
-        <Route path="profile" element={<ProfileConatiner />}></Route>
+        <Route path="profile/:nickname" element={<ProfileConatiner />}>
+          <Route path="articles" element={<ArticlesContainer />} />
+          <Route path="donations" element={<DonationListContainer />} />
+        </Route>
         <Route path="profile/edit" element={<ProfileEditContainer />} />
 
         <Route path="withdraw" element={<WithdrawConatiner />}></Route>
