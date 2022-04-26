@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  fe:
+    image: wjdgustn15/ssafy_donation_service:fe
+    ports: 
+      - "5500:5500"    
+    
+  be:
+    image: wjdgustn15/ssafy_donation_service:be 
+    ports:
+      - "8080:8080"
+  nginx:
+    image: wjdgustn15/ssafy_donation_service:nginx
+    ports:
+      - "80:80"
+  mysql:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+    ports:
+      - "3306:3306"
+  jenkins:
+      image: jenkins/jenkins:lts
+      volumes:
+          - /var/run/docker.sock:/var/run/docker.sock
+          - /jenkins:/var/jenkins_home
+          - /usr/bin/docker:/usr/bin/docker
+          - /usr/bin/docker-compose:/usr/bin/docker-compose
+
+      ports:
+          - "8000:8080"
+      privileged: true
+      user: root
+  sonarqube:
+    image: sonarqube:latest
+    ports:
+          - "9000:9000"
