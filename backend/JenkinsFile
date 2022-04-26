@@ -1,0 +1,25 @@
+pipeline {
+    agent any
+    stages {
+        stage("git clone"){
+            steps{
+              git branch: 'backend', credentialsId: 'ssafyid', url: 'https://lab.ssafy.com/s06-final/S06P31C101'
+            }
+        }
+        stage('build& image push') {
+                    steps{
+                        sh "./gradlew clean bootjar"
+                        dir("./backend"){
+                            script{
+                                docker.withRegistry('https://registry.hub.docker.com/', 'dockerhubId') {
+                                    def customImage = docker.build("wjdgustn15/ssafy_donation_service:be")
+                                    customImage.push()
+                                }
+                            }
+                        }
+                    }
+
+        }
+
+    }
+}
