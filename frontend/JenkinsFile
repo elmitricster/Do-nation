@@ -1,5 +1,6 @@
 pipeline {
     agent any
+    tools {nodejs "nodejs 18.0.0"}
     stages {
         stage("git clone"){
             steps{
@@ -9,8 +10,7 @@ pipeline {
         stage('build& image push') {
                     steps{
                         dir("./frontend"){
-                           sh "chmod +x npm"
-                            sh "npm install && npm run build"
+                            sh "npm install --force && CI=false npm run build"
                             script{
                                 docker.withRegistry('https://registry.hub.docker.com/', 'dockerhubId') {
                                     def customImage = docker.build("wjdgustn15/ssafy_donation_service:fe")
