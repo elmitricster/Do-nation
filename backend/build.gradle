@@ -55,7 +55,7 @@ sonarqube {
 	properties {
 		property "sonar.projectKey", "ssafy_donation"
 		property 'sonar.host.url', 'http://k6c101.p.ssafy.io:9000/'
-		property 'sonar.login', '3a8bbce2bfb967127d2f0f1213935e28a19e56aa'
+		property 'sonar.login', 'aed72782668a694c0d577b8744a95d43b08f4ba6'
 		property 'sonar.sources', 'src'
 		property 'sonar.language', 'java'
 		property 'sonar.coverage.jacoco.xmlReportPaths', '${buildDir}/reports/jacoco/test/jacocoTestReport.xml'
