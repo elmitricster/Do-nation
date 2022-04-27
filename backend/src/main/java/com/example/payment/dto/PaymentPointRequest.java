@@ -19,18 +19,19 @@ public class PaymentPointRequest {
     private String partnerUserId;
     private String pgToken;
 
-    public PaymentPointRequest(int point, int money, String cid, String tid, String partner_order_id, String partner_user_id, String pgToken) {
+    public PaymentPointRequest(int point, int money, String cid, String tid, String partnerOrderId, String partnerUserId, String pgToken) {
         if(point==0||money==0)
             throw new UnauthorizedRequestException();
-
+        
         this.point = point;
         this.money = money;
         this.cid = cid;
         this.tid = tid;
-        this.partnerOrderId = partner_order_id;
-        this.partnerUserId = partner_user_id;
+        this.partnerOrderId = partnerOrderId;
+        this.partnerUserId = partnerUserId;
         this.pgToken = pgToken;
     }
+
     public double getExchangeRate() {
 
         BigDecimal moneyBD = BigDecimal.valueOf(TaxCalculator.excludedTaxPrice(money));

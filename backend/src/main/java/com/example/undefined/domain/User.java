@@ -1,6 +1,7 @@
 package com.example.undefined.domain;
 
 import com.example.common.exception.UnauthorizedRequestException;
+import com.example.undefined.exception.NotChargePointException;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -36,7 +37,7 @@ public class User {
     public void chargePoint(int point){
         long chargePoint = this.point+(long)point;
         if(point<=0||chargePoint>=Integer.MAX_VALUE)
-            throw new RuntimeException("충전되지 않는 경우입니다.");
+            throw new NotChargePointException();
         this.point+=point;
     }
     

@@ -1,6 +1,5 @@
 package com.example.payment.util;
 
-import com.example.common.exception.BaseException;
 import com.example.common.util.BaseUtil;
 import com.example.payment.dto.PaymentPointRequest;
 import com.example.payment.exception.OverflowPointException;
@@ -9,7 +8,7 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 
 @NoArgsConstructor
-public class PointConvertCalculator extends BaseUtil {
+public class PointConvertCalculator extends BaseUtil{
     private static final double EXCHANGE_RATE = 1;
 
     public static long moneyToPoint(long money) {

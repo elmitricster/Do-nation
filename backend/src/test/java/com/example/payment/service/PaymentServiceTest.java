@@ -1,13 +1,13 @@
 package com.example.payment.service;
 
 import com.example.payment.domain.PaymentRecord;
-import com.example.undefined.domain.User;
 import com.example.payment.dto.KakaoPayApiResponse;
 import com.example.payment.dto.PaymentPointRequest;
 import com.example.payment.dto.PaymentPointResponse;
 import com.example.payment.dto.PaymentRecordResponse;
 import com.example.payment.repository.PaymentRecordRepository;
-import com.example.undefined.repository.UserRepository;
+import com.example.undefined.domain.User;
+import com.example.undefined.service.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,11 +20,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class PaymentServiceTest {
@@ -32,7 +30,8 @@ class PaymentServiceTest {
     @Mock
     PaymentRecordRepository paymentRecordRepository;
     @Mock
-    UserRepository userRepository;
+    UserService userService;
+
     @Mock
     KakaoPayService kakaoPayService;
     @InjectMocks
@@ -45,7 +44,7 @@ class PaymentServiceTest {
     @BeforeEach
     public void setUp() {
         user = new User();
-        when(userRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(user));
+        when(userService.findMember(Mockito.anyLong())).thenReturn(user);
 
     }
 
