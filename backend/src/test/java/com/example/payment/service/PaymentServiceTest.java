@@ -76,6 +76,6 @@ class PaymentServiceTest {
         when(paymentRecordRepository.save(Mockito.any())).thenReturn(record);
        PaymentPointResponse response = payment.paymentPoint(1, new PaymentPointRequest(1, 2, "cid", "tid", "partner_order_id", "partner_user_id", "pg_token"));
 
-       assertEquals(true,record.getPaymentTime().isEqual(response.getApprove_at()));
+       assertEquals(true,record.getPaymentTime().isEqual(response.getApproveAt()));
     }
 }
