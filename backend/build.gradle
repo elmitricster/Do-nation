@@ -59,7 +59,6 @@ sonarqube {
 		property 'sonar.sources', 'src'
 		property 'sonar.language', 'java'
 		property 'sonar.coverage.jacoco.xmlReportPaths', '${buildDir}/reports/jacoco/test/jacocoTestReport.xml'
-		property 'sonar.java.binaries', '${buildDir}/classes'
 		property 'sonar.test.inclusions', '**/*Test.java'
 		property 'sonar.exclusions', '**/test/**, **/Q*.java, **/*Doc*.java, **/resources/**'
 
