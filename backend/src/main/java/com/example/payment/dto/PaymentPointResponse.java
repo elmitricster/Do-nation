@@ -12,8 +12,8 @@ public class PaymentPointResponse {
     private LocalDateTime approve_at;
 
 
-    public PaymentPointResponse(PaymentRecord record) {
-        this.currentPoint =record.getUser().getPoint();
-        this.approve_at = record.getPaymentTime();
+    public PaymentPointResponse(PaymentRecord paymentRecord) {
+        this.currentPoint =paymentRecord.getUser().getPoint();
+        this.approve_at = paymentRecord.getPaymentTime();
     }
 }

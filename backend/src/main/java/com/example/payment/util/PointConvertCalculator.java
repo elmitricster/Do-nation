@@ -1,12 +1,16 @@
 package com.example.payment.util;
 
+import com.example.common.exception.BaseException;
+import com.example.common.util.BaseUtil;
 import com.example.payment.dto.PaymentPointRequest;
-import com.example.payment.dto.PaymentRecordResponse;
+import com.example.payment.exception.OverflowPointException;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
-public class PointConvertCalculator {
-    private final static double EXCHANGE_RATE = 1;
+@NoArgsConstructor
+public class PointConvertCalculator extends BaseUtil {
+    private static final double EXCHANGE_RATE = 1;
 
     public static long moneyToPoint(long money) {
         BigDecimal priceBD = BigDecimal.valueOf(money);
@@ -14,7 +18,7 @@ public class PointConvertCalculator {
 
         long point=(priceBD.multiply(taxBD)).longValue();
         if(point>Integer.MAX_VALUE)
-            throw new RuntimeException("충전할수 있는 한도 초과");
+            throw new OverflowPointException();
 
         return (int)point;
     }

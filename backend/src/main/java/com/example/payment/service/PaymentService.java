@@ -1,6 +1,5 @@
 package com.example.payment.service;
 
-import com.example.payment.domain.PaymentRecord;
 import com.example.payment.dto.PaymentPointRequest;
 import com.example.payment.dto.PaymentPointResponse;
 import com.example.payment.dto.PaymentRecordResponse;

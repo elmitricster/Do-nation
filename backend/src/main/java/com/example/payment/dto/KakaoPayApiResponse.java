@@ -7,11 +7,11 @@ import java.time.LocalDateTime;
 @Getter
 @RequiredArgsConstructor
 public class KakaoPayApiResponse {
-    private LocalDateTime approve_at;
+    private LocalDateTime approveAt;
     private String tid;
 
-    public KakaoPayApiResponse(LocalDateTime approve_at, String tid) {
-        this.approve_at = approve_at;
+    public KakaoPayApiResponse(LocalDateTime approveAt, String tid) {
+        this.approveAt = approveAt;
         this.tid = tid;
     }
 }

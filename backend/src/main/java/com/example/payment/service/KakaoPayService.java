@@ -2,7 +2,6 @@ package com.example.payment.service;
 
 import com.example.payment.dto.KakaoPayApiResponse;
 import com.example.payment.dto.PaymentPointRequest;
-import com.example.payment.dto.PaymentRecordResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -10,11 +9,9 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
-import java.net.URISyntaxException;
 
 @Service
 @Slf4j
@@ -40,9 +37,9 @@ public class KakaoPayService {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
         params.add("cid", request.getCid());
         params.add("tid", request.getTid());
-        params.add("partner_order_id", request.getPartner_order_id());
-        params.add("partner_user_id", request.getPartner_user_id());
-        params.add("pg_token", request.getPg_token());
+        params.add("partner_order_id", request.getPartnerOrderId());
+        params.add("partner_user_id", request.getPartnerUserId());
+        params.add("pg_token", request.getPgToken());
 
         HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(params, headers);
 

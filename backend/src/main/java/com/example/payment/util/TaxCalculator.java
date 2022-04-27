@@ -1,9 +1,13 @@
 package com.example.payment.util;
 
+import com.example.common.util.BaseUtil;
+import lombok.NoArgsConstructor;
+
 import java.math.BigDecimal;
 
-public class TaxCalculator {
-    final static double TAX  = 1.1;
+@NoArgsConstructor
+public class TaxCalculator extends BaseUtil {
+    static final double TAX  = 1.1;
 
     public static long excludedTaxPrice(long price) {
         BigDecimal priceBD = BigDecimal.valueOf(price);

@@ -1,5 +1,6 @@
 package com.example.undefined.domain;
 
+import com.example.common.exception.UnauthorizedRequestException;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -26,14 +27,14 @@ public class User {
     @Builder()
     public User(long id, String nickname, int point) {
         if(point<0)
-            throw new RuntimeException("잘못된 접근입니다.");
+            throw new UnauthorizedRequestException();
         this.id = id;
         this.nickname = nickname;
         this.point = point;
     }
 
     public void chargePoint(int point){
-        long chargePoint = this.point+point;
+        long chargePoint = this.point+(long)point;
         if(point<=0||chargePoint>=Integer.MAX_VALUE)
             throw new RuntimeException("충전되지 않는 경우입니다.");
         this.point+=point;

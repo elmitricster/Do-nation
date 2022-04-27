@@ -70,7 +70,7 @@ class PaymentServiceTest {
                 .paymentMoney(2)
                 .paymentPoint(1)
                 .tid(kakaoPayApiResponse.getTid())
-                .paymentTime(kakaoPayApiResponse.getApprove_at())
+                .paymentTime(kakaoPayApiResponse.getApproveAt())
                 .user(user)
                 .build();
         when(kakaoPayService.approveKakaoPay(Mockito.any())).thenReturn(kakaoPayApiResponse);

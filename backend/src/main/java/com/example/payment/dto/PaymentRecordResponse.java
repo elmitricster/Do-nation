@@ -24,7 +24,7 @@ public class PaymentRecordResponse {
     }
     public static List<PaymentRecordResponse> convertList(List<PaymentRecord> list){
         return list.stream()
-                .map(x->new PaymentRecordResponse(x))
+                .map(PaymentRecordResponse::new)
                 .collect(Collectors.toList());
     }
 }

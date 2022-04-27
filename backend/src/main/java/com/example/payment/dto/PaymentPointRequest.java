@@ -1,8 +1,8 @@
 package com.example.payment.dto;
 
+import com.example.common.exception.UnauthorizedRequestException;
 import com.example.payment.util.TaxCalculator;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 import java.math.BigDecimal;
 
@@ -15,21 +15,21 @@ public class PaymentPointRequest {
     //카카오 쪽
     private String cid;
     private String tid;
-    private String partner_order_id;
-    private String partner_user_id;
-    private String pg_token;
+    private String partnerOrderId;
+    private String partnerUserId;
+    private String pgToken;
 
-    public PaymentPointRequest(int point, int money, String cid, String tid, String partner_order_id, String partner_user_id, String pg_token) {
+    public PaymentPointRequest(int point, int money, String cid, String tid, String partner_order_id, String partner_user_id, String pgToken) {
         if(point==0||money==0)
-            throw new RuntimeException("잘못된 접근임.");
+            throw new UnauthorizedRequestException();
 
         this.point = point;
         this.money = money;
         this.cid = cid;
         this.tid = tid;
-        this.partner_order_id = partner_order_id;
-        this.partner_user_id = partner_user_id;
-        this.pg_token = pg_token;
+        this.partnerOrderId = partner_order_id;
+        this.partnerUserId = partner_user_id;
+        this.pgToken = pgToken;
     }
     public double getExchangeRate() {
 

@@ -22,7 +22,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/payment")
 public class PaymentController {
-    final private PaymentService paymentService;
+    private final PaymentService paymentService;
 
     //TODO 두 메소드를 인자값 LoginMember loginmember으로 바꾸게 해주세요.
 
