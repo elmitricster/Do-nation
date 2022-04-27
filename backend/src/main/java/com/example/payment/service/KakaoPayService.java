@@ -2,6 +2,7 @@ package com.example.payment.service;
 
 import com.example.payment.dto.KakaoPayApiResponse;
 import com.example.payment.dto.PaymentPointRequest;
+import com.example.payment.exception.KakaoPayApiException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -12,6 +13,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
+import java.net.URISyntaxException;
 
 @Service
 @Slf4j
@@ -50,8 +52,8 @@ public class KakaoPayService {
                 throw new RuntimeException("결제 api 실패");
 
             return response;
-        }finally {
-            throw new RuntimeException("결제 api 실패");
+        }catch(NullPointerException | URISyntaxException e){
+            throw new KakaoPayApiException();
         }
 
     }
