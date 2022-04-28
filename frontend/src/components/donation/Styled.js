@@ -32,7 +32,7 @@ const donaText = styled.div`
   text-align: center;
   font-weight: bold;
   font-size: 3vh;
-  margin-top: 3vh;
+  margin-top: 4vh;
 `;
 
 const donaBtn = styled.button`
@@ -44,6 +44,44 @@ const donaBtn = styled.button`
   text-decoration: none;
   display: inline-block;
   font-size: 2vh;
+  margin: auto;
+  margin-top: 3vh;
+  display: block;
+  border-radius: 15px;
 `;
 
-export { ownDiv, posPtag, ownPtag, ownSpan, ownGom, nick, donaText, donaBtn };
+const box = styled.div`
+  text-align: center;
+`;
+
+const nicks = styled.div`
+  display: inline-block;
+  font-size: 3vh;
+  margin-left: 2vw;
+`;
+
+const boxes = styled.div`
+  display: flexbox;
+  align-items: center;
+  margin-top: 2vh;
+  margin-left: 1vw;
+`;
+
+const tBox = styled.div`
+  margin-top: 3vh;
+`;
+
+export {
+  ownDiv,
+  posPtag,
+  ownPtag,
+  ownSpan,
+  ownGom,
+  nick,
+  donaText,
+  donaBtn,
+  box,
+  nicks,
+  boxes,
+  tBox,
+};
