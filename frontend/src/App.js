@@ -14,6 +14,7 @@ import { PaymentContainer } from 'containers/payment/PaymentContainer';
 import { PaymentDetailsContainer } from 'containers/payment/PaymentDetailsContainer';
 import { ArticlesContainer } from 'containers/profile/ArticlesContainer';
 import { DonationListContainer } from 'containers/profile/DonationListContainer';
+import { GuideContainer } from './containers/guide/GuideContainer';
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
         <Route path="payment/details" element={<PaymentDetailsContainer />} />
 
         <Route path="*" element={<NotFound />} />
+        <Route path="/guide" element={<GuideContainer />}></Route>
       </Routes>
     </div>
   );
