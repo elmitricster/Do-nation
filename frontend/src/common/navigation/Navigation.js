@@ -21,6 +21,8 @@ export function Navigation() {
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
 
+  const nickname = 'kimcookie'
+
   useEffect(() => {
     if (localStorage.getItem(''))
       setIsAuthenticated(true)
@@ -93,7 +95,7 @@ export function Navigation() {
                 {isAuthenticated ? (
                   <>
                     <NavLink
-                      to=""
+                      to={`/profile/${nickname}`}
                       onClick={handleClose}
                       style={S.navLinkStyle}
                     >
