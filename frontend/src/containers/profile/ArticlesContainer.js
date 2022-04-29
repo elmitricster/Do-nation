@@ -1,7 +1,9 @@
+import { Articles } from 'components/profile/Articles/Articles';
+
 export function ArticlesContainer() {
-  return(
+  return (
     <div>
-      ArticlesContainer
+      <Articles />
     </div>
-  )
+  );
 }
