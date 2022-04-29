@@ -2,6 +2,7 @@ package com.example.undefined.domain;
 
 import com.example.common.exception.UnauthorizedRequestException;
 import com.example.undefined.exception.NotChargePointException;
+import com.example.withdraw.exception.NotWithdrawPointException;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -34,11 +35,18 @@ public class User {
         this.point = point;
     }
 
+
     public void chargePoint(int point){
         long chargePoint = this.point+(long)point;
         if(point<=0||chargePoint>=Integer.MAX_VALUE)
             throw new NotChargePointException();
         this.point+=point;
+    }
+    public void withdrawPoint(int point){
+        long remainedPoint = this.point-(long)point;
+        if(point<=0||remainedPoint<0)
+            throw new NotWithdrawPointException();
+        this.point-=point;
     }
     
 }

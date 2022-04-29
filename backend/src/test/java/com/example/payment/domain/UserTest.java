@@ -36,4 +36,18 @@ class UserTest {
         assertEquals(user.getPoint(),100);
     }
 
+    @Test
+    @DisplayName("withdrawPoint 메소드 확인")
+    public void withdrawPointTest(){
+        assertThrows(RuntimeException.class,()->user.withdrawPoint(0));
+        assertThrows(RuntimeException.class,()->user.chargePoint(Integer.MAX_VALUE));
+
+        user.chargePoint(1000);
+        user.withdrawPoint(500);
+        assertEquals(user.getPoint(),500);
+        user.withdrawPoint(500);
+        assertEquals(user.getPoint(),0);
+
+    }
+
 }
