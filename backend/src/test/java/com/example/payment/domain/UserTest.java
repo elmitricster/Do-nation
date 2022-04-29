@@ -7,24 +7,13 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class UserTest {
+public class UserTest {
     User user;
     @BeforeEach
     public void setUp(){
-        user = User.builder().nickname("um").point(0).build();
-    }
-    @Test
-    @DisplayName("생성자 확인")
-    public void constructorTest(){
-        assertThrows(RuntimeException.class,()->user.builder().nickname("qwe").point(-1).build());
+        user = testUser();
     }
 
-    @Test
-    @DisplayName("멱등성 확인")
-    public void userTest(){
-        User user = User.builder().nickname("um").build();
-        assertEquals(this.user,user);
-    }
 
     @Test
     @DisplayName("chargePoint 메소드 확인")
@@ -47,7 +36,15 @@ class UserTest {
         assertEquals(user.getPoint(),500);
         user.withdrawPoint(500);
         assertEquals(user.getPoint(),0);
-
+    }
+    public static User testUser(){
+        String basicStr ="1";
+        return  User.BasicBuilder()
+                .kakaoId(basicStr)
+                .birthday(basicStr)
+                .profileImage(basicStr)
+                .nickname(basicStr)
+                .build();
     }
 
 }

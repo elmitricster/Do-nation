@@ -1,6 +1,7 @@
 package com.example.payment.repository;
 
 import com.example.payment.domain.PaymentRecord;
+import com.example.payment.domain.UserTest;
 import com.example.undefined.domain.User;
 import com.example.undefined.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -25,9 +26,10 @@ class PaymentRecordRepositoryTest {
 
 
     User user;
+
     @BeforeEach
     public void setUp(){
-       user = User.builder().id(123).nickname("dja").point(1000).build();
+       user = UserTest.testUser();
        user =userRepository.save(user);
     }
 
@@ -58,6 +60,8 @@ class PaymentRecordRepositoryTest {
         paymentRecordRepository.save(new PaymentRecord( "엄",user,dummy,1100,1000));
         paymentRecordRepository.save(new PaymentRecord( "엄",user,wanted,1100,1000));
         assertEquals(paymentRecordRepository.findAllByUserOrderByPaymentTimeDesc(user).get(0).getPaymentTime(), wanted);
+        assertEquals(paymentRecordRepository.findAllByUserOrderByPaymentTimeDesc(user).size(), 2);
+
     }
 
 

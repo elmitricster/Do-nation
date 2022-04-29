@@ -1,5 +1,6 @@
 package com.example.withdraw.repository;
 
+import com.example.payment.domain.UserTest;
 import com.example.undefined.domain.User;
 import com.example.undefined.repository.UserRepository;
 import com.example.withdraw.domain.WithdrawRecord;
@@ -26,7 +27,7 @@ class WithdrawRepositoryTest {
     User user;
     @BeforeEach
     public void setUp(){
-        user = User.builder().id(123).nickname("dja").point(1000).build();
+        user = UserTest.testUser();
         user=userRepository.save(user);
     }
 
