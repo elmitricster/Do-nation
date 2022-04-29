@@ -1,7 +1,7 @@
 package com.example.payment.domain;
 
 import com.example.common.exception.UnauthorizedRequestException;
-import com.example.payment.util.TaxCalculator;
+import com.example.payment.util.UseServiceTaxCalculator;
 import com.example.undefined.domain.User;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -40,7 +40,7 @@ public class PaymentRecord {
 
     //심화 사항: 조금더 심화적으로 짠다면, 목록을 만들어서, 이 목록이 아닐때는 익셉션 처리를 해도 됫을듯 함.
     public PaymentRecord(User user, LocalDateTime paymentTime, int paymentMoney, int paymentPoint) {
-        if(TaxCalculator.excludedTaxPrice(paymentMoney)!=paymentPoint)
+        if(UseServiceTaxCalculator.excludedTaxPrice(paymentMoney)!=paymentPoint)
             throw new UnauthorizedRequestException();
         this.user = user;
         this.paymentTime = paymentTime;

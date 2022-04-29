@@ -1,7 +1,7 @@
 package com.example.payment.dto;
 
 import com.example.common.exception.UnauthorizedRequestException;
-import com.example.payment.util.TaxCalculator;
+import com.example.payment.util.UseServiceTaxCalculator;
 import lombok.Getter;
 
 import java.math.BigDecimal;
@@ -34,7 +34,7 @@ public class PaymentPointRequest {
 
     public double getExchangeRate() {
 
-        BigDecimal moneyBD = BigDecimal.valueOf(TaxCalculator.excludedTaxPrice(money));
+        BigDecimal moneyBD = BigDecimal.valueOf(UseServiceTaxCalculator.excludedTaxPrice(money));
         BigDecimal pointBD = BigDecimal.valueOf(point);
         return moneyBD.divide(pointBD).doubleValue();
     }
