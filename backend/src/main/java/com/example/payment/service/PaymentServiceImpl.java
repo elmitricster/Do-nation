@@ -8,10 +8,8 @@ import com.example.payment.dto.KakaoPayApiResponse;
 import com.example.payment.dto.PaymentPointRequest;
 import com.example.payment.dto.PaymentPointResponse;
 import com.example.payment.dto.PaymentRecordResponse;
-import com.example.undefined.exception.NotFoundUserException;
 import com.example.payment.repository.PaymentRecordRepository;
-import com.example.undefined.repository.UserRepository;
-import com.example.payment.util.PointConvertCalculator;
+import com.example.payment.util.ConvertCalculator;
 import com.example.undefined.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -34,10 +32,11 @@ public class PaymentServiceImpl implements PaymentService{
     @Override
     public PaymentPointResponse paymentPoint(long id, PaymentPointRequest request) {
         User user = userService.findMember(id);
-        if(!PointConvertCalculator.isEqualExchangeRate(request))
+        if(!ConvertCalculator.isEqualExchangeRate(request))
             throw new UnauthorizedRequestException();
 
         KakaoPayApiResponse kakaoPayApiResponse =kakaoPayService.approveKakaoPay(request);
+
         user.chargePoint(request.getPoint());
         PaymentRecord paymentRecord =paymentRecordRepository.save(
                 PaymentRecord.builder()
@@ -48,6 +47,7 @@ public class PaymentServiceImpl implements PaymentService{
                         .user(user)
                         .build()
         );
+
         return new PaymentPointResponse(paymentRecord);
     }
 

@@ -43,7 +43,7 @@ public class KakaoOAuth2Service {
         params.add("grant_type", "authorization_code");
         params.add("client_id", CLIENT_ID);
         params.add("client_secret", CLIENT_SECRET);
-        params.add("redirect_uri", REDIRECT_URI);
+        //params.add("redirect_uri", REDIRECT_URI);
         params.add("code", authorizedCode);
 
         // HttpHeader와 HttpBody를 하나의 오브젝트에 담기

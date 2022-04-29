@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 
 @NoArgsConstructor
-public class TaxCalculator extends BaseUtil {
+public class UseServiceTaxCalculator extends BaseUtil {
     static final double TAX  = 1.1;
 
     public static long excludedTaxPrice(long price) {
