@@ -1,4 +1,4 @@
-package com.example;
+package com.example.common.config;
 
 //TODO 상황에 맞게 폴더 위치를 수정, 추가 변경해주세요.
 
