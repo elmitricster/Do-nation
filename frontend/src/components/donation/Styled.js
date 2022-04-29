@@ -19,33 +19,33 @@ const ownSpan = styled.span`
 `;
 
 const ownGom = styled.span`
-  margin-left: 1vh;
+  margin-left: 0.5rem;
 `;
 
 const nick = styled.div`
-  margin-top: 1vh;
-  font-size: 3vh;
+  margin-top: 0.5rem;
+  font-size: 2rem;
   text-align: center;
 `;
 
 const donaText = styled.div`
   text-align: center;
   font-weight: bold;
-  font-size: 3vh;
-  margin-top: 4vh;
+  font-size: 1.5rem;
+  margin-top: 2rem;
 `;
 
 const donaBtn = styled.button`
   background-color: #94bdfb; /* Green */
   border: none;
   color: white;
-  padding: 2vh 5vw;
+  padding: 1rem 6rem;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 2vh;
+  font-size: 1.2rem;
   margin: auto;
-  margin-top: 3vh;
+  margin-top: 2rem;
   display: block;
   border-radius: 15px;
 `;
@@ -56,19 +56,19 @@ const box = styled.div`
 
 const nicks = styled.div`
   display: inline-block;
-  font-size: 3vh;
-  margin-left: 2vw;
+  font-size: 2rem;
+  margin-left: 2rem;
 `;
 
 const boxes = styled.div`
   display: flexbox;
   align-items: center;
-  margin-top: 2vh;
-  margin-left: 1vw;
+  margin-top: 1rem;
+  margin-left: 1rem;
 `;
 
 const tBox = styled.div`
-  margin-top: 3vh;
+  margin-top: 2rem;
 `;
 
 export {
