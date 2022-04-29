@@ -30,11 +30,10 @@ public class ConvertCalculator extends BaseUtil{
 
     }
 
-    private static long exchange(long before,double EXCHANGE_RATE) {
-        BigDecimal priceBD = BigDecimal.valueOf(before);
-        BigDecimal taxBD = BigDecimal.valueOf(EXCHANGE_RATE);
-        long after=(priceBD.multiply(taxBD)).longValue();
-        return after;
+    private static long exchange(long beforeValue,double exchangeRate) {
+        BigDecimal priceBD = BigDecimal.valueOf(beforeValue);
+        BigDecimal taxBD = BigDecimal.valueOf(exchangeRate);
+        return (priceBD.multiply(taxBD)).longValue();
     }
 
     public static boolean isEqualExchangeRate(PaymentPointRequest request){

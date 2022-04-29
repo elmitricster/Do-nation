@@ -43,13 +43,13 @@ public class KakaoPayService {
         params.add("partner_user_id", request.getPartnerUserId());
         params.add("pg_token", request.getPgToken());
 
-        HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(params, headers);
+        HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<>(params, headers);
 
         try{
             KakaoPayApiResponse response = restTemplate.postForObject(new URI(HOST + "/v1/payment/approve"), body, KakaoPayApiResponse.class);
             log.info("" + response);
             if(response.getTid()!=request.getTid())
-                throw new RuntimeException("결제 api 실패");
+                throw new KakaoPayApiException();
 
             return response;
         }catch(NullPointerException | URISyntaxException e){

@@ -28,10 +28,11 @@ public class WithdrawController {
         return ResponseEntity.ok().build();
     }
     //TODO 후순위
-    @PostMapping("/certification")
-    public void certifyAccount() {
+//    @PostMapping("/certification")
+//    public void certifyAccount() {
+//
+//    }
 
-    }
     @GetMapping("")
     public List<WithdrawRecordResponse> fetchWithdraws(){
         long id = 1;
