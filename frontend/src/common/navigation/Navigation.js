@@ -103,7 +103,7 @@ export function Navigation() {
                       프로필
                     </NavLink>
                     <NavLink
-                      to=""
+                      to="payment"
                       onClick={handleClose}
                       style={S.navLinkStyle}
                     >

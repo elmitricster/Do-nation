@@ -1,8 +1,9 @@
 import { useState } from "react"
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Nav } from "react-bootstrap";
 import * as S from "./Style"
 import { Modal } from "@mui/material"
 import PaymentModal from "./paymentModal/PaymentModal"
+import { NavLink, useNavigate } from 'react-router-dom'
 
 export function Payment() {
   const [name, setName] = useState('박한빈');
@@ -16,6 +17,7 @@ export function Payment() {
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true)
+  const handleClose = () => setOpen(false);
 
 
   return(
@@ -48,18 +50,21 @@ export function Payment() {
             </S.MyButton>
           </Col>
           <Col>
-            <S.MyButton 
-              style={{width: "100%", marginTop: "1rem"}}
-              onClick={onSubmit}
-            >
-              충전내역 확인
-            </S.MyButton>
+            <NavLink to="details">
+              <S.MyButton 
+                style={{width: "100%", marginTop: "1rem"}}
+                onClick={onSubmit}
+              >
+                충전내역 확인
+              </S.MyButton>
+            </NavLink>
+            
           </Col>
         </S.Contents>
       </Row>
 
-      <Modal open={open}>
-        <PaymentModal />
+      <Modal open={open} onclose={handleClose}>
+        <PaymentModal handleClose={handleClose}/>
       </Modal>
 
 
