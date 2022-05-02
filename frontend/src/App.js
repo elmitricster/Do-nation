@@ -15,6 +15,8 @@ import { PaymentDetailsContainer } from 'containers/payment/PaymentDetailsContai
 import { ArticlesContainer } from 'containers/profile/ArticlesContainer';
 import { DonationListContainer } from 'containers/profile/DonationListContainer';
 import { GuideContainer } from './containers/guide/GuideContainer';
+import { ArticleContainer } from 'containers/profile/ArticleContainer';
+import { ArticleCreateContainer } from 'containers/profile/ArticleCreateContainer';
 
 function App() {
   return (
@@ -31,6 +33,12 @@ function App() {
           <Route path="donations" element={<DonationListContainer />} />
         </Route>
         <Route path="profile/edit" element={<ProfileEditContainer />} />
+
+        <Route
+          path="profile/:nickname/articles/:article_id"
+          element={<ArticleContainer />}
+        />
+        <Route path="articles/create" element={<ArticleCreateContainer />} />
 
         <Route path="withdraw" element={<WithdrawConatiner />}></Route>
         <Route

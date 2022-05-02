@@ -2,6 +2,8 @@ import { useParams } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
 import defaultProfile from './default_profile.png';
 import * as S from './Style';
+import articles from './articles.png';
+import donate from './donate.png';
 
 export function ProfileHeader() {
   const params = useParams();
@@ -83,6 +85,10 @@ export function ProfileHeader() {
         </S.Contents>
       </Row>
       <S.Line></S.Line>
+      <div className="row justify-content-around mt-3">
+        <S.Icon src={articles} />
+        <S.Icon src={donate} />
+      </div>
     </div>
   );
 }

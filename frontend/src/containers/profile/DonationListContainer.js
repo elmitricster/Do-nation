@@ -1,7 +1,9 @@
+import { DonationList } from 'components/profile/DonationList/DonationList';
+
 export function DonationListContainer() {
-  return(
+  return (
     <div>
-      DonationListContainer
+      <DonationList />
     </div>
-  )
+  );
 }
