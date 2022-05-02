@@ -1,5 +1,6 @@
 package com.example.api;
 
+import com.example.auth.dto.SessionUser;
 import com.example.payment.dto.PaymentPointRequest;
 import com.example.payment.dto.PaymentPointResponse;
 import com.example.payment.dto.PaymentRecordResponse;
@@ -24,22 +25,19 @@ import java.util.List;
 public class PaymentController {
     private final PaymentService paymentService;
 
-    //TODO 두 메소드를 인자값 LoginMember loginmember으로 바꾸게 해주세요.
 
     @ApiOperation(value = "현재 유저의 값", notes = "현재 유저의 값", response = PaymentPointResponse.class)
     @PostMapping()
-    public PaymentPointResponse paymentPoint(PaymentPointRequest request) {
-        long id = 1;
-        return  paymentService.paymentPoint(id,request);
+    public PaymentPointResponse paymentPoint(PaymentPointRequest request, SessionUser sessionUser) {
+        return  paymentService.paymentPoint(sessionUser.getId(),request);
     }
 
 
 
     @ApiOperation(value ="jwt",notes = "jwt 토큰", response = String.class)
     @GetMapping()
-    public List<PaymentRecordResponse> fetchPayments(){
-        long id = 1;
-        return paymentService.fetchPayments(id);
+    public List<PaymentRecordResponse> fetchPayments(SessionUser sessionUser){
+        return paymentService.fetchPayments(sessionUser.getId());
     }
 
 }

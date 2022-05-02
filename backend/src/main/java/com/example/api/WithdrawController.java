@@ -1,5 +1,6 @@
 package com.example.api;
 
+import com.example.auth.dto.SessionUser;
 import com.example.withdraw.dto.WithdrawRecordResponse;
 import com.example.withdraw.service.WithdrawService;
 import lombok.RequiredArgsConstructor;
@@ -21,10 +22,8 @@ import java.util.List;
 public class WithdrawController {
     private final WithdrawService withdrawService;
     @PostMapping("")
-    public ResponseEntity<Void> withdraw() {
-        long id = 1;
-        int point = 0;
-        withdrawService.withdraw(id,point);
+    public ResponseEntity<Void> withdraw(SessionUser sessionUser,int point){
+        withdrawService.withdraw(sessionUser.getId(),point);
         return ResponseEntity.ok().build();
     }
     //TODO 후순위
@@ -34,10 +33,8 @@ public class WithdrawController {
 //    }
 
     @GetMapping("")
-    public List<WithdrawRecordResponse> fetchWithdraws(){
-        long id = 1;
-        return withdrawService.fetchWithdraws(id);
-
+    public List<WithdrawRecordResponse> fetchWithdraws(SessionUser sessionUser){
+        return withdrawService.fetchWithdraws(sessionUser.getId());
     }
 
 }
