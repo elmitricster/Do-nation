@@ -6,9 +6,9 @@ export function ProfileConatiner() {
   const navigate = useNavigate();
   const params = useParams();
 
-  useEffect(() => {
-    navigate(`/profile/${params.nickname}/articles`);
-  }, []);
+  // useEffect(() => {
+  //   navigate(`/profile/${params.nickname}/articles`);
+  // }, []);
 
   return (
     <div className="container">
