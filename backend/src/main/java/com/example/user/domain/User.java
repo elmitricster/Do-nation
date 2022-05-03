@@ -1,9 +1,8 @@
-package com.example.undefined.domain;
+package com.example.user.domain;
 
-import com.example.common.exception.UnauthorizedRequestException;
-import com.example.undefined.exception.NotChargePointException;
+import com.example.user.exception.NotIncreasePointException;
+import com.example.user.exception.NotDecreasePointException;
 import io.jsonwebtoken.lang.Assert;
-import com.example.withdraw.exception.NotWithdrawPointException;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -15,6 +14,7 @@ import javax.persistence.*;
 @RequiredArgsConstructor
 @Getter
 @EqualsAndHashCode
+
 public class User {
     @Id
     @Column(name = "user_id", nullable = false)
@@ -51,6 +51,7 @@ public class User {
     @Column(name = "point", nullable = false)
     private int point;
 
+
     @Builder(builderClassName = "BasicBuilder", builderMethodName = "BasicBuilder")
     public User(String kakaoId, String profileImage, String nickname, String birthday){
         Assert.notNull(kakaoId, "kakaoId must not be null");
@@ -63,6 +64,21 @@ public class User {
         this.nickname = nickname;
         this.birthday = birthday;
     }
+
+    public void increasePoint(int point){
+        long increasedPoint = this.point+(long)point;
+        if(point<=0||increasedPoint>=Integer.MAX_VALUE)
+            throw new NotIncreasePointException();
+        this.point+=point;
+    }
+    public void decreasePoint(int point){
+        long remainedPoint = this.point-(long)point;
+        if(point<=0||remainedPoint<0)
+            throw new NotDecreasePointException();
+        this.point-=point;
+    }
+
+
 
     public void setProfileImage(String profileImage) {
         this.profileImage = profileImage;
@@ -87,19 +103,4 @@ public class User {
     public void setCertified(boolean certified) {
         isCertified = certified;
     }
-
-
-    public void chargePoint(int point){
-        long chargePoint = this.point+(long)point;
-        if(point<=0||chargePoint>=Integer.MAX_VALUE)
-            throw new NotChargePointException();
-        this.point+=point;
-    }
-    public void withdrawPoint(int point){
-        long remainedPoint = this.point-(long)point;
-        if(point<=0||remainedPoint<0)
-            throw new NotWithdrawPointException();
-        this.point-=point;
-    }
-
 }

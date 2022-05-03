@@ -1,7 +1,7 @@
 package com.example.payment.dto;
 
 import com.example.payment.domain.PaymentRecord;
-import com.example.undefined.domain.User;
+import com.example.user.domain.User;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

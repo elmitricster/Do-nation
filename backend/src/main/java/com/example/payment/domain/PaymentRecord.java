@@ -2,7 +2,7 @@ package com.example.payment.domain;
 
 import com.example.common.exception.UnauthorizedRequestException;
 import com.example.payment.util.UseServiceTaxCalculator;
-import com.example.undefined.domain.User;
+import com.example.user.domain.User;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -54,7 +54,7 @@ public class PaymentRecord {
         this(user,paymentTime,paymentMoney,paymentPoint);
         this.tid = tid;
     }
-    public PaymentRecord(long id,String tid, User user, LocalDateTime paymentTime, int paymentMoney, int paymentPoint) {
+    public PaymentRecord(long id, String tid, User user, LocalDateTime paymentTime, int paymentMoney, int paymentPoint) {
         this(tid,user,paymentTime,paymentMoney,paymentPoint);
         this.id = id;
     }

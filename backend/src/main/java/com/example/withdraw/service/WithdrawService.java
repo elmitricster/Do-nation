@@ -1,8 +1,8 @@
 package com.example.withdraw.service;
 
 import com.example.payment.util.ConvertCalculator;
-import com.example.undefined.domain.User;
-import com.example.undefined.service.UserService;
+import com.example.user.domain.User;
+import com.example.user.service.UserService;
 import com.example.withdraw.domain.WithdrawRecord;
 import com.example.withdraw.dto.WithdrawRecordResponse;
 import com.example.withdraw.repository.WithdrawRepository;
@@ -33,6 +33,6 @@ public class WithdrawService {
                 .money(ConvertCalculator.pointToMoney(point))
                 .point(point)
                 .build());
-        user.withdrawPoint(point);
+        user.decreasePoint(point);
     }
 }

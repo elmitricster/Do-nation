@@ -1,8 +1,8 @@
 package com.example.withdraw.repository;
 
 import com.example.payment.domain.UserTest;
-import com.example.undefined.domain.User;
-import com.example.undefined.repository.UserRepository;
+import com.example.user.domain.User;
+import com.example.user.repository.UserRepository;
 import com.example.withdraw.domain.WithdrawRecord;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

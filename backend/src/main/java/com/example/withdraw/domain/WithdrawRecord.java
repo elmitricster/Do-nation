@@ -1,6 +1,6 @@
 package com.example.withdraw.domain;
 
-import com.example.undefined.domain.User;
+import com.example.user.domain.User;
 import lombok.*;
 
 import javax.persistence.*;

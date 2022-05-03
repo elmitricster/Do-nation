@@ -1,4 +1,4 @@
-package com.example.undefined.exception;
+package com.example.user.exception;
 
 import com.example.common.exception.BaseException;
 import lombok.extern.slf4j.Slf4j;

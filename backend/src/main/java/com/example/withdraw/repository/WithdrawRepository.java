@@ -1,6 +1,6 @@
 package com.example.withdraw.repository;
 
-import com.example.undefined.domain.User;
+import com.example.user.domain.User;
 import com.example.withdraw.domain.WithdrawRecord;
 import org.springframework.data.jpa.repository.JpaRepository;
 

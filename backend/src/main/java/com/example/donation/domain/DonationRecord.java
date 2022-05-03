@@ -1,6 +1,6 @@
 package com.example.donation.domain;
 
-import com.example.undefined.domain.User;
+import com.example.user.domain.User;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;

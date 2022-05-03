@@ -8,8 +8,8 @@ import com.example.auth.dto.UpdateUserRequest;
 import com.example.auth.exception.DuplicateNicknameException;
 import com.example.auth.exception.UserNotFoundException;
 import com.example.auth.util.JwtUtil;
-import com.example.undefined.domain.User;
-import com.example.undefined.repository.UserRepository;
+import com.example.user.domain.User;
+import com.example.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

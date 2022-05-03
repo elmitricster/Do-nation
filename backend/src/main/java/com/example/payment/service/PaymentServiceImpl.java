@@ -3,14 +3,14 @@ package com.example.payment.service;
 
 import com.example.common.exception.UnauthorizedRequestException;
 import com.example.payment.domain.PaymentRecord;
-import com.example.undefined.domain.User;
+import com.example.user.domain.User;
 import com.example.payment.dto.KakaoPayApiResponse;
 import com.example.payment.dto.PaymentPointRequest;
 import com.example.payment.dto.PaymentPointResponse;
 import com.example.payment.dto.PaymentRecordResponse;
 import com.example.payment.repository.PaymentRecordRepository;
 import com.example.payment.util.ConvertCalculator;
-import com.example.undefined.service.UserService;
+import com.example.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -37,7 +37,7 @@ public class PaymentServiceImpl implements PaymentService{
 
         KakaoPayApiResponse kakaoPayApiResponse =kakaoPayService.approveKakaoPay(request);
 
-        user.chargePoint(request.getPoint());
+        user.increasePoint(request.getPoint());
         PaymentRecord paymentRecord =paymentRecordRepository.save(
                 PaymentRecord.builder()
                         .paymentMoney(request.getMoney())
