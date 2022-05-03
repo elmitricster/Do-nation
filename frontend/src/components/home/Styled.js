@@ -53,7 +53,7 @@ const creator = styled.div`
   height: 2rem;
   line-height: 2rem;
   border-radius: 25px;
-  background: #fffdf6;
+  background: #e32222;
 `;
 
 const subject = styled.div`

@@ -17,6 +17,7 @@ import { DonationListContainer } from 'containers/profile/DonationListContainer'
 import { GuideContainer } from './containers/guide/GuideContainer';
 import { ArticleContainer } from 'containers/profile/ArticleContainer';
 import { ArticleCreateContainer } from 'containers/profile/ArticleCreateContainer';
+import { SearchContainer } from './containers/search/SearchContainer';
 
 function App() {
   return (
@@ -51,6 +52,10 @@ function App() {
 
         <Route path="*" element={<NotFound />} />
         <Route path="/guide" element={<GuideContainer />}></Route>
+        <Route
+          path="/user/search/:keyword"
+          element={<SearchContainer />}
+        ></Route>
       </Routes>
     </div>
   );

@@ -1,7 +1,7 @@
+import { useParams } from 'react-router-dom';
+import SearchBox from '../../components/search/SearchBox';
+
 export function SearchContainer() {
-  return(
-    <div>
-      SearchContainer
-    </div>
-  )
+  const { keyword } = useParams();
+  return <SearchBox keyword={keyword} />;
 }
