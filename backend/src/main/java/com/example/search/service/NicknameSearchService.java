@@ -1,22 +1,25 @@
 package com.example.search.service;
 
+import com.example.search.repository.SearchRepository;
 import com.example.user.dto.CreatorResponse;
-import com.example.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.context.annotation.Primary;
 
 import java.util.List;
 
-@Transactional
-@Service
 @RequiredArgsConstructor
-
+@Primary
 public class NicknameSearchService implements SearchService {
-    private final UserRepository userRepository;
+    private final SearchRepository searchRepository;
+
 
     @Override
     public List<CreatorResponse> fetchSearchList(String keyword) {
-        return null;
+        return CreatorResponse.userToList(searchRepository.findAllByNicknameContains(keyword));
+    }
+
+    @Override
+    public boolean isWork(String mode) {
+        return "NICKNAME".equals(mode);
     }
 }
