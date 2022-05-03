@@ -4,6 +4,7 @@ import { LoginConatiner } from './containers/user/LoginConatiner';
 import { AuthContainer } from './containers/user/AuthContainer';
 import { SignupContainer } from './containers/user/SignupContainer';
 import { GuideContainer } from './containers/guide/GuideContainer';
+import { SearchContainer } from './containers/search/SearchContainer';
 
 function App() {
   return (
@@ -14,6 +15,10 @@ function App() {
         <Route path="/user/kakao/callback" element={<AuthContainer />}></Route>
         <Route path="/user/signup" element={<SignupContainer />}></Route>
         <Route path="/guide" element={<GuideContainer />}></Route>
+        <Route
+          path="/user/search/:keyword"
+          element={<SearchContainer />}
+        ></Route>
       </Routes>
     </div>
   );
