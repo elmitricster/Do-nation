@@ -26,7 +26,7 @@ public class PaymentController {
     private final PaymentService paymentService;
 
 
-    @ApiOperation(value = "현재 유저의 값", notes = "현재 유저의 값", response = PaymentPointResponse.class)
+    @ApiOperation(value = "포인트 충전", notes = "카카오페이 결제를 통해 포인트를 충전할 수 있습니다. 성공할 시 포인트가 충전됩니다.", response = PaymentPointResponse.class)
     @PostMapping()
     public PaymentPointResponse paymentPoint(PaymentPointRequest request, SessionUser sessionUser) {
         return  paymentService.paymentPoint(sessionUser.getId(),request);
@@ -34,7 +34,7 @@ public class PaymentController {
 
 
 
-    @ApiOperation(value ="jwt",notes = "jwt 토큰", response = String.class)
+    @ApiOperation(value ="충전 내역 확인",notes = "충전한 내역들을 조회할 수 있습니다.", response = List.class)
     @GetMapping()
     public List<PaymentRecordResponse> fetchPayments(SessionUser sessionUser){
         return paymentService.fetchPayments(sessionUser.getId());
