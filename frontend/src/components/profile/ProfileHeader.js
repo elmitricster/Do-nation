@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
 import defaultProfile from './default_profile.png';
@@ -7,6 +8,7 @@ import donate from './donate.png';
 
 export function ProfileHeader() {
   const params = useParams();
+  const [isMore, setIsMore] = useState(false);
 
   // user category
   const createCate = '유튜버';
@@ -27,6 +29,10 @@ export function ProfileHeader() {
       color: '#F24F4F',
     },
   ];
+
+  const onHandleIsMore = () => {
+    setIsMore(!isMore);
+  };
 
   return (
     <div className="row justify-content-center">
@@ -64,24 +70,55 @@ export function ProfileHeader() {
             </Col>
           </Row>
 
-          <Row style={{ marginBottom: '1rem' }}>
-            <Col>
-              <S.URLText>URL</S.URLText>
-              <div>
-                {URLBtns.map(URLBtn => (
-                  <S.URLButton key={URLBtn.id} color={URLBtn.color}>
-                    {URLBtn.urlName}
-                  </S.URLButton>
-                ))}
-              </div>
-            </Col>
-          </Row>
+          {isMore ? (
+            <>
+              <Row style={{ marginBottom: '1rem' }}>
+                <Col>
+                  <S.URLText>URL</S.URLText>
+                  <div>
+                    {URLBtns.map(URLBtn => (
+                      <S.URLButton key={URLBtn.id} color={URLBtn.color}>
+                        {URLBtn.urlName}
+                      </S.URLButton>
+                    ))}
+                  </div>
+                </Col>
+              </Row>
 
-          <Row>
-            <Col>
-              <S.ContentBox>자기소개</S.ContentBox>
-            </Col>
-          </Row>
+              <Row>
+                <Col>
+                  <S.ContentBox>자기소개</S.ContentBox>
+                </Col>
+              </Row>
+
+              <Row
+                className="justify-content-end"
+                style={{
+                  fontSize: '0.8rem',
+                  marginTop: '0.5rem',
+                  marginRight: '0.1rem',
+                  cursor: 'pointer',
+                }}
+                onClick={onHandleIsMore}
+              >
+                닫기
+              </Row>
+            </>
+          ) : (
+            <>
+              <Row
+                className="justify-content-end"
+                style={{
+                  fontSize: '0.8rem',
+                  cursor: 'pointer',
+                  marginRight: '0.1rem',
+                }}
+                onClick={onHandleIsMore}
+              >
+                더보기
+              </Row>
+            </>
+          )}
         </S.Contents>
       </Row>
       <S.Line></S.Line>
