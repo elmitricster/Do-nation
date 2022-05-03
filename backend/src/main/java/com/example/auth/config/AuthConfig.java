@@ -30,7 +30,7 @@ public class AuthConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**").allowedMethods("*")
                 .allowedOrigins(
-                        "http://localhost:8080",
+                        "http://localhost:3000",
                         "http://k6c101.p.ssafy.io"
                 );
     }
