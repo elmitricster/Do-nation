@@ -11,7 +11,7 @@ export const TopBox = styled.div`
 export const Contents = styled.div`
   position: relative;
   width: 80%;
-  margin: 4.5rem auto;
+  margin: 3rem auto;
   font-size: 0.8rem;
   border: solid 1px black;
   border-radius: 0.3rem;
