@@ -66,6 +66,56 @@ const subject = styled.div`
   background: #8ac4ff;
 `;
 
+const RightAr = styled.div`
+  font-size: 0;
+  line-height: 0;
+  top: 50%;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  color: transparent;
+  border: none;
+  outline: 0;
+  background: 0 0;
+
+  &::before {
+    content: '>' !important;
+    font-size: 30px;
+    line-height: 1;
+    color: black;
+    background: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    /* border: solid 1px #d2d2d2; */
+  }
+`;
+
+const LeftAr = styled.div`
+  font-size: 0;
+  line-height: 0;
+  top: 50%;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  color: transparent;
+  border: none;
+  outline: 0;
+  background: 0 0;
+
+  &::before {
+    content: '<' !important;
+    font-size: 30px;
+    line-height: 1;
+    color: black;
+    background: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    /* border: solid 1px #d2d2d2; */
+  }
+`;
+
 export {
   mainImg,
   box,
@@ -76,4 +126,6 @@ export {
   cardBox,
   creator,
   subject,
+  RightAr,
+  LeftAr,
 };
