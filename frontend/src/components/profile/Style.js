@@ -94,3 +94,7 @@ export const Line = styled.div`
   width: 80%;
   height: 0;
 `;
+
+export const Icon = styled(Image)`
+  width: 3rem;
+`;

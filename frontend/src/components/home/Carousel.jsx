@@ -3,8 +3,9 @@ import * as S from './Styled';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import Creator from './Creator';
 
-function SampleNextArrow(props) {
+function NextArrow(props) {
   const { className, style, onClick } = props;
   return (
     <div
@@ -15,7 +16,7 @@ function SampleNextArrow(props) {
   );
 }
 
-function SamplePrevArrow(props) {
+function PrevArrow(props) {
   const { className, style, onClick } = props;
   return (
     <div
@@ -32,43 +33,22 @@ export default function Carousel() {
     infinite: true,
     slidesToShow: 5,
     slidesToScroll: 1,
-    nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />,
+    autoplay: true,
+    speed: 1000,
+    autoplaySpeed: 5000,
+    pauseOnHover: true,
+    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow />,
   };
+
+  const tmp = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   return (
     <S.carouselBox>
       <Slider {...settings}>
-        <div>
-          <h3>1</h3>
-        </div>
-        <div>
-          <h3>2</h3>
-        </div>
-        <div>
-          <h3>3</h3>
-        </div>
-        <div>
-          <h3>4</h3>
-        </div>
-        <div>
-          <h3>5</h3>
-        </div>
-        <div>
-          <h3>6</h3>
-        </div>
-        <div>
-          <h3>7</h3>
-        </div>
-        <div>
-          <h3>8</h3>
-        </div>
-        <div>
-          <h3>9</h3>
-        </div>
-        <div>
-          <h3>10</h3>
-        </div>
+        {tmp.map((t, idx) => {
+          return <Creator key={idx} src="1" cre="유튜버" sub="영화/만화" />;
+        })}
       </Slider>
     </S.carouselBox>
   );

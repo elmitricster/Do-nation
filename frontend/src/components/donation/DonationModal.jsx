@@ -15,8 +15,10 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: '25%',
-  height: '70%',
+  width: '30rem',
+  // height: '46rem',
+  // overflow: 'hidden',
+  height: 'auto',
   bgcolor: 'background.paper',
   boxShadow: 24,
   p: 4,
@@ -64,12 +66,20 @@ export default function BasicModal() {
               <Avatar
                 alt="Remy Sharp"
                 src="/static/images/avatar/1.jpg"
-                sx={{ width: '50%', height: '35%', mx: 'auto', mt: '10vh' }}
+                sx={{
+                  width: '15rem',
+                  height: '15rem',
+                  mx: 'auto',
+                  mt: '6rem',
+                }}
               />
               <S.nick>닉네임</S.nick>
               <S.donaText>보낼 Gom을 입력해주세요!</S.donaText>
               <S.box>
-                <FormControl sx={{ m: '2vh', width: '75%' }} variant="outlined">
+                <FormControl
+                  sx={{ m: '1.5rem', width: '75%' }}
+                  variant="outlined"
+                >
                   <OutlinedInput
                     value={gom || ''}
                     onChange={handleChange}
@@ -102,8 +112,8 @@ export default function BasicModal() {
                   alt="Remy Sharp"
                   src="/static/images/avatar/1.jpg"
                   sx={{
-                    width: '7vw',
-                    height: '14vh',
+                    width: '8rem',
+                    height: '8rem',
                   }}
                 />
                 <S.nicks>닉네임</S.nicks>
