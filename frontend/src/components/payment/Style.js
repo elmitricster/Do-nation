@@ -33,6 +33,7 @@ export const PointName = styled.span`
   text-align: center;
   font-size: 1.3rem;
   font-weight: normal;
+  padding: 8px;
 `
 
 

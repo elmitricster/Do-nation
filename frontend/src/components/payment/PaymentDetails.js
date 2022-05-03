@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { DateSearch } from "./paymentDetails/DateSearch";
 import * as S from './Style';
 
 export function PaymentDetails({payment}) {
@@ -40,6 +42,7 @@ export function PaymentDetails({payment}) {
 
   const [totalGomValue, setTotalGomValue] = useState(0);
   const [totalWonValue, settotalWonValue] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     var resultGom = 0;
@@ -54,7 +57,8 @@ export function PaymentDetails({payment}) {
 
   return(
     <div>
-      <S.ListBox>
+      <DateSearch />
+      <S.ListBox style={{ marginTop: "3rem" }}>
         <div style={{ fontWeight: "bold", textAlign: "start", fontSize: "1.2rem" }}>
           충전내역
         </div>
@@ -84,7 +88,7 @@ export function PaymentDetails({payment}) {
           </div>
         </div>
 
-        <S.BackButton>돌아가기</S.BackButton>
+        <S.BackButton onClick={() => navigate(-1)}>돌아가기</S.BackButton>
 
       </S.ListBox>
 

@@ -96,7 +96,11 @@ export function Navigation() {
                       <S.IconImg src={`${profileIcon}`} alt="home-icon" />
                       프로필
                     </NavLink>
-                    <NavLink to="" onClick={handleClose} style={S.navLinkStyle}>
+                    <NavLink
+                      to="payment"
+                      onClick={handleClose}
+                      style={S.navLinkStyle}
+                    >
                       <S.IconImg src={`${paymentIcon}`} alt="home-icon" />
                       충전
                     </NavLink>
