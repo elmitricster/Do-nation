@@ -1,6 +1,5 @@
 package com.example.follow.service;
 
-import com.example.auth.dto.SessionUser;
 import com.example.follow.domain.Follow;
 import com.example.follow.exception.AlreadyFollowException;
 import com.example.follow.exception.AlreadyRemoveFollowException;
@@ -21,8 +20,8 @@ public class FollowService {
     private final UserService userService;
     private final FollowRepository followRepository;
 
-    public void followCreator(SessionUser user, String nickname) {
-        User me =userService.findMember(user.getId());
+    public void followCreator(Long id, String nickname) {
+        User me =userService.findMember(id);
         User follower =userService.findMember(nickname);
         if(followRepository.existsByUserAndCreator(me,follower))
             throw new AlreadyFollowException();
@@ -30,8 +29,8 @@ public class FollowService {
         followRepository.save(new Follow(me,follower));
     }
 
-    public void unfollowCreator(SessionUser user, String nickname) {
-        User me =userService.findMember(user.getId());
+    public void unfollowCreator(Long id, String nickname) {
+        User me =userService.findMember(id);
         User follower = userService.findMember(nickname);
         if(followRepository.existsByUserAndCreator(me,follower))
             throw new AlreadyRemoveFollowException();
@@ -42,6 +41,15 @@ public class FollowService {
     public List<CreatorResponse> fetchFollowingCreators(Long id) {
         return CreatorResponse.followToList(followRepository.findAllByUser(userService.findMember(id)));
     }
+
+    @Transactional(readOnly = true)
+    public Boolean hasFollowRelation(Long id,String nickname) {
+        User me =userService.findMember(id);
+        User follower = userService.findMember(nickname);
+        return followRepository.existsByUserAndCreator(me,follower);
+    }
+
+
 
 }
 
