@@ -11,9 +11,9 @@ services:
     ports:
       - "8080:8080"
     environment:
-      -spring.datasource.url: "jdbc:mysql://db:3306/example?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&tinyInt1isBit=false"
-      -spring.datasource.username: root
-      -spring.datasource.password: example
+      SPRING_DATASOURCE_URL: "jdbc:mysql://db:3306/example?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&tinyInt1isBit=false"
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: example
   nginx:
     image: wjdgustn15/ssafy_donation_service:nginx
     ports:
