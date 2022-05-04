@@ -18,19 +18,9 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
-
     @GetMapping("/random")
     public List<CreatorResponse> fetchRandomCreators(){
         return userService.fetchRandomCreators();
-    }
-
-
-
-
-    //TODO donation dto 보고 작업.
-    @GetMapping("/donations")
-    public List<CreatorResponse> fetchDonations(){
-        return null;
     }
 
     @GetMapping("/me")

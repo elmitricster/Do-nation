@@ -1,6 +1,7 @@
 package com.example.donation.service;
 
 import com.example.donation.domain.DonationRecord;
+import com.example.donation.dto.DonationRecordResponse;
 import com.example.donation.repository.DonationRecordRepository;
 import com.example.user.domain.User;
 import com.example.user.service.UserService;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -44,4 +46,8 @@ public class DonationService {
         creator.increasePoint(donatePoint);
     }
 
+    public List<DonationRecordResponse> fetchDonations(long id) {
+        List<DonationRecord> donationRecordList =donationRecordRepository.findAllByDonatorOrderByDonateTimeDesc(userService.findMember(id));
+        return DonationRecordResponse.toList(donationRecordList);
+    }
 }

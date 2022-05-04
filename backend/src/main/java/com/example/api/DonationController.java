@@ -1,7 +1,7 @@
 package com.example.api;
 
 import com.example.auth.dto.SessionUser;
-import com.example.auth.dto.TokenResponse;
+import com.example.donation.dto.DonationRecordResponse;
 import com.example.donation.service.DonationService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 
 @Api("후원 관련 컨트롤러")
@@ -34,4 +36,9 @@ public class DonationController {
         donationService.donate(sessionUser.getId(), nickname, point, message);
         return ResponseEntity.ok().build();
     }
+    @GetMapping("/me")
+    public List<DonationRecordResponse> fetchDonations(SessionUser user) {
+        return donationService.fetchDonations(user.getId());
+    }
+
 }
