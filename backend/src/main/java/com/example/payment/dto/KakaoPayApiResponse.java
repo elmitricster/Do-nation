@@ -14,4 +14,8 @@ public class KakaoPayApiResponse {
         this.approveAt = approveAt;
         this.tid = tid;
     }
+
+    public boolean isEmptyTid() {
+        return tid==null||tid.trim().isEmpty();
+    }
 }
