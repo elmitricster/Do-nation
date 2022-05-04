@@ -52,7 +52,7 @@ public class User {
     private int point;
 
 
-    @Column(name = "subject", nullable = false)
+    @Column(name = "subject")
     private String subject;
 
     @Builder(builderClassName = "BasicBuilder", builderMethodName = "BasicBuilder")
