@@ -5,6 +5,7 @@ import com.example.payment.dto.PaymentPointRequest;
 import com.example.payment.exception.KakaoPayApiException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -23,18 +24,21 @@ import java.net.URISyntaxException;
 @RequiredArgsConstructor
 @Transactional
 public class KakaoPayService {
-
+    @Value("${spring.kakao.admin_key}")
+    private  String ADMIN_KEY;
     private static final String HOST = "https://kapi.kakao.com";
     private final RestTemplate restTemplate;
+
     public KakaoPayApiResponse approveKakaoPay(PaymentPointRequest request) {
 
         log.info("KakaoPayInfoVO............................................");
         log.info("-----------------------------");
 
+        log.debug("{}",ADMIN_KEY);
 
         // 서버로 요청할 Header
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Authorization", "KakaoAK " + "admin key를 넣어주세요~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!");
+        headers.add("Authorization", "KakaoAK " + ADMIN_KEY);
         headers.add("Accept", MediaType.APPLICATION_JSON_UTF8_VALUE);
         headers.add("Content-Type", MediaType.APPLICATION_FORM_URLENCODED_VALUE + ";charset=UTF-8");
         try{
