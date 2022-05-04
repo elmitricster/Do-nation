@@ -51,6 +51,8 @@ public class User {
     @Column(name = "point", nullable = false)
     private int point;
 
+    @Column(name = "subject")
+    private String subject;
 
     @Builder(builderClassName = "BasicBuilder", builderMethodName = "BasicBuilder")
     public User(String kakaoId, String profileImage, String nickname, String birthday){
@@ -78,8 +80,6 @@ public class User {
         this.point-=point;
     }
 
-
-
     public void setProfileImage(String profileImage) {
         this.profileImage = profileImage;
     }
@@ -102,5 +102,9 @@ public class User {
 
     public void setCertified(boolean certified) {
         isCertified = certified;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
     }
 }

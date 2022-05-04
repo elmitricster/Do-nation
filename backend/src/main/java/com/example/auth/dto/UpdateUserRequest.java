@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotBlank;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -29,11 +30,18 @@ public class UpdateUserRequest {
     @Length(max = 255)
     private String profile_name;
 
-    public UpdateUserRequest(String category, String intro_message, String user_nickname, String profile_image, String profile_name) {
+    @Length(max = 255)
+    private String subject;
+
+    private List<UserUrlDto> userUrls;
+
+    public UpdateUserRequest(String category, String intro_message, String user_nickname, String profile_image, String profile_name, String subject, List<UserUrlDto> userUrls) {
         this.category = category;
         this.intro_message = intro_message;
         this.user_nickname = user_nickname;
         this.profile_image = profile_image;
         this.profile_name = profile_name;
+        this.subject = subject;
+        this.userUrls = userUrls;
     }
 }

@@ -39,7 +39,7 @@ public class AuthController {
 //        return "index";
 //    }
 
-    @ApiOperation(value = "유저 정보 업데이트", notes = "DB의 category, intro_message, user_nickname, profile_image, profile_name을 업데이트 합니다.")
+    @ApiOperation(value = "유저 정보 업데이트", notes = "DB의 category, intro_message, user_nickname, profile_image, profile_name, subject, User_url - List{user_url, url_name} 을 업데이트 합니다.")
     @PutMapping("")
     public ResponseEntity<Void> updateUser(SessionUser sessionUser, @Valid @RequestBody UpdateUserRequest updateUserRequest, BindingResult result) {
         if(result.hasErrors()){
