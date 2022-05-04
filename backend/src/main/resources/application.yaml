@@ -20,5 +20,10 @@ spring:
         dialect: org.hibernate.dialect.MySQL57Dialect
     open-in-view: false
     show-sql: true
-
+  kakao:
+    rest_api_key: 15c42d10e537f8f950496465e2edc8c0
+    admin_key: 7f1ed1e02916c6bb166699a10a0992c8
+    client_secret: 513408R76Akp4SE3TuqsroTBZ2nPcME9
+    redirect_token_uri: https://kauth.kakao.com/oauth/token
+    my_info_uri: https://kapi.kakao.com/v2/user/me
 

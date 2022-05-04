@@ -2,6 +2,7 @@ package com.example.auth.service;
 
 import com.example.auth.dto.KakaoUserInfo;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -17,12 +18,17 @@ import org.springframework.web.client.RestTemplate;
 @Component
 public class KakaoOAuth2Service {
 
-    //public String getCode(String authorized)
-    private static final String CLIENT_ID = "15c42d10e537f8f950496465e2edc8c0";
-    private static final String CLIENT_SECRET = "513408R76Akp4SE3TuqsroTBZ2nPcME9";
-    private static final String REDIRECT_URI = "http://localhost:8080/auth/login";
-    private static final String REDIRECT_TOKEN_URI = "https://kauth.kakao.com/oauth/token";
-    private static final String MY_INFO_URI = "https://kapi.kakao.com/v2/user/me";
+    @Value("${spring.kakao.rest_api_key}")
+    private String CLIENT_ID;
+
+    @Value("${spring.kakao.client_secret}")
+    private String CLIENT_SECRET;
+
+    @Value("${spring.kakao.redirect_token_uri}")
+    private String REDIRECT_TOKEN_URI;
+
+    @Value("${spring.kakao.my_info_uri}")
+    private String MY_INFO_URI;
 
     public KakaoUserInfo getUserInfo(String authorizedCode) {
         System.out.println("getUserInfo 호출"); // 인가코드 -> 액세스 토큰
@@ -80,7 +86,13 @@ public class KakaoOAuth2Service {
         String kakao_id = Long.toString(body.getLong("id"));
         String profile_image_url = body.getJSONObject("kakao_account").getJSONObject("profile").getString("profile_image_url");
         String nickname = body.getJSONObject("properties").getString("nickname");
-        String birthday = body.getJSONObject("kakao_account").getString("birthday");
+
+        String birthday;
+        if(body.getJSONObject("kakao_account").has("birthday")){
+            birthday = body.getJSONObject("kakao_account").getString("birthday");
+        }else{
+            birthday = "";
+        }
 
         //가져온 사용자 정보를 객체로 만들어서 반환
         return new KakaoUserInfo(kakao_id, profile_image_url, nickname, birthday);
