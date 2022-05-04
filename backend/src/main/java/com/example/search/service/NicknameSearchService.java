@@ -3,12 +3,12 @@ package com.example.search.service;
 import com.example.search.repository.SearchRepository;
 import com.example.user.dto.CreatorResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @RequiredArgsConstructor
-@Primary
+@Service
 public class NicknameSearchService implements SearchService {
     private final SearchRepository searchRepository;
 

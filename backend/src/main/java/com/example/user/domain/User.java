@@ -52,6 +52,9 @@ public class User {
     private int point;
 
 
+    @Column(name = "subject", nullable = false)
+    private String subject;
+
     @Builder(builderClassName = "BasicBuilder", builderMethodName = "BasicBuilder")
     public User(String kakaoId, String profileImage, String nickname, String birthday){
         Assert.notNull(kakaoId, "kakaoId must not be null");

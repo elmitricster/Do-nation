@@ -3,13 +3,12 @@ package com.example.search.service;
 import com.example.search.repository.SearchRepository;
 import com.example.user.dto.CreatorResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Transactional
 @RequiredArgsConstructor
-
+@Service
 public class SubjectSearchService implements SearchService {
     private final SearchRepository searchRepository;
 
