@@ -9,6 +9,7 @@ import com.example.user.domain.User;
 import com.example.user.domain.UserUrl;
 import com.example.user.repository.UserRepository;
 import com.example.user.repository.UserUrlRepository;
+import com.example.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,7 @@ import java.util.List;
 public class AuthService {
 
     private final KakaoOAuth2Service kakaoOAuth2Service;
+    private final UserService userService;
     private final UserRepository userRepository;
     private final UserUrlRepository userUrlRepository;
 
@@ -44,14 +46,8 @@ public class AuthService {
     }
 
     public void updateUser(SessionUser sessionUser, UpdateUserRequest updateUserRequest) {
-        User user = userRepository.findById(sessionUser.getId())
-                                  .orElseThrow(UserNotFoundException::new);
-        user.setCategory(updateUserRequest.getCategory());
-        user.setIntroMessage(updateUserRequest.getIntro_message());
-        user.setNickname(updateUserRequest.getUser_nickname());
-        user.setProfileImage(updateUserRequest.getProfile_image());
-        user.setProfileName(updateUserRequest.getProfile_name());
-        user.setSubject(updateUserRequest.getSubject());
+        User user = userService.findMember(sessionUser.getId());
+        user.updateProfile(updateUserRequest);
 
         userUrlRepository.deleteAllByUser(user);
         List<UserUrlDto> userUrls = updateUserRequest.getUserUrls();

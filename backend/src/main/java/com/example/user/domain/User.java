@@ -1,5 +1,6 @@
 package com.example.user.domain;
 
+import com.example.auth.dto.UpdateUserRequest;
 import com.example.user.exception.NotIncreasePointException;
 import com.example.user.exception.NotDecreasePointException;
 import io.jsonwebtoken.lang.Assert;
@@ -9,6 +10,8 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @RequiredArgsConstructor
@@ -54,6 +57,9 @@ public class User {
     @Column(name = "subject")
     private String subject;
 
+    @OneToMany(mappedBy = "user") //참조를 당하는 쪽에서 읽기만 가능!
+    private List<UserUrl> userUrls = new ArrayList<>();
+
     @Builder(builderClassName = "BasicBuilder", builderMethodName = "BasicBuilder")
     public User(String kakaoId, String profileImage, String nickname, String birthday){
         Assert.notNull(kakaoId, "kakaoId must not be null");
@@ -80,31 +86,16 @@ public class User {
         this.point-=point;
     }
 
-    public void setProfileImage(String profileImage) {
-        this.profileImage = profileImage;
-    }
-
-    public void setProfileName(String profileName) {
-        this.profileName = profileName;
-    }
-
-    public void setIntroMessage(String introMessage) {
-        this.introMessage = introMessage;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
+    public void updateProfile(UpdateUserRequest updateUserRequest) {
+        this.profileImage = updateUserRequest.getProfile_image();
+        this.profileName = updateUserRequest.getProfile_name();
+        this.introMessage = updateUserRequest.getIntro_message();
+        this.category = updateUserRequest.getCategory();
+        this.nickname = updateUserRequest.getUser_nickname();
+        this.subject = updateUserRequest.getSubject();
     }
 
     public void setCertified(boolean certified) {
         isCertified = certified;
-    }
-
-    public void setSubject(String subject) {
-        this.subject = subject;
     }
 }
