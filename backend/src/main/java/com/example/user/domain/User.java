@@ -60,9 +60,6 @@ public class User {
     @OneToMany(mappedBy = "user") //참조를 당하는 쪽에서 읽기만 가능!
     private List<UserUrl> userUrls = new ArrayList<>();
 
-    @Column(name = "subject")
-    private String subject;
-
     @Builder(builderClassName = "BasicBuilder", builderMethodName = "BasicBuilder")
     public User(String kakaoId, String profileImage, String nickname, String birthday){
         Assert.notNull(kakaoId, "kakaoId must not be null");
