@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import * as S from './Style';
 import default_content from './따봉도치.jpg';
 import default_profile from '../default_profile.png';
@@ -8,6 +9,8 @@ import edit from './edit.png';
 import delete_icon from './delete.png';
 
 export function ArticleDetail() {
+  const navigate = useNavigate();
+
   const article = {
     id: 0,
     content:
@@ -36,7 +39,7 @@ export function ArticleDetail() {
     <div>
       <S.Contents>
         <S.TopBox>
-          <i className="fa-solid fa-arrow-left"> 게시글</i>
+          <i className="fa-solid fa-arrow-left" onClick={() => navigate(-1)} style={{ cursor: 'pointer'}}> 게시글</i>
         </S.TopBox>
         <S.NicknameBox>
           <S.SmallProfileImg rounded src={default_profile} />

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, NavLink } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
 import defaultProfile from './default_profile.png';
 import * as S from './Style';
@@ -49,7 +49,7 @@ export function ProfileHeader() {
               <div
                 style={{ float: 'left', marginLeft: '1rem', height: '9rem' }}
               >
-                <S.NinknameBox>{params.nickname}</S.NinknameBox>
+                <S.NinknameBox>{params.user_id}</S.NinknameBox>
                 <Row>
                   <div>
                     {createCate ? <S.Category>{createCate}</S.Category> : <></>}
@@ -123,8 +123,18 @@ export function ProfileHeader() {
       </Row>
       <S.Line></S.Line>
       <div className="row justify-content-around mt-3">
-        <S.Icon src={articles} />
-        <S.Icon src={donate} />
+        <NavLink
+          to={`/profile/${params.user_id}/articles`}
+          className="col"
+        >
+          <S.Icon src={articles} />
+        </NavLink>
+        <NavLink
+          to={`/profile/${params.user_id}/donations`}
+          className="col"
+        >
+          <S.Icon src={donate} />
+        </NavLink>
       </div>
     </div>
   );

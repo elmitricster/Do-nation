@@ -96,5 +96,5 @@ export const Line = styled.div`
 `;
 
 export const Icon = styled(Image)`
-  width: 3rem;
+  width: 2rem;
 `;

@@ -168,3 +168,33 @@ export const MyButton = styled.button`
   font-size: 0.7rem;
   width: 8rem;
 `;
+
+export const Menu = styled.ul`
+  background: #fff;
+  border-radius: 8px;
+  position: absolute;
+  right: -5rem;
+  top: 3rem;
+  font-size: 0.8rem;
+  width: 7rem;
+  text-align: center;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
+  opacity: ${props => (props.isOpen ? 1 : 0)};
+  visibility: ${props => (props.isOpen ? 'visible' : 'hidden')};
+  transform: ${props => (props.isOpen ? 'translateY(0)' : 'translateY(-20px)')};
+  transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
+  padding: 10px;
+`;
+
+export const MyLi = styled.li`
+  list-style: none;
+  color: black;
+  height: 1rem;
+  line-height: 1rem;
+
+  &:hover {
+    border: solid 1px #94bdfb;
+    outline: solid 1px #94bdfb;
+    border-radius: 8px;
+  }
+`;

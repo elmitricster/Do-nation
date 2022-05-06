@@ -1,1 +1,8 @@
-// 리덕스 모듈 관리
+import { combineReducers } from 'redux';
+import user from './user';
+
+const rootReducer = combineReducers({
+  user,
+});
+
+export default rootReducer;
