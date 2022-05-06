@@ -26,7 +26,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomeContainer />}></Route>
         <Route path="/user/login" element={<LoginConatiner />}></Route>
-        <Route path="/user/kakao/callback" element={<AuthContainer />}></Route>
+        <Route path="/oauth/callback/kakao" element={<AuthContainer />}></Route>
         <Route path="/user/signup" element={<SignupContainer />}></Route>
 
         <Route path="profile/:nickname" element={<ProfileConatiner />}>
