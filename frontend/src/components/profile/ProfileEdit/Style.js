@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Image, DropdownButton } from 'react-bootstrap';
+import { Image } from 'react-bootstrap';
 
 export const ProfileImg = styled(Image)`
   margin-top: 3rem;

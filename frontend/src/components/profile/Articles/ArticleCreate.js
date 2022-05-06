@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import defaultImg from './defaultImage.jpg';
 import * as S from './Style';
 
@@ -6,6 +7,8 @@ export function ArticleCreate() {
   const [error, setError] = useState(false);
   const [image, setImage] = useState('');
   const [fileImage, setFileImage] = useState(defaultImg);
+
+  const navigate = useNavigate();
 
   function onLoad(e) {
     if (e.target.files[0].size > 1000000) {
@@ -20,7 +23,7 @@ export function ArticleCreate() {
     <div>
       <S.Contents style={{ border: 'none' }}>
         <S.TopBox>
-          <i className="fa-solid fa-arrow-left"> 돌아가기</i>
+          <i className="fa-solid fa-arrow-left" onClick={() => navigate(-1)} style={{ cursor: 'pointer'}}> 돌아가기</i>
         </S.TopBox>
         <S.CreateText>내용</S.CreateText>
         <S.ContentInput></S.ContentInput>

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import * as S from './Style';
 import default_profile from '../default_profile.png';
 import heart_img from './heart.png';
@@ -6,6 +7,8 @@ import dots from './dots.png';
 import { NavLink } from 'react-router-dom';
 
 export function Article({ article }) {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <div>
       <S.Contents>
@@ -14,8 +17,14 @@ export function Article({ article }) {
           cookie
           <S.Icon
             src={dots}
-            style={{ position: 'absolute', right: '1rem', top: '1.5rem' }}
+            style={{ position: 'absolute', right: '1rem', top: '1.5rem', cursor: 'pointer' }}
+            onClick={() => setIsOpen(!isOpen)}
           />
+          <S.Menu isOpen={isOpen}>
+            <S.MyLi>
+              수정하기
+            </S.MyLi>
+          </S.Menu>
         </S.NicknameBox>
         <S.ContentBox>{article.content}</S.ContentBox>
         <NavLink to={`${article.id}`}>

@@ -29,14 +29,14 @@ function App() {
         <Route path="/user/kakao/callback" element={<AuthContainer />}></Route>
         <Route path="/user/signup" element={<SignupContainer />}></Route>
 
-        <Route path="profile/:nickname" element={<ProfileConatiner />}>
+        <Route path="profile/:user_id" element={<ProfileConatiner />}>
           <Route path="articles" element={<ArticlesContainer />} />
           <Route path="donations" element={<DonationListContainer />} />
         </Route>
         <Route path="profile/edit" element={<ProfileEditContainer />} />
 
         <Route
-          path="profile/:nickname/articles/:article_id"
+          path="profile/:user_id/articles/:article_id"
           element={<ArticleContainer />}
         />
         <Route path="articles/create" element={<ArticleCreateContainer />} />

@@ -63,7 +63,7 @@ export function Navigation() {
             className="me-2"
             aria-label="Search"
           />
-          <Button variant="outline-success">Search</Button>
+          <S.SearchButton>검색</S.SearchButton>
         </Form>
         <Navbar.Collapse>
           <S.Offcanvas show={show} onHide={handleClose}>
