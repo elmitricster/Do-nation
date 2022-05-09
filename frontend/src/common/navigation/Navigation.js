@@ -6,7 +6,6 @@ import {
   Offcanvas,
   Form,
   FormControl,
-  Button,
 } from 'react-bootstrap';
 import { NavLink, useNavigate } from 'react-router-dom';
 import homeIcon from 'images/home.png';
@@ -17,25 +16,36 @@ import guideIcon from 'images/guide.png';
 import settingIcon from 'images/setting.png';
 import logoutIcon from 'images/logout.png';
 import * as S from './Style';
+import { apiInstance } from 'api';
 
 export function Navigation() {
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const api = apiInstance();
+  const getUserInfo = async () => {
+    const response = await api.get('/user/me');
+    console.log(response);
+    return response;
+  };
+
   const nickname = 'kimcookie';
 
   useEffect(() => {
-    if (localStorage.getItem('')) setIsAuthenticated(true);
-  }, []);
+    if (localStorage.getItem('jwt')) {
+      setIsAuthenticated(true);
+      getUserInfo();
+    }
+  });
 
   function logout() {
-    localStorage.removeItem('');
+    localStorage.removeItem('jwt');
+    setIsAuthenticated(false);
     navigate('/');
-    navigate(0);
   }
 
   return (
@@ -47,11 +57,19 @@ export function Navigation() {
           </S.Toggle>
         ) : (
           <div>
-            <NavLink to="" onClick={handleClose} style={S.notAuthNavLinkStyle}>
+            <NavLink
+              to="/user/login"
+              onClick={handleClose}
+              style={S.notAuthNavLinkStyle}
+            >
               로그인
             </NavLink>
             /
-            <NavLink to="" onClick={handleClose} style={S.notAuthNavLinkStyle}>
+            <NavLink
+              to="/user/signup"
+              onClick={handleClose}
+              style={S.notAuthNavLinkStyle}
+            >
               회원가입
             </NavLink>
           </div>
@@ -124,7 +142,14 @@ export function Navigation() {
                       <S.IconImg src={`${settingIcon}`} alt="home-icon" />
                       설정
                     </NavLink>
-                    <NavLink to="" onClick={handleClose} style={S.navLinkStyle}>
+                    <NavLink
+                      to="/"
+                      onClick={() => {
+                        handleClose();
+                        logout();
+                      }}
+                      style={S.navLinkStyle}
+                    >
                       <S.IconImg src={`${logoutIcon}`} alt="home-icon" />
                       로그아웃
                     </NavLink>
