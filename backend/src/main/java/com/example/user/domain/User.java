@@ -3,6 +3,7 @@ package com.example.user.domain;
 import com.example.auth.dto.UpdateUserRequest;
 import com.example.user.exception.NotIncreasePointException;
 import com.example.user.exception.NotDecreasePointException;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import io.jsonwebtoken.lang.Assert;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -57,7 +58,8 @@ public class User {
     @Column(name = "subject")
     private String subject;
 
-    @OneToMany(mappedBy = "user") //참조를 당하는 쪽에서 읽기만 가능!
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<UserUrl> userUrls = new ArrayList<>();
 
     @Builder(builderClassName = "BasicBuilder", builderMethodName = "BasicBuilder")
