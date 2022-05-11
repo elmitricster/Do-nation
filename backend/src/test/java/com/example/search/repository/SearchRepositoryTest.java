@@ -26,7 +26,6 @@ class SearchRepositoryTest {
     void setUp() {
         user= UserTest.testUser();
         user= userRepository.save(user);
-        log.info("setup done");
     }
     @Test
     void  canTestNickName(){
