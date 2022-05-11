@@ -26,7 +26,7 @@ public class PaymentController {
     private final PaymentService paymentService;
 
 
-    @ApiOperation(value = "포인트 충전", notes = "카카오페이 결제를 통해 포인트를 충전할 수 있습니다. 성공할 시 포인트가 충전됩니다.", response = PaymentPointResponse.class)
+    @ApiOperation(value = "포인트 충전", notes = "카카오페이 결제를 통해 포인트를 충전할 수 있습니다. 성공할 시 포인트가 충전됩니다.(exchangeRate값은 안넣어야 함.)", response = PaymentPointResponse.class)
     @PostMapping()
     public PaymentPointResponse paymentPoint(PaymentPointRequest request, SessionUser sessionUser) {
         return  paymentService.paymentPoint(sessionUser.getId(),request);
