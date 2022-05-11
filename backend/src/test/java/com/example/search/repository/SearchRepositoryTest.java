@@ -2,7 +2,6 @@ package com.example.search.repository;
 
 import com.example.payment.domain.UserTest;
 import com.example.user.domain.User;
-import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,7 +13,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@Slf4j
 class SearchRepositoryTest {
     @Autowired
     SearchRepository searchRepository;
