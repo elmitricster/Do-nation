@@ -49,7 +49,7 @@ public class AuthService {
         User user = userService.findMember(sessionUser.getId());
         user.updateProfile(updateUserRequest);
 
-        userUrlRepository.deleteAllByUser(user);
+        userUrlRepository.deleteAllByIdInQuery(user);
         List<UserUrlDto> userUrls = updateUserRequest.getUserUrls();
         for (UserUrlDto url : userUrls) {
             userUrlRepository.save(UserUrl.BasicBuilder()
