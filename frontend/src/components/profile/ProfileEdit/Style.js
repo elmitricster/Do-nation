@@ -12,7 +12,7 @@ export const ProfileImg = styled(Image)`
 
   @media (min-width: 992px) {
     margin-top: 3rem;
-    width: 15%;
+    width: 35%;
   }
 `;
 
@@ -41,11 +41,13 @@ export const ContentText = styled.div`
   margin-bottom: 0.5rem;
 `;
 
-export const Input = styled.input`
+export const Input = styled.textarea`
+  resize: none;
   margin: 0.5rem auto;
   border: solid 1px black;
   border-radius: 0.3rem;
   height: 2rem;
+  font-size: 0.8rem;
 
   &:focus {
     border: solid 1px #94bdfb;

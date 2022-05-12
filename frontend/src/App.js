@@ -1,5 +1,7 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
+import { useState } from 'react';
+
 import { HomeContainer } from './containers/home/HomeContainer';
 import { LoginConatiner } from './containers/user/LoginConatiner';
 import { AuthContainer } from './containers/user/AuthContainer';
@@ -20,16 +22,17 @@ import { ArticleCreateContainer } from 'containers/profile/ArticleCreateContaine
 import { SearchContainer } from './containers/search/SearchContainer';
 
 function App() {
+  const [jwt, setJwt] = useState('');
   return (
     <div className="App">
-      <Navigation />
+      <Navigation jwt={jwt} />
       <Routes>
-        <Route path="/" element={<HomeContainer />}></Route>
+        <Route path="/" element={<HomeContainer setJwt={setJwt} />}></Route>
         <Route path="/user/login" element={<LoginConatiner />}></Route>
         <Route path="/oauth/callback/kakao" element={<AuthContainer />}></Route>
         <Route path="/user/signup" element={<SignupContainer />}></Route>
 
-        <Route path="profile/:user_id" element={<ProfileConatiner />}>
+        <Route path="profile/:nickname" element={<ProfileConatiner />}>
           <Route path="articles" element={<ArticlesContainer />} />
           <Route path="donations" element={<DonationListContainer />} />
         </Route>

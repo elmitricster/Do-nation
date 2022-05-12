@@ -1,4 +1,4 @@
-import { Navbar } from 'react-bootstrap';
+import { Navbar, Image } from 'react-bootstrap';
 import styled from 'styled-components';
 
 export const navLinkStyle = ({ isActive }) => ({
@@ -38,6 +38,10 @@ export const Toggle = styled.div`
 
 export const LogoImg = styled.img`
   width: 3rem;
+`;
+
+export const ProfileImg = styled(Image)`
+  width: 2.5rem;
 `;
 
 export const IconImg = styled.img`

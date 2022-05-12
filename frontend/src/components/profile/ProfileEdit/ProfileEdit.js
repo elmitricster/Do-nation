@@ -4,8 +4,10 @@ import { CreateButton } from './CreateButton';
 import { SubjectButton } from './SubjectButton';
 import profileDafult from './default_profile.png';
 import * as S from './Style';
+import { apiInstance } from 'api';
 
 export function ProfileEdit() {
+  const [previewImg, setPreviewImg] = useState();
   const [profileImg, setProfileImg] = useState(profileDafult);
   const [nickname, setNickname] = useState('');
   const [content, setContent] = useState('');
@@ -17,6 +19,7 @@ export function ProfileEdit() {
   const [isOpen, setIsOpen] = useState(false);
 
   const dropDownRef = useRef(null);
+  const api = apiInstance();
 
   const createCategories = [
     {
@@ -124,6 +127,59 @@ export function ProfileEdit() {
 
   const urlNames = ['Youtube', 'Instagram'];
 
+  useEffect(() => {
+    const getUserInfo = async () => {
+      const response = await api.get('/user/me');
+      const data = response.data;
+
+      console.log(data);
+      setSubject(data.subject);
+      setContent(data.introMessage);
+      setNickname(data.nickname);
+      setCreate(data.category);
+      setProfileImg(data.profileImage);
+      setUrlBtns(data.userUrls);
+
+      return response;
+    };
+
+    getUserInfo();
+  }, []);
+
+  useEffect(() => {
+    if (create) {
+      var create_active_index = 0;
+      createCategories.map((createCate, index) => {
+        if (createCate.cate === create) {
+          create_active_index = index;
+        }
+      });
+
+      const activeCheck = createCateActive.map((el, index) => {
+        return index === create_active_index;
+      });
+
+      setCreateCateActive(activeCheck);
+    }
+  }, [create]);
+
+  useEffect(() => {
+    if (subject) {
+      var subject_active_index = 0;
+      subjectCategories.map((subjectCate, index) => {
+        if (subjectCate.cate === subject) {
+          subject_active_index = index;
+        }
+      });
+
+      const activeCheck = subjectCateActive.map((el, index) => {
+        return index === subject_active_index;
+      });
+
+      setSubjectCateActive(activeCheck);
+    }
+  }, [subject]);
+
   const createBtnActiveHandler = (id, activeLists, setActiveLists) => {
     setCreate(createCategories[id].cate);
 
@@ -160,8 +216,8 @@ export function ProfileEdit() {
     setUrlBtns(urlBtns => [
       ...urlBtns,
       {
-        btnName: urlName,
-        btnUrl: url,
+        urlName: urlName,
+        userUrl: url,
       },
     ]);
 
@@ -173,21 +229,52 @@ export function ProfileEdit() {
     setUrlBtns([...urlBtns.slice(0, index), ...urlBtns.slice(index + 1)]);
   };
 
+  function onLoad(e) {
+    if (e.target.files[0].size > 1000000) {
+      console.log('error');
+    } else {
+      setPreviewImg(e.target.files[0]);
+      setProfileImg(URL.createObjectURL(e.target.files[0]));
+    }
+  }
+
   const onSubmit = () => {
     const data = {
-      nickname: nickname,
-      content: content,
-      urlBtns: urlBtns,
-      create: create,
+      profile_name: nickname,
+      profile_image: profileImg,
+      intro_message: content,
+      userUrls: urlBtns,
+      category: create,
       subject: subject,
+      user_nickname: nickname,
     };
 
     console.log(data);
+
+    const updateUserInfo = async data => {
+      const response = await api.put('/auth', data);
+      return response;
+    };
+
+    updateUserInfo(data);
   };
 
   return (
     <div>
-      <S.ProfileImg src={profileImg} rounded />
+      <div>
+        <input
+          id="imgInput"
+          className="image"
+          type="file"
+          accept="image/*"
+          style={{ display: 'none' }}
+          onChange={onLoad}
+        ></input>
+
+        <label style={{ cursor: 'pointer' }} name="ImgBtn" htmlFor="imgInput">
+          <S.ProfileImg src={profileImg ? profileImg : profileDafult} rounded />
+        </label>
+      </div>
       <Row>
         <S.Contents style={{ marginTop: '1.5rem' }}>
           <Col style={{ marginBottom: '1rem' }}>
@@ -258,10 +345,10 @@ export function ProfileEdit() {
                 <>
                   <div className="col-10" key={urlBtn.btnName}>
                     <S.LeftBox style={{ width: '30%' }}>
-                      {urlBtn.btnName}
+                      {urlBtn.urlName}
                     </S.LeftBox>
                     <S.RightBox style={{ width: '70%' }}>
-                      {urlBtn.btnUrl}
+                      {urlBtn.userUrl}
                     </S.RightBox>
                   </div>
                   <div className="col-2">

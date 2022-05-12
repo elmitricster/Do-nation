@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, NavLink } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
 import defaultProfile from './default_profile.png';
@@ -6,9 +6,10 @@ import * as S from './Style';
 import articles from './articles.png';
 import donate from './donate.png';
 
-export function ProfileHeader() {
+export function ProfileHeader({profileInfo}) {
   const params = useParams();
   const [isMore, setIsMore] = useState(false);
+  const [profile, setProfile] = useState();
 
   // user category
   const createCate = '유튜버';
@@ -30,31 +31,37 @@ export function ProfileHeader() {
     },
   ];
 
+  useEffect(() => {
+    setProfile(profileInfo)
+  }, [profileInfo])
+
   const onHandleIsMore = () => {
     setIsMore(!isMore);
   };
 
   return (
     <div className="row justify-content-center">
+      {profile ? 
+      <>
       <Row style={{ marginTop: '1rem' }}>
         <S.Contents>
           <Row style={{ marginBottom: '1rem' }}>
             <Col>
               <S.ProfileImg
                 style={{ float: 'left' }}
-                src={defaultProfile}
+                src={profile.profileImage}
                 rounded
                 fluid
               />
               <div
                 style={{ float: 'left', marginLeft: '1rem', height: '9rem' }}
               >
-                <S.NinknameBox>{params.user_id}</S.NinknameBox>
+                <S.NinknameBox>{profile.nickname}</S.NinknameBox>
                 <Row>
                   <div>
-                    {createCate ? <S.Category>{createCate}</S.Category> : <></>}
-                    {subjectCate ? (
-                      <S.Category>{subjectCate}</S.Category>
+                    {profile.category ? <S.Category>{profile.category}</S.Category> : <></>}
+                    {profile.subject ? (
+                      <S.Category>{profile.subject}</S.Category>
                     ) : (
                       <></>
                     )}
@@ -121,6 +128,7 @@ export function ProfileHeader() {
           )}
         </S.Contents>
       </Row>
+      
       <S.Line></S.Line>
       <div className="row justify-content-around mt-3">
         <NavLink
@@ -136,6 +144,8 @@ export function ProfileHeader() {
           <S.Icon src={donate} />
         </NavLink>
       </div>
+      </>
+      : <></>}
     </div>
   );
 }

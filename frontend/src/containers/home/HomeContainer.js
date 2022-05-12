@@ -1,9 +1,16 @@
+import { useEffect } from 'react';
 import MainImg from '../../components/home/MainImg';
 import MainpageText from '../../components/home/MainpageText';
 import Carousel from '../../components/home/Carousel';
 import Guide from '../../components/home/Guide';
 
-export function HomeContainer() {
+export function HomeContainer({ setJwt }) {
+  useEffect(() => {
+    if (localStorage.getItem('jwt')) {
+      setJwt(localStorage.getItem('jwt'));
+    }
+  });
+
   return (
     <>
       <MainImg />
