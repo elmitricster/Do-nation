@@ -5,35 +5,39 @@ import defaultProfile from './default_profile.png';
 import * as S from './Style';
 import articles from './articles.png';
 import donate from './donate.png';
+import { apiInstance } from 'api';
 
-export function ProfileHeader({profileInfo}) {
+export function ProfileHeader() {
   const params = useParams();
   const [isMore, setIsMore] = useState(false);
   const [profile, setProfile] = useState();
+  const [isMyProfile, setIsMyProfile] = useState(false);
+  const api = apiInstance();
 
-  // user category
-  const createCate = '유튜버';
-  const subjectCate = '영화/만화';
+  // url buttons color
+  const urlButton = {
+    'Youtube': '#E32222',
+    'Instagram': '#F24F4F'
+  }
 
-  // url buttons
-  const URLBtns = [
-    {
-      id: 0,
-      urlName: 'Youtube',
-      url: 'https://www.youtube.com/kimcookie',
-      color: '#E32222',
-    },
-    {
-      id: 1,
-      urlName: 'Instagram',
-      url: 'https://www.instagram.com/kimcookie',
-      color: '#F24F4F',
-    },
-  ];
+  const getProfileInfo = async () => {
+    const response = await api.get(`/user/nickname?nickname=${params.nickname}`)
+    const myResponse = await api.get('/user/me');
+
+    if (response.data.nickname === myResponse.data.nickname) {
+      setIsMyProfile(true);
+    }
+    return response.data
+  }
 
   useEffect(() => {
-    setProfile(profileInfo)
-  }, [profileInfo])
+    getProfileInfo()
+      .then(res => {
+        setProfile(res)
+        console.log(profile)
+        console.log(isMyProfile)
+      });
+  }, [])
 
   const onHandleIsMore = () => {
     setIsMore(!isMore);
@@ -69,8 +73,8 @@ export function ProfileHeader({profileInfo}) {
                 </Row>
                 <Row>
                   <div>
-                    <S.MyButton>팔로우</S.MyButton>
-                    <S.MyButton>후원하기</S.MyButton>
+                    {isMyProfile ? <S.MyButton>프로필 편집</S.MyButton> : <S.MyButton>팔로우</S.MyButton>}
+                    {isMyProfile ? <S.MyButton>글 작성</S.MyButton> : <S.MyButton>후원하기</S.MyButton>}
                   </div>
                 </Row>
               </div>
@@ -83,9 +87,9 @@ export function ProfileHeader({profileInfo}) {
                 <Col>
                   <S.URLText>URL</S.URLText>
                   <div>
-                    {URLBtns.map(URLBtn => (
-                      <S.URLButton key={URLBtn.id} color={URLBtn.color}>
-                        {URLBtn.urlName}
+                    {profile.userUrls.map(userUrl => (
+                      <S.URLButton key={userUrl.id} color={urlButton[userUrl.urlName]}>
+                        {userUrl.urlName}
                       </S.URLButton>
                     ))}
                   </div>
@@ -94,7 +98,7 @@ export function ProfileHeader({profileInfo}) {
 
               <Row>
                 <Col>
-                  <S.ContentBox>자기소개</S.ContentBox>
+                  <S.ContentBox>{profile.introMessage}</S.ContentBox>
                 </Col>
               </Row>
 

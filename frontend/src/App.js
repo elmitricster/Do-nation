@@ -1,6 +1,6 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { HomeContainer } from './containers/home/HomeContainer';
 import { LoginConatiner } from './containers/user/LoginConatiner';
@@ -23,11 +23,17 @@ import { SearchContainer } from './containers/search/SearchContainer';
 
 function App() {
   const [jwt, setJwt] = useState('');
+  useEffect(() => {
+    if (localStorage.getItem('jwt')) {
+      setJwt(localStorage.getItem('jwt'));
+    }
+  });
+
   return (
     <div className="App">
       <Navigation jwt={jwt} />
       <Routes>
-        <Route path="/" element={<HomeContainer setJwt={setJwt} />}></Route>
+        <Route path="/" element={<HomeContainer />}></Route>
         <Route path="/user/login" element={<LoginConatiner />}></Route>
         <Route path="/oauth/callback/kakao" element={<AuthContainer />}></Route>
         <Route path="/user/signup" element={<SignupContainer />}></Route>
