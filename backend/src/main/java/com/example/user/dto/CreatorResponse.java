@@ -15,15 +15,18 @@ public class CreatorResponse {
 
     private String introMessage;
     private String category;
+    private String subject;
 
-    public CreatorResponse(String profileImage, String nickname, String introMessage, String category) {
+    public CreatorResponse(String profileImage, String nickname, String introMessage, String category, String subject) {
         this.profileImage = profileImage;
         this.nickname = nickname;
         this.introMessage = introMessage;
         this.category = category;
+        this.subject = subject;
     }
+
     public  CreatorResponse(User user){
-        this(user.getProfileImage(),user.getNickname(),user.getIntroMessage(),user.getCategory());
+        this(user.getProfileImage(),user.getNickname(),user.getIntroMessage(),user.getCategory(),user.getSubject());
     }
 
 

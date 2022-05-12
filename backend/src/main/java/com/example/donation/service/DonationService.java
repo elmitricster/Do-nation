@@ -26,8 +26,6 @@ public class DonationService {
 
         return true;
     }
-
-    @Transactional
     public void donate(long id, String userNickname, int donatePoint, String donateMessage) {
         User donator = userService.findMember(id);
         User creator = userService.findMember(userNickname);
@@ -48,6 +46,11 @@ public class DonationService {
 
     public List<DonationRecordResponse> fetchDonations(long id) {
         List<DonationRecord> donationRecordList =donationRecordRepository.findAllByDonatorOrderByDonateTimeDesc(userService.findMember(id));
+        return DonationRecordResponse.toList(donationRecordList);
+    }
+
+    public List<DonationRecordResponse> fetchDonations(String nickname) {
+        List<DonationRecord> donationRecordList =donationRecordRepository.findAllByDonatorOrderByDonateTimeDesc(userService.findMember(nickname));
         return DonationRecordResponse.toList(donationRecordList);
     }
 }

@@ -13,28 +13,22 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-@Transactional
-
+@Transactional(readOnly = true)
 public class UserService {
     private final UserRepository userRepository;
 
-    @Transactional(readOnly = true)
     public User findMember(long id){
      return  userRepository.findById(id).orElseThrow(NotFoundUserException::new);
     }
-    @Transactional(readOnly = true)
     public User findMember(String nickname){
         return  userRepository.findByNickname(nickname).orElseThrow(NotFoundUserException::new);
     }
 
-    @Transactional(readOnly = true)
     public List<CreatorResponse> fetchRandomCreators() {
         List<User>list =userRepository.findAll();
         Collections.shuffle(list);
         return CreatorResponse.userToList(list);
     }
-
-    @Transactional(readOnly = true)
     public Integer checkPoint(long id) {
         return findMember(id).getPoint();
     }

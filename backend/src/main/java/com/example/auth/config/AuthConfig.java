@@ -21,9 +21,10 @@ public class AuthConfig implements WebMvcConfigurer {
         registry.addInterceptor(authInterceptor)
                 .excludePathPatterns("/auth/login", "/auth/duplicate/**")
                 .addPathPatterns("/auth", "/auth/**")
+                .excludePathPatterns("/donation/nickname")
                 .addPathPatterns("/donation","/donation/**")
                 .addPathPatterns("/withdraw","/withdraw/**")
-                .excludePathPatterns("/user/random")
+                .excludePathPatterns("/user/random","/user/nickname")
                 .addPathPatterns("/user", "/user/**")
                 .addPathPatterns("/follow/**")
                 .addPathPatterns("/payment/**");

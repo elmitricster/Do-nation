@@ -40,5 +40,9 @@ public class DonationController {
     public List<DonationRecordResponse> fetchDonations(SessionUser user) {
         return donationService.fetchDonations(user.getId());
     }
+    @GetMapping("/nickname")
+    public List<DonationRecordResponse> fetchDonations(String nickname) {
+        return donationService.fetchDonations(nickname);
+    }
 
 }

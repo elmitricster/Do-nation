@@ -23,6 +23,11 @@ public class UserController {
         return userService.fetchRandomCreators();
     }
 
+    @GetMapping("/nickname")
+    public User getUser(String nickname){
+        return userService.findMember(nickname);
+    }
+
     @GetMapping("/me")
     public User getUser(SessionUser user){
         return userService.findMember(user.getId());
