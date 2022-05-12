@@ -54,9 +54,9 @@ public class AuthService {
         for (UserUrlDto url : userUrls) {
             userUrlRepository.save(UserUrl.BasicBuilder()
                                           .user(user)
-                                          .userUrl(url.getUser_url())
+                                          .userUrl(url.getUserUrl())
                                           .colorHash("-")
-                                          .urlName(url.getUrl_name())
+                                          .urlName(url.getUrlName())
                                           .build());
         }
     }

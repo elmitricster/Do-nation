@@ -89,11 +89,11 @@ public class User {
     }
 
     public void updateProfile(UpdateUserRequest updateUserRequest) {
-        this.profileImage = updateUserRequest.getProfile_image();
-        this.profileName = updateUserRequest.getProfile_name();
-        this.introMessage = updateUserRequest.getIntro_message();
+        this.profileImage = updateUserRequest.getProfileImage();
+        this.profileName = updateUserRequest.getProfileName();
+        this.introMessage = updateUserRequest.getIntroMessage();
         this.category = updateUserRequest.getCategory();
-        this.nickname = updateUserRequest.getUser_nickname();
+        this.nickname = updateUserRequest.getUserNickname();
         this.subject = updateUserRequest.getSubject();
     }
 
