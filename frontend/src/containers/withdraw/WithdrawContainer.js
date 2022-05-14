@@ -8,9 +8,9 @@ export function WithdrawConatiner() {
   return (
     <div className="container">
       {isAccount ?
-        <Withdraw />
+        <Withdraw isAccount={isAccount}/>
       :
-        <AccountAuth />
+        <AccountAuth setIsAccount={setIsAccount}/>
       }
     </div>
   )

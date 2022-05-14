@@ -240,13 +240,13 @@ export function ProfileEdit() {
 
   const onSubmit = () => {
     const data = {
-      profile_name: nickname,
-      profile_image: profileImg,
-      intro_message: content,
+      profileName: nickname,
+      profileImage: profileImg,
+      introMessage: content,
       userUrls: urlBtns,
       category: create,
       subject: subject,
-      user_nickname: nickname,
+      userNickname: nickname,
     };
 
     console.log(data);
