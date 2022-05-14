@@ -95,6 +95,7 @@ export const Input = styled.input`
   border: solid 1px black;
   border-radius: 0.3rem;
   height: 2rem;
+  font-size: 0.8rem;
 
   &:focus {
     border: solid 1px #94BDFB;

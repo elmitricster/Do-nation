@@ -2,7 +2,7 @@ import { useState } from "react";
 import * as S from "./Style";
 import { Row, Col } from "react-bootstrap";
 
-export function AccountAuth() {
+export function AccountAuth({ setIsAccount }) {
   const [name, setName] = useState('');
   const [birthday, setBirthday] = useState('');
   const [bank, setBank] = useState('');
@@ -28,6 +28,7 @@ export function AccountAuth() {
     const data = {
       
     };
+    setIsAccount(true);
   };
 
   const handleKeyPress = e => {

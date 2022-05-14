@@ -1,21 +1,42 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Row, Col } from 'react-bootstrap';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import * as S from './Style';
+import { apiInstance } from 'api';
 
 export function Withdraw() {
-  const [name, setName] = useState('김준석');
-  const [pointValue, setPointValue] = useState(10000);
+  const [name, setName] = useState('');
+  const [pointValue, setPointValue] = useState(0);
   const [withdrawValue, setWithdrawValue] = useState();
+  const api = apiInstance();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const getPoint = async () => {
+      const response = await api.get('/user/me')
+      console.log(response.data)
+      return response.data
+    }
+
+    getPoint()
+      .then(res => {
+        setName(res.nickname)
+        setPointValue(res.point)
+      })
+  }, [])
 
   const onWithdrawValueHandler = (e) => {
     setWithdrawValue(e.currentTarget.value)
   }
 
   const onSubmit = () => {
-    const data = {
-      
-    };
+    const requestWithdraw = async () => {
+      const response = await api.post(`/withdraw?point=${withdrawValue}`)
+      return response
+    }
+    requestWithdraw();
+
+    navigate(0);
   };
 
   return(
@@ -61,7 +82,6 @@ export function Withdraw() {
             <NavLink to="details">
               <S.MyButton
                 style={{width: "100%", marginTop: "1rem"}}
-                onClick={onSubmit}
               >
                 정산 내역 확인
               </S.MyButton>
