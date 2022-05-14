@@ -8,8 +8,21 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import rootReducer from 'modules';
+import { checkUser } from 'modules/user';
 
 const store = createStore(rootReducer);
+
+function loadUser() {
+  try {
+    const user = localStorage.getItem('user');
+    if (!user) return; // 로그인 상태가 아니라면 아무것도 안함
+    store.dispatch(checkUser(user));
+  } catch (e) {
+    console.log('localStorage is not working');
+  }
+}
+
+loadUser();
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

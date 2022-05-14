@@ -1,8 +1,8 @@
 import { createAction, handleActions } from 'redux-actions';
 
-const TEMP_SET_USER = 'user/TEMP_SET_USER'; // 새로고침 이후 임시 로그인 처리
+const CHECK_USER = 'user/CHECK_USER';
 
-export const tempSetUser = createAction(TEMP_SET_USER, user => user);
+export const checkUser = createAction(CHECK_USER, userNickname => userNickname);
 
 const initialState = {
   user: null,
@@ -10,9 +10,9 @@ const initialState = {
 
 export default handleActions(
   {
-    [TEMP_SET_USER]: (state, { payload: user }) => ({
+    [CHECK_USER]: (state, { payload: userNickname }) => ({
       ...state,
-      user,
+      user: userNickname,
     }),
   },
   initialState,
