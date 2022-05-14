@@ -8,6 +8,7 @@ import {
   FormControl,
 } from 'react-bootstrap';
 import { NavLink, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import homeIcon from 'images/home.png';
 import profileIcon from 'images/profile.png';
 import paymentIcon from 'images/payment.png';
@@ -26,6 +27,10 @@ export function Navigation({ jwt }) {
   const [profileName, setProfileName] = useState();
   const [point, setPoint] = useState();
 
+  const { user } = useSelector(({ user }) => ({
+    user: user.user,
+  }));
+
   const navigate = useNavigate();
 
   const handleClose = () => setShow(false);
@@ -42,14 +47,15 @@ export function Navigation({ jwt }) {
   };
 
   useEffect(() => {
-    if (jwt) {
+    if (user) {
       setIsAuthenticated(true);
       getUserInfo();
     }
-  }, [jwt]);
+  }, [user]);
 
   function logout() {
     localStorage.removeItem('jwt');
+    localStorage.removeItem('user');
     setIsAuthenticated(false);
     navigate('/');
   }
