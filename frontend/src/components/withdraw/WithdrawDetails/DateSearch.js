@@ -1,10 +1,25 @@
-import { useState } from 'react';
-import { Row, Col } from 'react-bootstrap';
+import { useState, useEffect } from 'react';
+import { Col } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
+import { setStartDate, setEndDate } from 'modules/withdraw';
 import * as S from './Style';
 
 export function DateSearch() {
-  const [startDate, setStartDate] = useState();
-  const [endDate, setEndDate] = useState();
+  const [myStartDate, setMyStartDate] = useState();
+  const [myEndDate, setMyEndDate] = useState();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setStartDate(myStartDate))
+  }, [myStartDate])
+
+  useEffect(() => {
+    dispatch(setEndDate(myEndDate))
+  }, [myEndDate])
+
+  const onClickSearch = () => {
+    
+  }
 
   function range(start, end) {
     var arr = [];
@@ -85,12 +100,12 @@ export function DateSearch() {
               </button>
             </div>
           )}
-          selected={startDate}
+          selected={myStartDate}
           onChange={(date) => {
             date.setHours(0)
             date.setMinutes(0)
             date.setSeconds(0)
-            setStartDate(date)
+            setMyStartDate(date)
           }}
           dateFormat="yyyy/MM/dd"
         />
@@ -146,12 +161,12 @@ export function DateSearch() {
               </button>
             </div>
           )}
-          selected={endDate}
+          selected={myEndDate}
           onChange={(date) => {
             date.setHours(0)
             date.setMinutes(0)
             date.setSeconds(0)
-            setEndDate(date)
+            setMyEndDate(date)
           }}
           dateFormat="yyyy/MM/dd"
         />

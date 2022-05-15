@@ -2,49 +2,25 @@ import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import { WithdrawDetail } from "./WithdrawDetail";
 import * as S from './Style';
+import { apiInstance } from 'api';
 
 export function WithdrawDetails() {
-  const [myList, setMyList] = useState(
-    [
-      {
-        id: 1,
-        date: "2022-04-20",
-        account: "우리은행 1002-051-123456",
-        values: 10000
-      },
-      {
-        id: 2,
-        date: "2022-04-19",
-        account: "우리은행 1002-051-123456",
-        values: 10000
-      },
-      {
-        id: 3,
-        date: "2022-04-18",
-        account: "우리은행 1002-051-123456",
-        values: 10000
-      },
-      {
-        id: 4,
-        date: "2022-04-17",
-        account: "우리은행 1002-051-123456",
-        values: 10000
-      },
-      {
-        id: 5,
-        date: "2022-04-16",
-        account: "우리은행 1002-051-123456",
-        values: 10000
-      },
-    ]
-  );
+  const [myList, setMyList] = useState();
   const [totalValue, setTotalValue] = useState(0);
   const navigate = useNavigate();
+  const api = apiInstance();
 
   useEffect(() => {
-    var result = 0;
-    myList.map((withdraw) => result += withdraw.values)
-    setTotalValue(result)
+    const getWithdrawDetails = async () => {
+      const response = await api.get('/withdraw')
+      setMyList(response.data)
+
+      var result = 0;
+      response.data.map((withdraw) => result += withdraw.money)
+      setTotalValue(result)
+    }
+
+    getWithdrawDetails();
   }, [])
 
   const goBack = () => {
@@ -53,6 +29,7 @@ export function WithdrawDetails() {
 
   return(
     <>
+      {myList ? 
       <S.ListBox style={{ marginTop: "2rem" }}>
         <div style={{ fontWeight: "bold", textAlign: "start", fontSize: "1.2rem" }}>
           정산목록
@@ -65,6 +42,7 @@ export function WithdrawDetails() {
         </div>
         <S.BackButton onClick={() => {goBack()}}>돌아가기</S.BackButton>
       </S.ListBox>
+      : <></>}
     </>
   )
 }
