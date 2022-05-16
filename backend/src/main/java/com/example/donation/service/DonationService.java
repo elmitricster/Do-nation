@@ -2,6 +2,7 @@ package com.example.donation.service;
 
 import com.example.donation.domain.DonationRecord;
 import com.example.donation.dto.DonationRecordResponse;
+import com.example.donation.exception.NotEnoughPointException;
 import com.example.donation.repository.DonationRecordRepository;
 import com.example.user.domain.User;
 import com.example.user.service.UserService;
@@ -22,7 +23,7 @@ public class DonationService {
     @Transactional(readOnly = true)
     public boolean checkEnoughPoint(long id, int donatePoint) {
         if(donatePoint>userService.checkPoint(id))
-            throw new RuntimeException("보유한 포인트가 후원할 포인트보다 적습니다.");
+            throw new NotEnoughPointException();
 
         return true;
     }
