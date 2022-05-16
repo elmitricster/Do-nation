@@ -32,7 +32,7 @@ public class FollowService {
     public void unfollowCreator(Long id, String nickname) {
         User me =userService.findMember(id);
         User follower = userService.findMember(nickname);
-        if(followRepository.existsByUserAndCreator(me,follower))
+        if(!followRepository.existsByUserAndCreator(me,follower))
             throw new AlreadyRemoveFollowException();
 
         followRepository.delete(new Follow(me,follower));
