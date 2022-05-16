@@ -36,6 +36,7 @@ public class DonationController {
         donationService.donate(sessionUser.getId(), nickname, point, message);
         return ResponseEntity.ok().build();
     }
+
     @GetMapping("/me")
     public List<DonationRecordResponse> fetchDonations(SessionUser user) {
         return donationService.fetchDonations(user.getId());
