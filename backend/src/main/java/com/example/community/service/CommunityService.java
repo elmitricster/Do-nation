@@ -43,9 +43,10 @@ public class CommunityService {
     //게시물 보기
     @Transactional(readOnly = true)
     public List<Community> fetchContents(long id) {
-        List<Community> communityList = communityRepository.findAllByCreatorOrderByWriteTimeDesc(userService.findMember(id)); // 여기 findAll 말고 글쓴 시간순으로 정렬 되도록
-        return communityList;
+        // 여기 findAll 말고 글쓴 시간순으로 정렬 되도록
+        return communityRepository.findAllByCreatorOrderByWriteTimeDesc(userService.findMember(id));
     }
+
 
     //게시물 수정
     @Transactional
