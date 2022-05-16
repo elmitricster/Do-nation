@@ -33,8 +33,8 @@ public class CommunityController {
 
     @ApiOperation(value = "게시글 전체 보기")
     @GetMapping("")
-    public List<Community> fetchContents(SessionUser sessionUser) {
-        return communityService.fetchContents(sessionUser.getId());
+    public List<Community> fetchContents(@PathVariable Long creatorId) {
+        return communityService.fetchContents(creatorId);
     }
 
     @ApiOperation(value = "게시글 내용 수정")
