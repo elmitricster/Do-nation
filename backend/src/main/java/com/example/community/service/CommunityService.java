@@ -2,41 +2,41 @@ package com.example.community.service;
 
 import com.example.community.domain.Comment;
 import com.example.community.domain.Community;
-import com.example.community.domain.UploadFile;
-import com.example.community.exception.NotFoundContentException;
+import com.example.community.dto.UpdateCommunityRequest;
+import com.example.community.dto.WriteCommunityRequest;
 import com.example.community.repository.CommentRepository;
 import com.example.community.repository.CommunityRepository;
 import com.example.user.domain.User;
 import com.example.user.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
 @Transactional
 public class CommunityService {
-    private final CommunityRepository communityRepository;
-    private final CommentRepository commentRepository;
+    private final FileStore fileStore;
+    private final CommunityQueryService communityQueryService;
+    private final CommentQueryService commentQueryService;
     private final UserService userService;
+    private final CommentRepository commentRepository;
+    private final CommunityRepository communityRepository;
 
     //게시글 등록
     @Transactional
-    public void writeContent(long id, String content, List<UploadFile> imageFiles) {
+    public void writeContent(Long id, WriteCommunityRequest request) {
         User creator = userService.findMember(id);
 
         communityRepository.save(Community.builder()
                 .creator(creator)
                 .writeTime(LocalDateTime.now())
-                .content(content)
-                .imageFiles(imageFiles)
+                .content(request.getContent())
+                .imageFiles(fileStore.storeFiles(request.getImages()))
                 .build());
     }
 
@@ -49,60 +49,52 @@ public class CommunityService {
 
     //게시물 수정
     @Transactional
-    public ResponseEntity<Community> updateContent(long id, @PathVariable Long community_id, String content, List<UploadFile> imageFiles) {
-        Community community = communityRepository.findById(community_id)
-                .orElseThrow(NotFoundContentException::new);
-        community.setContent(content);
-        community.setWriteTime(LocalDateTime.now());
-        community.setImageFiles(imageFiles);
+    public void updateContent(Long userId, Long community_id, UpdateCommunityRequest request) {
+        Community community = communityQueryService.getCommunity(userId, community_id);
 
-        Community updateContent = communityRepository.save(community);
-        return ResponseEntity.ok(updateContent);
+        community.updateContent(request.getContent(),LocalDateTime.now(),fileStore.storeFiles(request.getImages()));
     }
+
+
 
     //게시글 삭제
     @Transactional
-    public ResponseEntity<Map<String, Boolean>> deleteContent(long id, @PathVariable Long community_id) {
-        Community community = communityRepository.findById(community_id)
-                .orElseThrow(NotFoundContentException::new);
+    public void deleteContent(Long userId, long community_id) {
+        Community community = communityQueryService.getCommunity(userId, community_id);
 
         communityRepository.delete(community);
-        Map <String, Boolean> response = new HashMap<>();
-        response.put("삭제완료", Boolean.TRUE);
-        return ResponseEntity.ok(response);
     }
 
     //댓글 등록
     @Transactional
-    public void writeComment(long id, @PathVariable Long community_id, String commentor, String comment) {
-        Community community = communityRepository.findById(community_id)
-                        .orElseThrow(NotFoundContentException::new);
+    public void writeComment(long id, @PathVariable Long community_id, String comment) {
+        Community community = communityQueryService.getCommunity(community_id);
+        User commentor = userService.findMember(id);
 
         commentRepository.save(Comment.builder()
-                .communityId(community)
+                .community(community)
                 .commentWriteTime(LocalDateTime.now())
                 .commentor(commentor)
                 .comment(comment)
                 .build());
     }
 
-    //댓글 보기
-    @Transactional(readOnly = true)
-    public List<Comment> fetchComments(long id, Long community_id) {
-        List<Comment> commentList = commentRepository.findAllByCommentorOrderByCommentWriteTimeDesc(); // 여기 findAll 말고 댓글쓴 시간순으로 정렬 되도록, 파라미터 어떻게 넣어야될지 모르겠음
-        return commentList;
-    }
 
     //댓글 삭제
     @Transactional
-    public ResponseEntity<Map<String, Boolean>> deleteComment(long id, @PathVariable Long community_comment_id) {
-        Comment comment = commentRepository.findById(community_comment_id)
-                .orElseThrow(NotFoundContentException::new);
-
+    public void deleteComment(long id, @PathVariable Long community_comment_id) {
+        Comment comment = commentQueryService.getComment(community_comment_id, id);
         commentRepository.delete(comment);
-        Map <String, Boolean> response = new HashMap<>();
-        response.put("삭제완료", Boolean.TRUE);
-        return ResponseEntity.ok(response);
+
+    }
+    //댓글 보기
+    @Transactional(readOnly = true)
+    public List<Comment> fetchComments(Long community_id) {
+        return commentQueryService.fetchComments(community_id);
     }
 
+    public void updateComment(long id, Long community_comment_id,String newComment) {
+        Comment comment = commentQueryService.getComment(community_comment_id, id);
+        comment.updateComment(newComment,LocalDateTime.now());
+    }
 }
