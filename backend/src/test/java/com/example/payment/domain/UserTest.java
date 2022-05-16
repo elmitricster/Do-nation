@@ -46,5 +46,14 @@ public class UserTest {
                 .nickname(basicStr)
                 .build();
     }
+    public static User testUser(String name){
+        String basicStr ="1";
+        return  User.BasicBuilder()
+                .kakaoId(basicStr)
+                .birthday(basicStr)
+                .profileImage(basicStr)
+                .nickname(name)
+                .build();
+    }
 
 }
