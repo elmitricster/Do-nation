@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Col } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import { setStartDate, setEndDate } from 'modules/withdraw';
+import { setStartDate, setEndDate, setIsSearched } from 'modules/withdraw';
 import * as S from './Style';
 
-export function DateSearch() {
+export function DateSearch({ startDate, endDate }) {
   const [myStartDate, setMyStartDate] = useState();
   const [myEndDate, setMyEndDate] = useState();
   const dispatch = useDispatch();
@@ -18,7 +18,7 @@ export function DateSearch() {
   }, [myEndDate])
 
   const onClickSearch = () => {
-    
+    dispatch(setIsSearched(true))
   }
 
   function range(start, end) {
@@ -172,7 +172,7 @@ export function DateSearch() {
         />
       </S.DateBox>
       <Col xs={2} style={{ marginTop: "auto" }}>
-        <S.MyButton>검색</S.MyButton>
+        <S.MyButton onClick={() => {onClickSearch()}}>검색</S.MyButton>
       </Col>
     </div>
   )

@@ -14,7 +14,6 @@ export function Withdraw() {
   useEffect(() => {
     const getPoint = async () => {
       const response = await api.get('/user/me')
-      console.log(response.data)
       return response.data
     }
 
