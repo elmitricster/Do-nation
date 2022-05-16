@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams, NavLink } from 'react-router-dom';
+import { useParams, NavLink, useNavigate } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
 import defaultProfile from './default_profile.png';
 import * as S from './Style';
@@ -12,7 +12,9 @@ export function ProfileHeader() {
   const [isMore, setIsMore] = useState(false);
   const [profile, setProfile] = useState();
   const [isMyProfile, setIsMyProfile] = useState(false);
+  const [isFollow, setIsFollow] = useState(false);
   const api = apiInstance();
+  const navigate = useNavigate();
 
   // url buttons color
   const urlButton = {
@@ -30,17 +32,49 @@ export function ProfileHeader() {
     return response.data
   }
 
+  const checkIsFollow = async (nickname) => {
+    const response = await api.get(`/follow/isFollow?nickname=${nickname}`)
+    return response.data
+  }
+
+  const follow = async (nickname) => {
+    const response = await api.post(`/follow?nickname=${nickname}`)
+  }
+
+  const unfollow = async (nickname) => {
+    const response = await api.delete(`/follow?nickname=${nickname}`)
+  }
+
   useEffect(() => {
     getProfileInfo()
       .then(res => {
         setProfile(res)
-        console.log(profile)
-        console.log(isMyProfile)
-      });
+      })
+      .catch(e =>{
+        navigate('/noprofile')
+      })
   }, [])
+
+  useEffect(() => {
+    checkIsFollow(params.nickname)
+      .then(res => {
+        console.log(res)
+        setIsFollow(res)
+      })
+  }, [profile])
 
   const onHandleIsMore = () => {
     setIsMore(!isMore);
+  };
+
+  const onClickFollow = () => {
+    follow(params.nickname)
+    setIsFollow(true)
+  };
+
+  const onClickUnfollow = () => {
+    unfollow(params.nickname)
+    setIsFollow(false)
   };
 
   return (
@@ -73,7 +107,14 @@ export function ProfileHeader() {
                 </Row>
                 <Row>
                   <div>
-                    {isMyProfile ? <S.MyButton>프로필 편집</S.MyButton> : <S.MyButton>팔로우</S.MyButton>}
+                    {isMyProfile ? 
+                      <S.MyButton>프로필 편집</S.MyButton>
+                    : 
+                      isFollow ?
+                        <S.MyButton onClick={() => {onClickUnfollow()}}>언팔로우</S.MyButton>
+                      :
+                        <S.MyButton onClick={() => {onClickFollow()}}>팔로우</S.MyButton>
+                    }
                     {isMyProfile ? <S.MyButton>글 작성</S.MyButton> : <S.MyButton>후원하기</S.MyButton>}
                   </div>
                 </Row>
