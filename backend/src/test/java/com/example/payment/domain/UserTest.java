@@ -37,6 +37,14 @@ public class UserTest {
         user.decreasePoint(500);
         assertEquals(user.getPoint(),0);
     }
+
+    @Test
+    @DisplayName("멱등성테스트")
+    public void sameUserTest(){
+        User otherUser = testUser();
+        assertEquals(true,user.equals(otherUser));
+    }
+
     public static User testUser(){
         String basicStr ="1";
         return  User.BasicBuilder()

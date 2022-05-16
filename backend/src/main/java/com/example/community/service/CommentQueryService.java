@@ -24,7 +24,7 @@ public class CommentQueryService {
     private final UserService userService;
 
 
-    @Transactional(readOnly = true)
+
     public List<Comment> fetchComments(Long community_id) {
         Community community = communityQueryService.getCommunity(community_id);
         List<Comment> commentList = commentRepository.findAllByCommunityOrderByCommentWriteTimeDesc(community); // 여기 findAll 말고 댓글쓴 시간순으로 정렬 되도록, 파라미터 어떻게 넣어야될지 모르겠음
@@ -35,7 +35,7 @@ public class CommentQueryService {
         Comment comment = commentRepository.findById(community_comment_id)
                 .orElseThrow(NotFoundContentException::new);
         User user = userService.findMember(id);
-        if (!comment.getComment().equals(user))
+        if (!comment.getCommentor().equals(user))
             throw new DiffUserException();
         return comment;
     }
