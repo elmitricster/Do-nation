@@ -11,40 +11,11 @@ services:
     ports:
       - "8080:8080"
     environment:
-      SPRING_DATASOURCE_URL: "jdbc:mysql://db:3306/example?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&tinyInt1isBit=false"
+      SPRING_DATASOURCE_URL: "jdbc:mysql://k6c101.p.ssafy.io
+:3306/example?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&tinyInt1isBit=false"
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: example
   nginx:
     image: wjdgustn15/ssafy_donation_service:nginx
     ports:
       - "80:80"
-  db:
-    image: mysql
-    command: --default-authentication-plugin=mysql_native_password
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: example
-    ports:
-      - "3306:3306"
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - 3300:8080
-    
-  jenkins:
-      image: jenkins/jenkins:lts
-      volumes:
-          - /var/run/docker.sock:/var/run/docker.sock
-          - /jenkins:/var/jenkins_home
-          - /usr/bin/docker:/usr/bin/docker
-          - /usr/bin/docker-compose:/usr/bin/docker-compose
-
-      ports:
-          - "8000:8080"
-      privileged: true
-      user: root
-  sonarqube:
-    image: sonarqube:latest
-    ports:
-          - "9000:9000"
