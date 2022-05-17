@@ -33,11 +33,7 @@ public class AuthController {
         );
     }
 
-//    @ApiOperation(value = "값이름", notes = "값에 대한 설명", response = String.class)
-//    @GetMapping("/")
-//    public String registerUser() {
-//        return "index";
-//    }
+
 
     @ApiOperation(value = "유저 정보 업데이트", notes = "DB의 category, intro_message, user_nickname, profile_image, profile_name, subject, User_url - List{user_url, url_name} 을 업데이트 합니다.")
     @PutMapping("")

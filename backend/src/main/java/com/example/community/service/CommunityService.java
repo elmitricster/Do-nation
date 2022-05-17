@@ -76,7 +76,7 @@ public class CommunityService {
                 .community(community)
                 .commentWriteTime(LocalDateTime.now())
                 .commentor(commentor)
-                .comment(comment)
+                .content(comment)
                 .build());
     }
 

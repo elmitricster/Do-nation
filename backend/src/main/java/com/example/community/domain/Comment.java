@@ -31,18 +31,17 @@ public class Comment {
     private User commentor;
 
     @Column(name = "comment_contents", nullable = false)
-    private String comment;
+    private String content;
 
     @Builder
-    public Comment(Community community, LocalDateTime commentWriteTime, User commentor, String comment) {
+    public Comment(Community community, LocalDateTime commentWriteTime, User commentor, String content) {
         this.community = community;
-        updateComment(comment,commentWriteTime);
+        updateComment(content,commentWriteTime);
         this.commentor = commentor;
     }
     public void updateComment(String comment, LocalDateTime writeTime) {
         if (comment.trim().isEmpty())
             throw new NotValidCommunityException();
-        this.commentWriteTime = commentWriteTime;
         this.commentWriteTime = writeTime;
     }
 

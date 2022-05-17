@@ -48,9 +48,9 @@ public class Community {
 
 
     public void updateContent(String content, LocalDateTime writeTime, Collection<UploadFile> imageFiles) {
-        if(content.trim().isEmpty()&&imageFiles.size()==0)
+        if (content.trim().isEmpty() && imageFiles.size() == 0)
             throw new NotValidCommunityException();
-            this.content = content;
+        this.content = content;
         this.writeTime = writeTime;
         this.imageFiles = imageFiles.stream().collect(Collectors.toList());
     }
