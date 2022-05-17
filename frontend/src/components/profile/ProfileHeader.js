@@ -5,6 +5,7 @@ import defaultProfile from './default_profile.png';
 import * as S from './Style';
 import articles from './articles.png';
 import donate from './donate.png';
+import DonationModal from 'components/donation/DonationModal';
 import { apiInstance } from 'api';
 
 export function ProfileHeader() {
@@ -115,7 +116,7 @@ export function ProfileHeader() {
                       :
                         <S.MyButton onClick={() => {onClickFollow()}}>팔로우</S.MyButton>
                     }
-                    {isMyProfile ? <S.MyButton>글 작성</S.MyButton> : <S.MyButton>후원하기</S.MyButton>}
+                    {isMyProfile ? <S.MyButton>글 작성</S.MyButton> : <DonationModal profile={profile} />}
                   </div>
                 </Row>
               </div>

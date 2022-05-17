@@ -52,6 +52,7 @@ const donaBtn = styled.button`
 
 const box = styled.div`
   text-align: center;
+  position: relative;
 `;
 
 const nicks = styled.div`
@@ -70,6 +71,51 @@ const boxes = styled.div`
 const tBox = styled.div`
   margin-top: 2rem;
 `;
+
+export const MyButton = styled.button`
+  float: left;
+  border: solid 1px #4a91fc;
+  background-color: #4a91fc;
+  border-radius: 0.3rem;
+  height: 2rem;
+  margin-top: 0.5rem;
+  margin-right: 1rem;
+  color: white;
+  font-size: 0.9rem;
+  width: 6rem;
+`;
+
+export const Input = styled.input`
+  margin: 0.5rem auto;
+  border: solid 1px black;
+  border-radius: 0.3rem;
+  height: 2.5rem;
+  font-size: 0.8rem;
+  width: 75%;
+  padding-left: 3rem;
+
+  &:focus {
+    border: solid 1px #94BDFB;
+    outline: solid 1px #94BDFB;
+  }
+`
+
+export const GomIcon = styled.img`
+  position: absolute;
+  left: 3.7rem;
+  top: 0.7rem;
+  height: 2rem;
+  width: 2rem;
+  border-radius: 50%;
+`
+
+export const GomText = styled.div`
+  position: absolute;
+  right: 3.7rem;
+  top: 0.9rem;
+  font-size: 1rem;
+  font-weight: bold;
+`
 
 export {
   ownDiv,

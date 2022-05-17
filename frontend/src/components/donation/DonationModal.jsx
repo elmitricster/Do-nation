@@ -1,13 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import * as S from './Styled';
 import Avatar from '@mui/material/Avatar';
+import { apiInstance } from 'api';
 
-import OutlinedInput from '@mui/material/OutlinedInput';
-import InputAdornment from '@mui/material/InputAdornment';
-import FormControl from '@mui/material/FormControl';
 import TextField from '@mui/material/TextField';
 
 const style = {
@@ -25,8 +23,12 @@ const style = {
   borderRadius: '16px',
 };
 
-export default function BasicModal() {
+export default function BasicModal({ profile }) {
   const [open, setOpen] = useState(false);
+  const [myPoint, setMyPoint] = useState();
+  const api = apiInstance();
+  const navigate = useNavigate();
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
     setOpen(false);
@@ -39,19 +41,54 @@ export default function BasicModal() {
     setGom(Number(e.target.value));
   };
 
+  const [message, setMessage] = useState('');
+  const handleMessageChange = e => {
+    setMessage(e.target.value);
+  }
+
+  const checkCanDonate = async (point) => {
+    const response = api.get(`/donation/certification?point=${point}`)
+    return response
+  }
+
   const handleClick = e => {
-    setState(1);
+    checkCanDonate(gom)
+      .then(res => {
+        setState(1);
+      })
+      .catch(e => {
+        alert('잔액이 부족합니다.')
+      })
   };
 
+  const donate = async (nickname, point, message) => {
+    const response = await api.post(`/donation?nickname=${nickname}&point=${point}&message=${message}`)
+    return response
+  }
+
   const handleDona = e => {
+    donate(profile.nickname, gom, message);
     handleClose();
+    navigate(0);
   };
 
   const [state, setState] = useState(0);
 
+  const getMyPoint = async () => {
+    const response = await api.get('/user/point')
+    return response.data
+  }
+
+  useEffect(() => {
+    getMyPoint()
+      .then(res => {
+        setMyPoint(res)
+      })
+  }, [])
+
   return (
-    <div>
-      <Button onClick={handleOpen}>Donation</Button>
+    <div style={{ float: 'left' }}>
+      <S.MyButton onClick={handleOpen}>후원하기</S.MyButton>
       <Modal open={open} onClose={handleClose}>
         <Box sx={style}>
           {state === 0 && (
@@ -59,13 +96,13 @@ export default function BasicModal() {
               <S.ownDiv>
                 <S.posPtag>보유 Gom</S.posPtag>
                 <S.ownPtag>
-                  <S.ownSpan>100,000</S.ownSpan>
+                  <S.ownSpan>{myPoint}</S.ownSpan>
                   <S.ownGom>Gom</S.ownGom>
                 </S.ownPtag>
               </S.ownDiv>
               <Avatar
                 alt="Remy Sharp"
-                src="/static/images/avatar/1.jpg"
+                src={profile.profileImage}
                 sx={{
                   width: '15rem',
                   height: '15rem',
@@ -73,34 +110,12 @@ export default function BasicModal() {
                   mt: '6rem',
                 }}
               />
-              <S.nick>닉네임</S.nick>
+              <S.nick>{profile.nickname}</S.nick>
               <S.donaText>보낼 Gom을 입력해주세요!</S.donaText>
               <S.box>
-                <FormControl
-                  sx={{ m: '1.5rem', width: '75%' }}
-                  variant="outlined"
-                >
-                  <OutlinedInput
-                    value={gom || ''}
-                    onChange={handleChange}
-                    startAdornment={
-                      <InputAdornment position="start">
-                        <img
-                          alt="bear"
-                          src={require('../../images/bear.png')}
-                          style={{
-                            height: 50,
-                            width: 50,
-                            borderRadius: '50%',
-                          }}
-                        />
-                      </InputAdornment>
-                    }
-                    endAdornment={
-                      <InputAdornment position="end">Gom</InputAdornment>
-                    }
-                  />
-                </FormControl>
+                <S.Input onChange={handleChange} />
+                <S.GomIcon src={require('../../images/bear.png')} />
+                <S.GomText>Gom</S.GomText>
               </S.box>
               <S.donaBtn onClick={handleClick}>다음</S.donaBtn>
             </>
@@ -110,13 +125,13 @@ export default function BasicModal() {
               <S.boxes>
                 <Avatar
                   alt="Remy Sharp"
-                  src="/static/images/avatar/1.jpg"
+                  src={profile.profileImage}
                   sx={{
                     width: '8rem',
                     height: '8rem',
                   }}
                 />
-                <S.nicks>닉네임</S.nicks>
+                <S.nicks>{profile.nickname}</S.nicks>
               </S.boxes>
               <S.donaText>응원 메세지를 입력해주세요!</S.donaText>
               <S.tBox>
@@ -126,6 +141,7 @@ export default function BasicModal() {
                   fullWidth
                   rows={12}
                   maxRows={Infinity}
+                  onChange={handleMessageChange}
                 />
               </S.tBox>
               <S.donaBtn onClick={handleDona}>도네이션 하기</S.donaBtn>
