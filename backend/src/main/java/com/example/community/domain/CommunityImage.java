@@ -1,6 +1,7 @@
 package com.example.community.domain;
 
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -8,6 +9,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "community_images")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter
 public class CommunityImage {
     @Id
     @Column(name = "community_images_id", nullable = false)
