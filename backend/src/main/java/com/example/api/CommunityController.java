@@ -4,7 +4,7 @@ package com.example.api;
 import com.example.auth.dto.SessionUser;
 import com.example.community.domain.Comment;
 import com.example.community.domain.Community;
-import com.example.community.domain.CommunityImage;
+import com.example.community.dto.CommunityImageResponse;
 import com.example.community.dto.UpdateCommunityRequest;
 import com.example.community.dto.WriteCommunityRequest;
 import com.example.community.service.CommunityService;
@@ -78,7 +78,7 @@ public class CommunityController {
     }
     @ApiOperation(value = "커뮤니티 이미지 조회")
     @GetMapping("/image/read/{communityId}")
-    public List<CommunityImage> fetchCommunityImages(@PathVariable long communityId) {
+    public List<CommunityImageResponse> fetchCommunityImages(@PathVariable long communityId) {
         return communityService.fetchCommunityImages(communityId);
     }
 

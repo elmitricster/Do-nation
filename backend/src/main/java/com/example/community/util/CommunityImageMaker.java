@@ -12,4 +12,6 @@ public class CommunityImageMaker extends BaseUtil {
     public static List<CommunityImage> ofList(List<UploadFile> uploadList, Community community){
         return uploadList.stream().map(x->new CommunityImage(x,community)).collect(Collectors.toList());
     }
+
+
 }

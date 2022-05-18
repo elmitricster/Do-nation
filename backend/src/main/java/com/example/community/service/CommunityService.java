@@ -3,6 +3,7 @@ package com.example.community.service;
 import com.example.community.domain.Comment;
 import com.example.community.domain.Community;
 import com.example.community.domain.CommunityImage;
+import com.example.community.dto.CommunityImageResponse;
 import com.example.community.dto.UpdateCommunityRequest;
 import com.example.community.dto.WriteCommunityRequest;
 import com.example.community.repository.CommentRepository;
@@ -107,8 +108,9 @@ public class CommunityService {
         comment.updateComment(newComment,LocalDateTime.now());
     }
     @Transactional(readOnly = true)
-    public List<CommunityImage> fetchCommunityImages(Long community_id) {
-        return communityImageQueryService.getCommunityImages(communityQueryService.getCommunity(community_id));
+    public List<CommunityImageResponse> fetchCommunityImages(Long community_id) {
+        List<CommunityImage> communityImages = communityImageQueryService.getCommunityImages(communityQueryService.getCommunity(community_id));
+        return CommunityImageResponse.ofList(communityImages);
     }
 
 }
