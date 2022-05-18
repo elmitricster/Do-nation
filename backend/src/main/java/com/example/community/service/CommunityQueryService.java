@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly =true)
@@ -28,5 +30,9 @@ public class CommunityQueryService {
     public Community getCommunity(Long community_id) {
         return communityRepository.findById(community_id)
                 .orElseThrow(NotFoundContentException::new);
+    }
+    @Transactional(readOnly = true)
+    public List<Community> fetchContents(long userId) {
+        return communityRepository.findAllByCreatorOrderByWriteTimeDesc(userService.findMember(userId));
     }
 }

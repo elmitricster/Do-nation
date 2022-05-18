@@ -2,10 +2,13 @@ package com.example.community.service;
 
 import com.example.community.domain.Comment;
 import com.example.community.domain.Community;
+import com.example.community.domain.CommunityImage;
 import com.example.community.dto.UpdateCommunityRequest;
 import com.example.community.dto.WriteCommunityRequest;
 import com.example.community.repository.CommentRepository;
+import com.example.community.repository.CommunityImageRepository;
 import com.example.community.repository.CommunityRepository;
+import com.example.community.util.CommunityImageMaker;
 import com.example.user.domain.User;
 import com.example.user.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -23,27 +26,29 @@ public class CommunityService {
     private final CommunityQueryService communityQueryService;
     private final CommentQueryService commentQueryService;
     private final UserService userService;
+    private final CommunityImageQueryService communityImageQueryService;
     private final CommentRepository commentRepository;
     private final CommunityRepository communityRepository;
+    private final CommunityImageRepository communityImageRepository;
+
 
     //게시글 등록
     @Transactional
     public void writeContent(Long id, WriteCommunityRequest request) {
         User creator = userService.findMember(id);
-
-        communityRepository.save(Community.builder()
+        Community community=communityRepository.save(Community.builder()
                 .creator(creator)
                 .writeTime(LocalDateTime.now())
                 .content(request.getContent())
-                .imageFiles(fileStore.storeFiles(request.getImages()))
                 .build());
+        communityImageRepository.saveAll(CommunityImageMaker.ofList(fileStore.storeFiles(request.getImages()), community));
     }
 
     //게시물 보기
     @Transactional(readOnly = true)
     public List<Community> fetchContents(long id) {
         // 여기 findAll 말고 글쓴 시간순으로 정렬 되도록
-        return communityRepository.findAllByCreatorOrderByWriteTimeDesc(userService.findMember(id));
+        return communityQueryService.fetchContents(id);
     }
 
 
@@ -51,8 +56,10 @@ public class CommunityService {
     @Transactional
     public void updateContent(Long userId, Long community_id, UpdateCommunityRequest request) {
         Community community = communityQueryService.getCommunity(userId, community_id);
+        communityImageRepository.deleteAll(communityImageRepository.findAllByCommunity(community));
+        communityImageRepository.saveAll(CommunityImageMaker.ofList(fileStore.storeFiles(request.getImages()), community));
 
-        community.updateContent(request.getContent(),LocalDateTime.now(),fileStore.storeFiles(request.getImages()));
+        community.updateContent(request.getContent(),LocalDateTime.now());
     }
 
 
@@ -61,7 +68,8 @@ public class CommunityService {
     @Transactional
     public void deleteContent(Long userId, long community_id) {
         Community community = communityQueryService.getCommunity(userId, community_id);
-        commentRepository.deleteAll(commentRepository.findAllByCommunityOrderByCommentWriteTimeDesc(community));
+        communityImageRepository.deleteAll(communityImageRepository.findAllByCommunity(community));
+        commentRepository.deleteAll(commentQueryService.fetchComments(community_id));
         communityRepository.delete(community);
 
     }
@@ -98,4 +106,9 @@ public class CommunityService {
         Comment comment = commentQueryService.getComment(commentId, userId);
         comment.updateComment(newComment,LocalDateTime.now());
     }
+    @Transactional(readOnly = true)
+    public List<CommunityImage> fetchCommunityImages(Long community_id) {
+        return communityImageQueryService.getCommunityImages(communityQueryService.getCommunity(community_id));
+    }
+
 }

@@ -8,9 +8,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Collection;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "Community")
@@ -32,27 +29,19 @@ public class Community {
     @Column(name = "contents", nullable = false)
     private String content;
 
-    @ElementCollection
-    @CollectionTable(
-            name = "content_file",
-            joinColumns = @JoinColumn(name = "community_id")
-    )
-    private List<UploadFile> imageFiles;
 
     @Builder
-    public Community(User creator, LocalDateTime writeTime, String content, Collection<UploadFile> imageFiles) {
+    public Community(User creator, LocalDateTime writeTime, String content) {
         this.creator = creator;
-        this.content = content;
-        updateContent(content,writeTime,imageFiles);
+        updateContent(content,writeTime);
     }
 
 
-    public void updateContent(String content, LocalDateTime writeTime, Collection<UploadFile> imageFiles) {
-        if (content.trim().isEmpty() && imageFiles.size() == 0)
+    public void updateContent(String content, LocalDateTime writeTime) {
+        if (content==null||content.trim().isEmpty())
             throw new NotValidCommunityException();
         this.content = content;
         this.writeTime = writeTime;
-        if(imageFiles!=null)
-        this.imageFiles = imageFiles.stream().collect(Collectors.toList());
+
     }
 }

@@ -28,7 +28,7 @@ public class AuthConfig implements WebMvcConfigurer {
                 .addPathPatterns("/user", "/user/**")
                 .addPathPatterns("/follow/**")
                 .addPathPatterns("/payment/**")
-                .excludePathPatterns("community/read/**","community/comment/read/**")
+                .excludePathPatterns("community/read/**","community/comment/read/**","community/image/read/**")
                 .addPathPatterns("community/","community/comment/");
 
     }
