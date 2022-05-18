@@ -11,7 +11,6 @@ import com.example.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -62,13 +61,14 @@ public class CommunityService {
     @Transactional
     public void deleteContent(Long userId, long community_id) {
         Community community = communityQueryService.getCommunity(userId, community_id);
-
+        commentRepository.deleteAll(commentRepository.findAllByCommunityOrderByCommentWriteTimeDesc(community));
         communityRepository.delete(community);
+
     }
 
     //댓글 등록
     @Transactional
-    public void writeComment(long id, @PathVariable Long community_id, String comment) {
+    public void writeComment(long id,  Long community_id, String comment) {
         Community community = communityQueryService.getCommunity(community_id);
         User commentor = userService.findMember(id);
 
@@ -83,8 +83,8 @@ public class CommunityService {
 
     //댓글 삭제
     @Transactional
-    public void deleteComment(long id, @PathVariable Long community_comment_id) {
-        Comment comment = commentQueryService.getComment(community_comment_id, id);
+    public void deleteComment(long id, long commentId) {
+        Comment comment = commentQueryService.getComment(commentId, id);
         commentRepository.delete(comment);
 
     }
@@ -94,8 +94,8 @@ public class CommunityService {
         return commentQueryService.fetchComments(community_id);
     }
 
-    public void updateComment(long id, Long community_comment_id,String newComment) {
-        Comment comment = commentQueryService.getComment(community_comment_id, id);
+    public void updateComment(long userId, Long commentId,String newComment) {
+        Comment comment = commentQueryService.getComment(commentId, userId);
         comment.updateComment(newComment,LocalDateTime.now());
     }
 }

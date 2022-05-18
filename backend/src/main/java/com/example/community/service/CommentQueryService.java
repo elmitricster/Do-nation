@@ -31,8 +31,8 @@ public class CommentQueryService {
         return commentList;
     }
 
-    Comment getComment(Long community_comment_id, long id) {
-        Comment comment = commentRepository.findById(community_comment_id)
+    Comment getComment(Long commentId, long id) {
+        Comment comment = commentRepository.findById(commentId)
                 .orElseThrow(NotFoundContentException::new);
         User user = userService.findMember(id);
         if (!comment.getCommentor().equals(user))

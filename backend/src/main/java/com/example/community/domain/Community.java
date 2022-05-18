@@ -52,6 +52,7 @@ public class Community {
             throw new NotValidCommunityException();
         this.content = content;
         this.writeTime = writeTime;
+        if(imageFiles!=null)
         this.imageFiles = imageFiles.stream().collect(Collectors.toList());
     }
 }

@@ -26,8 +26,7 @@ public class CommunityQueryService {
     }
 
     public Community getCommunity(Long community_id) {
-        Community community = communityRepository.findById(community_id)
+        return communityRepository.findById(community_id)
                 .orElseThrow(NotFoundContentException::new);
-        return community;
     }
 }

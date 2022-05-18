@@ -32,47 +32,47 @@ public class CommunityController {
     }
 
     @ApiOperation(value = "게시글 전체 보기")
-    @GetMapping("")
-    public List<Community> fetchContents(@PathVariable Long creatorId) {
+    @GetMapping("/read/{creatorId}")
+    public List<Community> fetchContents(@PathVariable long creatorId) {
         return communityService.fetchContents(creatorId);
     }
 
     @ApiOperation(value = "게시글 내용 수정")
-    @PutMapping("")
-    public ResponseEntity<Void> updateContent(SessionUser sessionUser, @PathVariable Long community_id, UpdateCommunityRequest request) {
-        communityService.updateContent(sessionUser.getId(),community_id, request);
+    @PutMapping("/{communityId}")
+    public ResponseEntity<Void> updateContent(SessionUser sessionUser, @PathVariable long communityId, UpdateCommunityRequest request) {
+        communityService.updateContent(sessionUser.getId(),communityId, request);
         return ResponseEntity.ok().build();
     }
 
     @ApiOperation(value = "게시글 삭제")
-    @DeleteMapping("")
-    public ResponseEntity<Void> deleteContent(SessionUser sessionUser, @PathVariable Long community_id) {
-        communityService.deleteContent(sessionUser.getId(), community_id);
+    @DeleteMapping("/{communityId}")
+    public ResponseEntity<Void> deleteContent(SessionUser sessionUser, @PathVariable long communityId) {
+        communityService.deleteContent(sessionUser.getId(), communityId);
         return ResponseEntity.ok().build();
     }
 
     @ApiOperation(value = "커뮤니티 게시글에 댓글 등록")
-    @PostMapping("/comment")
-    public ResponseEntity<Void> writeComment(SessionUser sessionUser, @PathVariable Long community_id,  String comment) {
-        communityService.writeComment(sessionUser.getId(), community_id, comment);
+    @PostMapping("/comment/{communityId}")
+    public ResponseEntity<Void> writeComment(SessionUser sessionUser, @PathVariable long communityId,  String comment) {
+        communityService.writeComment(sessionUser.getId(), communityId, comment);
         return ResponseEntity.ok().build();
     }
     @ApiOperation(value = "커뮤니티 게시글에 댓글 수정")
-    @PutMapping("/comment")
-    public ResponseEntity<Void> updateComment(SessionUser sessionUser, @PathVariable Long community_id,  String comment) {
-        communityService.updateComment(sessionUser.getId(), community_id, comment);
+    @PutMapping("/comment/{commentId}")
+    public ResponseEntity<Void> updateComment(SessionUser sessionUser, @PathVariable long commentId,String comment) {
+        communityService.updateComment(sessionUser.getId(),commentId, comment);
         return ResponseEntity.ok().build();
     }
     @ApiOperation(value = "댓글 전체 보기")
-    @GetMapping("/comment")
-    public List<Comment> fetchComments(@PathVariable Long community_id) {
-        return communityService.fetchComments(community_id);
+    @GetMapping("/comment/read/{commentId}")
+    public List<Comment> fetchComments(@PathVariable long commentId) {
+        return communityService.fetchComments(commentId);
     }
 
     @ApiOperation(value = "댓글 삭제")
-    @DeleteMapping("/comment")
-    public ResponseEntity<Void> deleteComment(SessionUser sessionUser, @PathVariable Long community_comment_id) {
-        communityService.deleteComment(sessionUser.getId(), community_comment_id);
+    @DeleteMapping("/comment/{commentId}")
+    public ResponseEntity<Void> deleteComment(SessionUser sessionUser,@PathVariable long commentId) {
+        communityService.deleteComment(sessionUser.getId(), commentId);
         return ResponseEntity.ok().build();
     }
 

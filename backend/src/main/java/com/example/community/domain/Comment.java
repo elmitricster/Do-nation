@@ -40,9 +40,10 @@ public class Comment {
         this.commentor = commentor;
     }
     public void updateComment(String comment, LocalDateTime writeTime) {
-        if (comment.trim().isEmpty())
+        if (comment==null||comment.trim().isEmpty())
             throw new NotValidCommunityException();
         this.commentWriteTime = writeTime;
+        this.content=comment;
     }
 
 }
