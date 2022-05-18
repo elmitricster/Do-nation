@@ -65,9 +65,9 @@ public class CommunityController {
         return ResponseEntity.ok().build();
     }
     @ApiOperation(value = "댓글 전체 보기")
-    @GetMapping("/comment/read/{commentId}")
-    public List<Comment> fetchComments(@PathVariable long commentId) {
-        return communityService.fetchComments(commentId);
+    @GetMapping("/comment/read/{communityId}")
+    public List<Comment> fetchComments(@PathVariable long communityId) {
+        return communityService.fetchComments(communityId);
     }
 
     @ApiOperation(value = "댓글 삭제")

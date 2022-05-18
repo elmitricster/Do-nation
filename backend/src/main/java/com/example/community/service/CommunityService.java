@@ -99,8 +99,8 @@ public class CommunityService {
     }
     //댓글 보기
     @Transactional(readOnly = true)
-    public List<Comment> fetchComments(Long community_id) {
-        return commentQueryService.fetchComments(community_id);
+    public List<Comment> fetchComments(Long communityId) {
+        return commentQueryService.fetchComments(communityId);
     }
 
     public void updateComment(long userId, Long commentId,String newComment) {
