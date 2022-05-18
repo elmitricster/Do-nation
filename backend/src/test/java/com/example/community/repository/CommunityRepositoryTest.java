@@ -22,6 +22,7 @@ class CommunityRepositoryTest {
 
     User user ;
     Community community;
+    Comment comment;
 
     @Autowired
     CommunityRepository communityRepository;
@@ -36,15 +37,19 @@ class CommunityRepositoryTest {
      user = UserTest.testUser();
      user=userRepository.save(user);
      community=communityRepository.save(testCommunity(user,"엄"));
-
+     comment=commentRepository.save(Comment.builder().community(community).commentor(user).content("준").commentWriteTime(LocalDateTime.now()).build());
     }
     @Test
     @DisplayName("삭제시 관련댓글 삭제")
     public void removeCommunity(){
-        Comment comment=commentRepository.save(Comment.builder().community(community).commentor(user).content("준").commentWriteTime(LocalDateTime.now()).build());
         commentRepository.deleteAll(commentRepository.findAllByCommunityOrderByCommentWriteTimeDesc(community));
         communityRepository.delete(community);
         assertEquals(0,commentRepository.findAll().size());
+    }
+    @Test
+    @DisplayName("커뮤니티 조회")
+    public void fetchCommunity() {
+        assertEquals(1,communityRepository.findAllByCreatorOrderByWriteTimeDesc(user).size());
     }
 
 

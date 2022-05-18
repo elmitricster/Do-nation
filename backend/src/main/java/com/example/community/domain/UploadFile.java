@@ -3,13 +3,12 @@ package com.example.community.domain;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Embeddable;
+import javax.persistence.*;
 
 @Embeddable
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class UploadFile {
 
-    private Long uploadId;
     private String uploadFileName;
     private String storeFileName;
 
