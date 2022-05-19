@@ -13,6 +13,7 @@ const userBox = styled.div`
 
 const avatarBox = styled.div`
   display: inline-block;
+  cursor: pointer;
 `;
 
 const contentBox = styled.div`
@@ -35,11 +36,12 @@ const description = styled.div`
 
 const creator = styled.div`
   margin-top: 0.3rem;
+  margin-right: 0.5rem;
   display: inline-block;
   width: 8rem;
   height: 2rem;
   line-height: 2rem;
-  border-radius: 25px;
+  border-radius: 0.5rem;
   background: #e32222;
   text-align: center;
 `;
@@ -50,7 +52,7 @@ const subject = styled.div`
   width: 10rem;
   height: 2rem;
   line-height: 2rem;
-  border-radius: 25px;
+  border-radius: 0.5rem;
   background: #8ac4ff;
   text-align: center;
 `;

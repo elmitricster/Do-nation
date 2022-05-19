@@ -1,8 +1,15 @@
 import React from 'react';
 import * as S from './Styled';
 import Avatar from '@mui/material/Avatar';
+import { useNavigate } from 'react-router-dom';
 
 export default function SearchedUser({ src, name, cre, sub, descpt }) {
+  const navigate = useNavigate();
+
+  const goProfilePage = (nickname) => {
+    navigate(`/profile/${nickname}/articles`)
+  }
+  
   return (
     <S.userBox>
       <S.avatarBox>
@@ -14,6 +21,7 @@ export default function SearchedUser({ src, name, cre, sub, descpt }) {
             height: '8rem',
             margin: 0,
           }}
+          onClick={() => {goProfilePage(name)}}
         />
       </S.avatarBox>
 

@@ -7,7 +7,7 @@ export function apiInstance() {
   const instance = axios.create({
     baseURL: API_BASE_URL,
     headers: {
-      'Content-type': 'application/json',
+      'Content-type': 'text/plain',
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Credentials': true,
       jwtoken: `${localStorage.getItem(ACCESS_TOKEN)}`,

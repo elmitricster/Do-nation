@@ -26,13 +26,10 @@ export function ArticleCreate() {
   };
 
   const onSubmit = () => {
-    // console.log(content)
-    // console.log(image)
-    // console.log(fileImage)
     console.log(content)
     
     const submit = async (content) => {
-      const response = await api.post(`/community?content=${content}`);
+      const response = await api.post(`community?content=${content}`);
       return response
     }
 

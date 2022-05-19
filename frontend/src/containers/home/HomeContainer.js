@@ -48,7 +48,11 @@ export function HomeContainer() {
       <div style={{ height: '10rem'}}></div>
 
       <MainpageText txt="관심있는 크리에이터를 찾아보세요" />
-      {random ? <Carousel creators={random}/> : <></>}
+      {random ? 
+        <Carousel creators={random}/> 
+      : 
+        <></>
+      }
       <MainpageText txt="구독한 크리에이터" />
       {follow ? 
         <Carousel creators={follow}/>

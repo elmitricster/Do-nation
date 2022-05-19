@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import * as S from './Styled';
 import Slider from 'react-slick';
@@ -19,7 +19,7 @@ const LeftArrow = props => {
 export default function Carousel({ creators }) {
   const settings = {
     dots: false,
-    infinite: true,
+    infinite: creators.length >= 5 ? true : false,
     slidesToShow: 5,
     slidesToScroll: 1,
     autoplay: true,
@@ -29,6 +29,9 @@ export default function Carousel({ creators }) {
     nextArrow: <RightArrow />,
     prevArrow: <LeftArrow />,
   };
+
+  useEffect(() => {
+  }, [])
 
   return (
     <S.carouselBox>
