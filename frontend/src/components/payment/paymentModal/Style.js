@@ -37,6 +37,7 @@ export const Cards = styled.div`
 
 
 export const Card = styled.div`
+  background-color: ${({ props, id }) => (props[id] ? '#94BDFB' : 'white')};
   margin: 15px;
   border: 1px solid black;
   border-radius: 8px;
@@ -64,3 +65,4 @@ margin-left: auto;
 margin-right: auto;
 margin-top: 6vh;
 `;
+
