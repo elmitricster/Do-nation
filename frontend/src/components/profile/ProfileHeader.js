@@ -88,7 +88,6 @@ export function ProfileHeader() {
               <S.ProfileImg
                 style={{ float: 'left' }}
                 src={profile.profileImage}
-                rounded
                 fluid
               />
               <div
@@ -185,13 +184,13 @@ export function ProfileHeader() {
       <S.Line></S.Line>
       <div className="row justify-content-around mt-3">
         <NavLink
-          to={`/profile/${params.user_id}/articles`}
+          to={`/profile/${params.nickname}/articles`}
           className="col"
         >
           <S.Icon src={articles} />
         </NavLink>
         <NavLink
-          to={`/profile/${params.user_id}/donations`}
+          to={`/profile/${params.nickname}/donations`}
           className="col"
         >
           <S.Icon src={donate} />

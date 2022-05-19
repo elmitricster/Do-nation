@@ -2,11 +2,10 @@ import React from 'react';
 import * as S from './Styled';
 import Avatar from '@mui/material/Avatar';
 
-export default function Creator({ src, cre, sub }) {
+export default function Creator({ src, nickname }) {
   return (
     <S.cardBox>
       <Avatar
-        alt="C"
         src={src}
         sx={{
           width: '8rem',
@@ -14,8 +13,7 @@ export default function Creator({ src, cre, sub }) {
           margin: 'auto',
         }}
       />
-      <S.creator>{cre}</S.creator>
-      <S.subject>{sub}</S.subject>
+      <S.subject>{nickname}</S.subject>
     </S.cardBox>
   );
 }

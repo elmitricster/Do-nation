@@ -26,6 +26,7 @@ export function Navigation({ jwt }) {
   const [nickname, setNickname] = useState();
   const [profileName, setProfileName] = useState();
   const [point, setPoint] = useState();
+  const [search, setSearch] = useState('');
 
   const { user } = useSelector(({ user }) => ({
     user: user.user,
@@ -60,6 +61,15 @@ export function Navigation({ jwt }) {
     navigate('/');
   }
 
+  const onSearchHandler = e => {
+    setSearch(e.currentTarget.value);
+  };
+
+  const onSearch = () => {
+    console.log(search)
+    navigate(`/user/search/${search}`)
+  }
+
   return (
     <S.MyNavbar collapseOnSelect expand={false}>
       <Container fluid>
@@ -92,8 +102,9 @@ export function Navigation({ jwt }) {
             placeholder="Search"
             className="me-2"
             aria-label="Search"
+            onChange={onSearchHandler}
           />
-          <S.SearchButton>검색</S.SearchButton>
+          <S.SearchButton onClick={onSearch}>검색</S.SearchButton>
         </Form>
         <Navbar.Collapse>
           <S.Offcanvas show={show} onHide={handleClose}>

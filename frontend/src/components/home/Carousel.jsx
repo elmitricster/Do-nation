@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import * as S from './Styled';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
@@ -15,7 +16,7 @@ const LeftArrow = props => {
   return <S.LeftAr className={className} onClick={onClick} />;
 };
 
-export default function Carousel() {
+export default function Carousel({ creators }) {
   const settings = {
     dots: false,
     infinite: true,
@@ -29,13 +30,15 @@ export default function Carousel() {
     prevArrow: <LeftArrow />,
   };
 
-  const tmp = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-
   return (
     <S.carouselBox>
       <Slider {...settings}>
-        {tmp.map((t, idx) => {
-          return <Creator key={idx} src="1" cre="유튜버" sub="영화/만화" />;
+        {creators.map((creator, idx) => {
+          return (
+            <NavLink key={idx} to={`/profile/${creator.nickname}/articles`} style={{ textDecoration: 'none' }}>
+              <Creator key={idx} src={creator.profileImage} nickname={creator.nickname} />
+            </NavLink>
+          );
         })}
       </Slider>
     </S.carouselBox>

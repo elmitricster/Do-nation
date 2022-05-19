@@ -18,27 +18,30 @@ export function ArticleDetail() {
     content: 'hi',
     image: 'null'
   });
-  const [comments, setComments] = useState([
-    {
-      id: 0,
-      nickname: '닉네임',
-      created_at: '2022-04-29',
-      comment: '화이팅!',
-    },
-    {
-      id: 1,
-      nickname: '닉네임',
-      created_at: '2022-04-29',
-      comment: '화이팅!',
-    },
-  ]);
+  const [comments, setComments] = useState([]);
   const [myComment, setMyComment] = useState();
 
   useEffect(() => {
-    console.log(article)
+    const getArticle = async () => {
+      const response = await api.get(`/community/read/${params.article_id}`)
+      return response
+    };
+
     const getComments = async () => {
-      const response = await api.get(`/community/`)
-    }
+      const response = await api.get(`/community/comment/read/${params.article_id}`)
+      return response
+    };
+
+    getArticle()
+      .then(res => {
+        console.log(res.data)
+        setArticle(res.data)
+      })
+
+    getComments()
+      .then(res => {
+        setComments(res.data)
+      })
   }, [])
 
   const onCommentHandler = e => {
@@ -53,8 +56,8 @@ export function ArticleDetail() {
 
     submitComment(myComment)
       .then(res => {
-        console.log(res)
         setMyComment('');
+        navigate(0);
       })
   }
 
@@ -66,7 +69,7 @@ export function ArticleDetail() {
           <i className="fa-solid fa-arrow-left" onClick={() => navigate(-1)} style={{ cursor: 'pointer'}}> 게시글</i>
         </S.TopBox>
         <S.NicknameBox>
-          <S.SmallProfileImg rounded src={default_profile} />
+          <S.SmallProfileImg src={article.profileImage} />
           cookie
           <S.DotsIcon 
             src={dots} 
@@ -83,16 +86,15 @@ export function ArticleDetail() {
           </S.Menu>
         </S.NicknameBox>
         <S.ContentBox>{article.content}</S.ContentBox>
-        <S.ImageBox src={article.image}></S.ImageBox>
         <S.BottomBox>
-          <S.Icon src={chat_img} /> 10
+          <S.Icon src={chat_img} /> {comments.length}
         </S.BottomBox>
         {comments? 
         <div style={{ borderBottom: 'solid 1px black', marginTop: '1rem' }}>
           {comments.map(comment => (
-            <S.CommentsBox key={comment.id}>
+            <S.CommentsBox key={comment.commentId}>
               <div>
-                <S.CommentProfile src={default_profile} rounded />
+                <S.CommentProfile src={comment.profileImage} />
                 <span
                   style={{
                     fontSize: '0.8rem',
@@ -106,16 +108,16 @@ export function ArticleDetail() {
                       position: 'absolute',
                       top: '1rem',
                       left: '0.1rem',
-                      width: '4rem',
+                      width: '10rem',
                     }}
                   >
-                    {comment.created_at}
+                    {comment.commentWriteTime.substr(0, 10)}
                   </span>
                 </span>
                 <S.CommentIcon src={edit} style={{ right: '2rem' }} />
                 <S.CommentIcon src={delete_icon} style={{ right: '0.5rem' }} />
               </div>
-              <S.CommentContent>{comment.comment}</S.CommentContent>
+              <S.CommentContent>{comment.content}</S.CommentContent>
             </S.CommentsBox>
           ))}
         </div>

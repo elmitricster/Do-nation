@@ -31,18 +31,21 @@ export const Contents = styled.div`
 
 export const SmallProfileImg = styled(Image)`
   width: 2.5rem;
+  height: 2.5rem;
   margin-left: 1rem;
   margin-right: 1rem;
+  border-radius: 2rem;
 `;
 
 export const NicknameBox = styled.div`
   text-align: start;
   line-height: 4rem;
   height: 4rem;
+  border-bottom: solid 1px black;
 `;
 
 export const ContentBox = styled.div`
-  height: fluid;
+  height: 25rem;
   border-bottom: solid 1px black;
   font-size: 0.9rem;
   padding: 1rem;
@@ -80,8 +83,10 @@ export const CommentsBox = styled.div`
 
 export const CommentProfile = styled(Image)`
   width: 1.5rem;
+  height: 1.5rem;
   margin-left: 1rem;
   margin-right: 0.5rem;
+  border-radius: 1.5rem;
 `;
 
 export const CommentIcon = styled(Image)`
