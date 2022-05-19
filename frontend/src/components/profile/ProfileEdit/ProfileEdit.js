@@ -140,7 +140,10 @@ export function ProfileEdit() {
       setNickname(data.nickname);
       setCreate(data.category);
       setProfileImg(data.profileImage);
-      setUrlBtns(data.userUrls);
+
+      if (data.userUrls) {
+        setUrlBtns(data.userUrls);
+      }
 
       return response;
     };
