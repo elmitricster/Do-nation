@@ -5,7 +5,6 @@ import com.example.community.domain.Community;
 import com.example.community.domain.CommunityImage;
 import com.example.community.dto.*;
 import com.example.community.repository.CommentRepository;
-import com.example.community.repository.CommunityImageRepository;
 import com.example.community.repository.CommunityRepository;
 import com.example.user.domain.User;
 import com.example.user.service.UserService;

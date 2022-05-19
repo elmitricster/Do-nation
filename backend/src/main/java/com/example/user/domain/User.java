@@ -1,9 +1,8 @@
 package com.example.user.domain;
 
 import com.example.auth.dto.UpdateUserRequest;
-import com.example.user.exception.NotIncreasePointException;
 import com.example.user.exception.NotDecreasePointException;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.example.user.exception.NotIncreasePointException;
 import io.jsonwebtoken.lang.Assert;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -11,8 +10,6 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @RequiredArgsConstructor
@@ -58,9 +55,6 @@ public class User {
     @Column(name = "subject")
     private String subject;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
-    @JsonManagedReference
-    private List<UserUrl> userUrls = new ArrayList<>();
 
     @Builder(builderClassName = "BasicBuilder", builderMethodName = "BasicBuilder")
     public User(String kakaoId, String profileImage, String nickname, String birthday){

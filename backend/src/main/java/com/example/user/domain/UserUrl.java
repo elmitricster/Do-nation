@@ -1,6 +1,5 @@
 package com.example.user.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -19,9 +18,8 @@ public class UserUrl {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="user_id")
-    @JsonBackReference
     private User user;
 
     @Column(name = "user_url")
@@ -38,14 +36,7 @@ public class UserUrl {
         this.userUrl = userUrl;
         this.colorHash = colorHash;
         this.urlName = urlName;
-        if(user != null){
-            changeUser(user);
-        }
+        this.user=user;
     }
 
-    //연관관계 method
-    public void changeUser(User user){
-        this.user = user;
-        user.getUserUrls().add(this);
-    }
 }
