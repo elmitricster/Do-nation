@@ -69,8 +69,8 @@ export function ArticleDetail() {
           <i className="fa-solid fa-arrow-left" onClick={() => navigate(-1)} style={{ cursor: 'pointer'}}> 게시글</i>
         </S.TopBox>
         <S.NicknameBox>
-          <S.SmallProfileImg src={article.profileImage} />
-          cookie
+          <S.SmallProfileImg src={article.user.profileImage} />
+          {article.user.profileNickName}
           <S.DotsIcon 
             src={dots} 
             style={{ position: 'absolute', right: '1rem', top: '1.3rem', cursor: 'pointer' }}
@@ -94,14 +94,14 @@ export function ArticleDetail() {
           {comments.map(comment => (
             <S.CommentsBox key={comment.commentId}>
               <div>
-                <S.CommentProfile src={comment.profileImage} />
+                <S.CommentProfile src={comment.user.profileImage} />
                 <span
                   style={{
                     fontSize: '0.8rem',
                     position: 'relative',
                   }}
                 >
-                  {comment.nickname}
+                  {comment.user.profileNickName}
                   <span
                     style={{
                       fontSize: '0.3rem',

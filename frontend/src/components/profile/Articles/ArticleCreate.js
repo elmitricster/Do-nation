@@ -29,12 +29,17 @@ export function ArticleCreate() {
     console.log(content)
     
     const submit = async (content) => {
-      const response = await api.post(`community?content=${content}`);
+      const data = {
+        content: content
+      }
+      
+      const response = await api.post(`/community?content=${content}`);
       return response
     }
 
     submit(content)
       .then(res => {
+        console.log(res)
         navigate(-1)
       })
       .catch(e => {
