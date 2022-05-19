@@ -3,16 +3,22 @@ import { Image } from 'react-bootstrap';
 
 export const ProfileImg = styled(Image)`
   margin-top: 3rem;
-  width: 35%;
+  width: 13rem;
+  height: 13rem;
+  border-radius: 13rem;
 
   @media (min-width: 768px) {
     margin-top: 3rem;
-    width: 25%;
+    width: 13rem;
+    height: 13rem;
+    border-radius: 13rem;
   }
 
   @media (min-width: 992px) {
     margin-top: 3rem;
-    width: 35%;
+    width: 13rem;
+    height: 13rem;
+    border-radius: 13rem;
   }
 `;
 

@@ -154,7 +154,7 @@ export function Navigation({ jwt }) {
                       <S.IconImg src={`${withdrawIcon}`} alt="home-icon" />
                       정산
                     </NavLink>
-                    <NavLink to="" onClick={handleClose} style={S.navLinkStyle}>
+                    <NavLink to="/guide" onClick={handleClose} style={S.navLinkStyle}>
                       <S.IconImg src={`${guideIcon}`} alt="home-icon" />
                       사용방법
                     </NavLink>

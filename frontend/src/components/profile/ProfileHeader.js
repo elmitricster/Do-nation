@@ -134,6 +134,7 @@ export function ProfileHeader() {
               <Row style={{ marginBottom: '1rem' }}>
                 <Col>
                   <S.URLText>URL</S.URLText>
+                  {profile.userUrls ? 
                   <div>
                     {profile.userUrls.map(userUrl => (
                       <S.URLButton key={userUrl.id} color={urlButton[userUrl.urlName]}>
@@ -141,6 +142,7 @@ export function ProfileHeader() {
                       </S.URLButton>
                     ))}
                   </div>
+                  : <></>}
                 </Col>
               </Row>
 

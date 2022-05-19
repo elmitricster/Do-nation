@@ -276,7 +276,7 @@ export function ProfileEdit() {
         ></input>
 
         <label style={{ cursor: 'pointer' }} name="ImgBtn" htmlFor="imgInput">
-          <S.ProfileImg src={profileImg ? profileImg : profileDafult} rounded />
+          <S.ProfileImg src={profileImg ? profileImg : profileDafult} />
         </label>
       </div>
       <Row>
