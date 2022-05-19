@@ -1,5 +1,6 @@
 package com.example.donation.dto;
 
+import com.example.common.dto.UserResponse;
 import com.example.donation.domain.DonationRecord;
 import com.example.user.domain.User;
 import lombok.Getter;
@@ -11,8 +12,8 @@ import java.util.stream.Collectors;
 
 @Getter
 public class DonationRecordResponse {
-    private User donator;
 
+    private UserResponse donator;
     private LocalDateTime donateTime;
 
     private int donatePoint;
@@ -20,7 +21,7 @@ public class DonationRecordResponse {
     private String donateMessage;
 
     public DonationRecordResponse(User donator, LocalDateTime donateTime, int donatePoint, String donateMessage) {
-        this.donator = donator;
+        this.donator = new UserResponse(donator);
         this.donateTime = donateTime;
         this.donatePoint = donatePoint;
         this.donateMessage = donateMessage;

@@ -1,5 +1,6 @@
 package com.example.community.dto;
 
+import com.example.common.dto.UserResponse;
 import com.example.community.domain.Comment;
 import lombok.Getter;
 
@@ -14,17 +15,13 @@ public class CommentResponse {
     private LocalDateTime commentWriteTime;
 
 
-    private String profileImage;
-
-    private String nickname;
-
+    private UserResponse user;
     private String content;
 
     public CommentResponse(Comment comment) {
         this.commentId = comment.getCommentId();
         this.commentWriteTime = comment.getCommentWriteTime();
-        this.profileImage=comment.getCommentor().getProfileImage();
-        this.nickname=comment.getCommentor().getNickname();
+        this.user=new UserResponse(comment.getCommentor());
 
         this.content = comment.getContent();
     }
