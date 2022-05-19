@@ -341,10 +341,11 @@ export function ProfileEdit() {
           </Col>
 
           <Col style={{ marginBottom: '1rem' }}>
+            {urlBtns ? 
             <Row className="justify-content-between align-items-center">
               {urlBtns.map((urlBtn, index) => (
                 <>
-                  <div className="col-10" key={urlBtn.btnName}>
+                  <div className="col-10" key={urlBtn.id}>
                     <S.LeftBox style={{ width: '30%' }}>
                       {urlBtn.urlName}
                     </S.LeftBox>
@@ -365,6 +366,7 @@ export function ProfileEdit() {
                 </>
               ))}
             </Row>
+            : <></>}
           </Col>
 
           <Col style={{ marginBottom: '1rem' }}>
