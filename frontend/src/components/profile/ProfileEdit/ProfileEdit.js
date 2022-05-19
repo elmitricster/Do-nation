@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
 import { CreateButton } from './CreateButton';
 import { SubjectButton } from './SubjectButton';
@@ -20,6 +21,7 @@ export function ProfileEdit() {
 
   const dropDownRef = useRef(null);
   const api = apiInstance();
+  const navigate = useNavigate();
 
   const createCategories = [
     {
@@ -249,14 +251,13 @@ export function ProfileEdit() {
       userNickname: nickname,
     };
 
-    console.log(data);
-
     const updateUserInfo = async data => {
       const response = await api.put('/auth', data);
       return response;
     };
 
     updateUserInfo(data);
+    navigate(`/profile/${nickname}/articles`)
   };
 
   return (

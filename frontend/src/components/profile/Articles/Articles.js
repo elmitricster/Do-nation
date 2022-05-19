@@ -1,36 +1,33 @@
+import { useEffect, useState } from 'react';
 import { Article } from 'components/profile/Articles/Article';
-import default_content from './따봉도치.jpg';
+import { apiInstance } from 'api';
 
 export function Articles() {
-  const articles = [
-    {
-      id: 0,
-      content:
-        '글 내용글 내용글 내용글 내용글 내용글 내용글 내용글 내용글 내용글 내용글 내용글 내용글 내용글 내용글 내용글 내용글 내용글 내용글 내용글 내용글 내용글 내용글 내용글 내용글 내용글 내용글 내용',
-      image: default_content,
-      likes: 100,
-      comments: 10,
-    },
-    {
-      id: 1,
-      content: '글 내용',
-      image: 'image_url',
-      likes: 100,
-      comments: 10,
-    },
-    {
-      id: 2,
-      content: '글 내용',
-      image: 'image_url',
-      likes: 100,
-      comments: 10,
-    },
-  ];
+  const [articles, setArticles] = useState([]);
+  const api = apiInstance();
+  
+  useEffect(() => {
+    const nickname = localStorage.getItem('user');
+
+    const getArticles = async () => {
+      const user_response = await api.get(`/user/nickname?nickname=${nickname}`)
+      const user_id = user_response.data.id
+
+      const response = await api.get(`/community/read/${user_id}`)
+      return response
+    }
+
+    getArticles()
+      .then(res => {
+        console.log(res.data)
+        setArticles(res.data)
+      })
+  }, [])
 
   return (
     <div>
       {articles.map(article => (
-        <Article key={article.id} article={article} />
+        <Article key={article.communityId} article={article} />
       ))}
     </div>
   );

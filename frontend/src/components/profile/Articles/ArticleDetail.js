@@ -1,26 +1,24 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import * as S from './Style';
-import default_content from './따봉도치.jpg';
 import default_profile from '../default_profile.png';
-import heart_img from './heart.png';
 import chat_img from './chat-bubble.png';
 import dots from './dots.png';
 import edit from './edit.png';
 import delete_icon from './delete.png';
+import { useEffect, useState } from 'react';
+import { apiInstance } from 'api';
 
 export function ArticleDetail() {
   const navigate = useNavigate();
+  const params = useParams();
+  const api = apiInstance();
 
-  const article = {
-    id: 0,
-    content:
-      '글 내용글 내용글 내용글 내용글 내용글 내용글 내용글 내용글 내용글 내용글 내용글 내용글 내용글 내용글 내용글 내용글 내용글 내용글 내용글 내용글 내용글 내용글 내용글 내용글 내용글 내용글 내용',
-    image: default_content,
-    likes: 100,
-    comments: 10,
-  };
-
-  const comments = [
+  const [isOpen, setIsOpen] = useState(false);
+  const [article, setArticle] = useState({
+    content: 'hi',
+    image: 'null'
+  });
+  const [comments, setComments] = useState([
     {
       id: 0,
       nickname: '닉네임',
@@ -33,10 +31,36 @@ export function ArticleDetail() {
       created_at: '2022-04-29',
       comment: '화이팅!',
     },
-  ];
+  ]);
+  const [myComment, setMyComment] = useState();
+
+  useEffect(() => {
+    console.log(article)
+    const getComments = async () => {
+      const response = await api.get(`/community/`)
+    }
+  }, [])
+
+  const onCommentHandler = e => {
+    setMyComment(e.currentTarget.value);
+  };
+
+  const onCommentSubmit = () => {
+    const submitComment = async (comment) => {
+      const response = await api.post(`/community/comment/${params.article_id}?comment=${comment}`)
+      return response
+    }
+
+    submitComment(myComment)
+      .then(res => {
+        console.log(res)
+        setMyComment('');
+      })
+  }
 
   return (
     <div>
+      {article ? 
       <S.Contents>
         <S.TopBox>
           <i className="fa-solid fa-arrow-left" onClick={() => navigate(-1)} style={{ cursor: 'pointer'}}> 게시글</i>
@@ -44,14 +68,26 @@ export function ArticleDetail() {
         <S.NicknameBox>
           <S.SmallProfileImg rounded src={default_profile} />
           cookie
-          <S.DotsIcon src={dots} />
+          <S.DotsIcon 
+            src={dots} 
+            style={{ position: 'absolute', right: '1rem', top: '1.3rem', cursor: 'pointer' }}
+            onClick={() => setIsOpen(!isOpen)}
+          />
+          <S.Menu isOpen={isOpen}>
+            <S.MyLi>
+              수정하기
+            </S.MyLi>
+            <S.MyLi>
+              삭제하기
+            </S.MyLi>
+          </S.Menu>
         </S.NicknameBox>
         <S.ContentBox>{article.content}</S.ContentBox>
         <S.ImageBox src={article.image}></S.ImageBox>
         <S.BottomBox>
-          <S.Icon src={heart_img} /> 100
           <S.Icon src={chat_img} /> 10
         </S.BottomBox>
+        {comments? 
         <div style={{ borderBottom: 'solid 1px black', marginTop: '1rem' }}>
           {comments.map(comment => (
             <S.CommentsBox key={comment.id}>
@@ -83,11 +119,13 @@ export function ArticleDetail() {
             </S.CommentsBox>
           ))}
         </div>
+        : <></>}
         <S.CommentCreateBox>
-          <S.CommentInput />
-          <S.CommentButton>작성</S.CommentButton>
+          <S.CommentInput value={myComment} onChange={onCommentHandler} />
+          <S.CommentButton onClick={onCommentSubmit}>작성</S.CommentButton>
         </S.CommentCreateBox>
       </S.Contents>
+      : <></>}
     </div>
   );
 }
