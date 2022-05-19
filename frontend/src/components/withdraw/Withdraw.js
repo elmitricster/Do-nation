@@ -30,12 +30,19 @@ export function Withdraw() {
 
   const onSubmit = () => {
     const requestWithdraw = async () => {
-      const response = await api.post(`/withdraw?point=${withdrawValue}`)
+      const response = await api.post(`/withdraw?point=${parseInt(withdrawValue)}`)
       return response
     }
-    requestWithdraw();
 
-    navigate(0);
+    if (parseInt(withdrawValue) >= 10000) {
+      requestWithdraw()
+        .then(res => {
+          console.log(res)
+          navigate(0);
+        })
+    } else {
+      alert('최소 10,000 Gom 이상부터 출금할 수 있습니다.')
+    }
   };
 
   return(

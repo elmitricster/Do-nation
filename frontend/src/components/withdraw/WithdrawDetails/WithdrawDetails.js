@@ -57,9 +57,11 @@ export function WithdrawDetails({ startDate, endDate, isSearched }) {
         <div style={{ fontWeight: "bold", textAlign: "start", fontSize: "1.2rem" }}>
           정산목록
         </div>
+        <S.WithdrawListBox>
         {searchedList.map((withdraw) => (
           <WithdrawDetail key={withdraw.id} withdraw={withdraw}/>
         ))}
+        </S.WithdrawListBox>
         <div style={{ textAlign: "end" }}>
           Total {totalValue.toLocaleString()} 원
         </div>

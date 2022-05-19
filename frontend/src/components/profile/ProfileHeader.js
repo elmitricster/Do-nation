@@ -137,7 +137,7 @@ export function ProfileHeader() {
                   <div>
                     {profile.userUrls.map(userUrl => (
                       <S.URLButton key={userUrl.id} color={urlButton[userUrl.urlName]}>
-                        {userUrl.urlName}
+                        <a href={`${userUrl.userUrl}`} style={{ textDecoration: 'none', color: 'white' }}>{userUrl.urlName}</a>
                       </S.URLButton>
                     ))}
                   </div>

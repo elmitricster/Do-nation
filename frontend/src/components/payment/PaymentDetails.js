@@ -2,58 +2,40 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { DateSearch } from "./paymentDetails/DateSearch";
 import * as S from './Style';
+import { apiInstance } from "api";
 
 export function PaymentDetails({payment}) {
-
   const [myList, setMyList] = useState(
-    [
-      {
-        id: 1,
-        date: "2022-04-28",
-        gomValue: 10000,
-        wonValue: 11000,
-      },
-      {
-        id: 2,
-        date: "2022-04-28",
-        gomValue: 10000,
-        wonValue: 11000,
-      },
-      {
-        id: 3,
-        date: "2022-04-28",
-        gomValue: 10000,
-        wonValue: 11000,
-      },
-      {
-        id: 4,
-        date: "2022-04-28",
-        gomValue: 10000,
-        wonValue: 11000,
-      },
-      {
-        id: 5,
-        date: "2022-04-28",
-        gomValue: 10000,
-        wonValue: 11000,
-      },
-    ]
+    []
   );
 
   const [totalGomValue, setTotalGomValue] = useState(0);
   const [totalWonValue, settotalWonValue] = useState(0);
   const navigate = useNavigate();
+  const api = apiInstance();
+
+  const getPayments = async () => {
+    const response = await api.get('/payment')
+    return response
+  };
+
+  useEffect(() => {
+    getPayments()
+      .then(res => {
+        setMyList(res.data)
+      })
+  }, [])
 
   useEffect(() => {
     var resultGom = 0;
     var resultWon = 0;
     myList.map((payment) => {
-      resultGom += payment.gomValue;
-      resultWon += payment.wonValue;
+      resultGom += parseInt(payment.paymentPoint);
+      resultWon += parseInt(payment.paymentMoney);
     })
     setTotalGomValue(resultGom);
     settotalWonValue(resultWon);
-  }, [])
+  }, [myList])
 
   return(
     <div>
@@ -63,22 +45,24 @@ export function PaymentDetails({payment}) {
           충전내역
         </div>
         <br />
+        <S.PaymentListBox>
         {myList.map((payment) => (
-          <div key={payment.id}>
+          <div key={payment.paymentTime}>
             <div style={{ textAlign: "start", marginTop: "1rem", fontSize: "0.8rem" }}>
-              {payment.date}
+              {payment.paymentTime.substr(0, 10)}
             </div>
             <div className="row" style={{ marginTop: "1rem" }}>
               <div className="col" style={{ textAlign: "start" }}>
-                <span>{payment.gomValue.toLocaleString()} Gom</span>
+                <span>{payment.paymentPoint.toLocaleString()} Gom</span>
               </div>
               <div className="col" style={{ textAlign: "end" }}>
-                <span>{payment.wonValue.toLocaleString()} 원</span>
+                <span>{payment.paymentMoney.toLocaleString()} 원</span>
               </div>
             </div>
             <hr />
           </div>
         ))}
+        </S.PaymentListBox>
         <div className="row">
           <div className="col" style={{ textAlign: "start" }}>
             Total {totalGomValue.toLocaleString()} Gom

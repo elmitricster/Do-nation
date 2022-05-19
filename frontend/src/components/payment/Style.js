@@ -92,3 +92,9 @@ export const BackButton = styled.button`
   font-size: 0.8rem;
   width: 25%;
 `
+
+export const PaymentListBox = styled.div`
+  height: 30rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+`

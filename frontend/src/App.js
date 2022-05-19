@@ -20,6 +20,7 @@ import { GuideContainer } from './containers/guide/GuideContainer';
 import { ArticleContainer } from 'containers/profile/ArticleContainer';
 import { ArticleCreateContainer } from 'containers/profile/ArticleCreateContainer';
 import { SearchContainer } from './containers/search/SearchContainer';
+import { Footer } from 'common/footer/Footer';
 
 function App() {
   const [jwt, setJwt] = useState('');
@@ -66,6 +67,7 @@ function App() {
           element={<SearchContainer />}
         ></Route>
       </Routes>
+      <Footer />
     </div>
   );
 }
