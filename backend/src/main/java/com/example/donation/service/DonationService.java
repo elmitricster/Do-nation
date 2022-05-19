@@ -50,8 +50,8 @@ public class DonationService {
         return DonationRecordResponse.toList(donationRecordList);
     }
 
-    public List<DonationRecordResponse> fetchDonations(String nickname) {
-        List<DonationRecord> donationRecordList =donationRecordRepository.findAllByDonatorOrderByDonateTimeDesc(userService.findMember(nickname));
+    public List<DonationRecordResponse> fetchReceivedDonations(String nickname) {
+        List<DonationRecord> donationRecordList =donationRecordRepository.findAllByCreatorOrderByDonateTimeDesc(userService.findMember(nickname));
         return DonationRecordResponse.toList(donationRecordList);
     }
 }

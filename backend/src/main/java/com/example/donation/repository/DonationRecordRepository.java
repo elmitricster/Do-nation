@@ -9,4 +9,6 @@ import java.util.List;
 
 public interface DonationRecordRepository extends JpaRepository<DonationRecord, Long> {
     List<DonationRecord> findAllByDonatorOrderByDonateTimeDesc(User user);
+    List<DonationRecord> findAllByCreatorOrderByDonateTimeDesc(User user);
+
 }
