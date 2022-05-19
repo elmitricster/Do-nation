@@ -4,6 +4,7 @@ import { Image } from 'react-bootstrap';
 export const ProfileImg = styled(Image)`
   width: 9rem;
   height: 9rem;
+  border-radius: 9rem;
 `;
 
 export const Contents = styled.div`

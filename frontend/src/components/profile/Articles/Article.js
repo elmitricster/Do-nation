@@ -3,24 +3,23 @@ import * as S from './Style';
 import default_profile from '../default_profile.png';
 import chat_img from './chat-bubble.png';
 import dots from './dots.png';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { apiInstance } from 'api';
 
 export function Article({ article }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [image, setImage] = useState();
+  const [comments, setComments] = useState([]);
   const api = apiInstance();
 
   useEffect(() => {
-    const getImage = async () => {
-      const response = await api.get(`/community/image/read/${article.communityId}`)
+    const getComments = async () => {
+      const response = await api.get(`/community/comment/read/${article.communityId}`)
       return response
-    }
+    };
 
-    getImage()
+    getComments()
       .then(res => {
-        console.log(res)
-        setImage(res.data.storeFileName)
+        setComments(res.data)
       })
   }, [])
 
@@ -28,7 +27,7 @@ export function Article({ article }) {
     <div>
       <S.Contents>
         <S.NicknameBox style={{ position: 'relative' }}>
-          <S.SmallProfileImg src={default_profile} />
+          <S.SmallProfileImg src={article.creator.profileImage} />
           cookie
           <S.Icon
             src={dots}
@@ -44,12 +43,11 @@ export function Article({ article }) {
             </S.MyLi>
           </S.Menu>
         </S.NicknameBox>
-        <S.ContentBox>{article.content}</S.ContentBox>
-        <NavLink to={`${article.communityId}`}>
-          <S.ImageBox src={`data:image/jpeg;base64,${image}`}></S.ImageBox>
+        <NavLink to={`${article.communityId}`} style={{ textDecoration: 'none', color: 'black' }}>
+          <S.ContentBox>{article.content}</S.ContentBox>
         </NavLink>
         <S.BottomBox>
-          <S.Icon src={chat_img} /> 10
+          <S.Icon src={chat_img} /> {comments.length}
         </S.BottomBox>
       </S.Contents>
     </div>

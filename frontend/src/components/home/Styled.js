@@ -21,6 +21,11 @@ const MainpageText = styled.h1`
   margin-top: 3rem;
 `;
 
+const SubText = styled.div`
+  text-align: center;
+  margin-top: 3rem;
+`;
+
 const guide = styled.div`
   display: inline-block;
   position: fixed;
@@ -54,6 +59,7 @@ const creator = styled.div`
   line-height: 2rem;
   border-radius: 25px;
   background: #e32222;
+  font-size: 0.8rem;
 `;
 
 const subject = styled.div`
@@ -64,6 +70,9 @@ const subject = styled.div`
   line-height: 2rem;
   border-radius: 25px;
   background: #8ac4ff;
+  font-size: 0.8rem;
+  color: black;
+  text-decoration-line: none;
 `;
 
 const RightAr = styled.div`
@@ -128,4 +137,5 @@ export {
   subject,
   RightAr,
   LeftAr,
+  SubText,
 };

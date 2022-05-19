@@ -4,14 +4,14 @@ export function DonationDetail({ donation }) {
       <div
         style={{ textAlign: 'start', marginTop: '1rem', fontSize: '0.8rem' }}
       >
-        {donation.nickname} | {donation.created_at}
+        {donation.donator.profileNickName} | {donation.donateTime.substr(0, 10)}
       </div>
       <div className="row" style={{ marginTop: '1rem' }}>
         <div className="col-9" style={{ textAlign: 'start' }}>
-          {donation.message}
+          {donation.donateMessage}
         </div>
         <div className="col" style={{ textAlign: 'end' }}>
-          {donation.donation.toLocaleString()} Gom
+          {donation.donatePoint.toLocaleString()} Gom
         </div>
       </div>
       <hr />

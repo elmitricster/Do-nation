@@ -1,5 +1,5 @@
-import DonationModal from '../../components/donation/DonationModal';
+import { Guide } from 'components/guide/Guide';
 
 export function GuideContainer() {
-  return <DonationModal />;
+  return <Guide />;
 }
