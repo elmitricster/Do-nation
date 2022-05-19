@@ -3,10 +3,7 @@ package com.example.community.service;
 import com.example.community.domain.Comment;
 import com.example.community.domain.Community;
 import com.example.community.domain.CommunityImage;
-import com.example.community.dto.CommentResponse;
-import com.example.community.dto.CommunityImageResponse;
-import com.example.community.dto.UpdateCommunityRequest;
-import com.example.community.dto.WriteCommunityRequest;
+import com.example.community.dto.*;
 import com.example.community.repository.CommentRepository;
 import com.example.community.repository.CommunityImageRepository;
 import com.example.community.repository.CommunityRepository;
@@ -114,7 +111,7 @@ public class CommunityService {
         return CommunityImageResponse.ofList(communityImages);
     }
 
-    public Community getContent(long communityId) {
-        return communityQueryService.getCommunity(communityId);
+    public CommunityResponse getContent(long communityId) {
+        return new CommunityResponse(communityQueryService.getCommunity(communityId));
     }
 }

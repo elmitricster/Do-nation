@@ -4,6 +4,7 @@ package com.example.api;
 import com.example.auth.dto.SessionUser;
 import com.example.community.domain.Community;
 import com.example.community.dto.CommentResponse;
+import com.example.community.dto.CommunityResponse;
 import com.example.community.dto.UpdateCommunityRequest;
 import com.example.community.dto.WriteCommunityRequest;
 import com.example.community.service.CommunityService;
@@ -39,7 +40,7 @@ public class CommunityController {
 
     @ApiOperation(value = "특정 게시글 보기")
     @GetMapping("/read/{communityId}")
-    public Community getContent(@PathVariable long communityId) {
+    public CommunityResponse getContent(@PathVariable long communityId) {
         return communityService.getContent(communityId);
     }
 
