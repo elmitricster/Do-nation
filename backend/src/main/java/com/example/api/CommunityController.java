@@ -32,9 +32,15 @@ public class CommunityController {
     }
 
     @ApiOperation(value = "게시글 전체 보기")
-    @GetMapping("/read/{creatorId}")
+    @GetMapping("/read/all/{creatorId}")
     public List<Community> fetchContents(@PathVariable long creatorId) {
         return communityService.fetchContents(creatorId);
+    }
+
+    @ApiOperation(value = "특정 게시글 보기")
+    @GetMapping("/read/{communityId}")
+    public Community getContent(@PathVariable long communityId) {
+        return communityService.getContent(communityId);
     }
 
     @ApiOperation(value = "게시글 내용 수정")
@@ -75,6 +81,9 @@ public class CommunityController {
         communityService.deleteComment(sessionUser.getId(), commentId);
         return ResponseEntity.ok().build();
     }
+
+
+
 //TODO 우선뺌.
 //    @ApiOperation(value = "커뮤니티 이미지 조회")
 //    @GetMapping("/image/read/{communityId}")

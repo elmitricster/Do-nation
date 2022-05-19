@@ -114,4 +114,7 @@ public class CommunityService {
         return CommunityImageResponse.ofList(communityImages);
     }
 
+    public Community getContent(long communityId) {
+        return communityQueryService.getCommunity(communityId);
+    }
 }
