@@ -2,11 +2,13 @@ package com.example.community.dto;
 
 import com.example.community.domain.Comment;
 import com.example.user.domain.User;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Getter
 public class CommentResponse {
     private Long commentId;
 
