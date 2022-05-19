@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface UserUrlRepository extends JpaRepository<UserUrl, Long> {
-    List<UserUrl> findAllByUAndUser(User user);
+    List<UserUrl> findAllByUser(User user);
 
 }
