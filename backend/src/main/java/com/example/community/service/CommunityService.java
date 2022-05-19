@@ -3,6 +3,7 @@ package com.example.community.service;
 import com.example.community.domain.Comment;
 import com.example.community.domain.Community;
 import com.example.community.domain.CommunityImage;
+import com.example.community.dto.CommentResponse;
 import com.example.community.dto.CommunityImageResponse;
 import com.example.community.dto.UpdateCommunityRequest;
 import com.example.community.dto.WriteCommunityRequest;
@@ -99,8 +100,8 @@ public class CommunityService {
     }
     //댓글 보기
     @Transactional(readOnly = true)
-    public List<Comment> fetchComments(Long communityId) {
-        return commentQueryService.fetchComments(communityId);
+    public List<CommentResponse> fetchComments(Long communityId) {
+        return CommentResponse.ofList(commentQueryService.fetchComments(communityId));
     }
 
     public void updateComment(long userId, Long commentId,String newComment) {

@@ -3,19 +3,19 @@ package com.example.payment.service;
 
 import com.example.common.exception.UnauthorizedRequestException;
 import com.example.payment.domain.PaymentRecord;
-import com.example.user.domain.User;
-import com.example.payment.dto.KakaoPayApiResponse;
 import com.example.payment.dto.PaymentPointRequest;
 import com.example.payment.dto.PaymentPointResponse;
 import com.example.payment.dto.PaymentRecordResponse;
 import com.example.payment.repository.PaymentRecordRepository;
 import com.example.payment.util.ConvertCalculator;
+import com.example.user.domain.User;
 import com.example.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -26,8 +26,7 @@ public class PaymentServiceImpl implements PaymentService{
     private final PaymentRecordRepository paymentRecordRepository;
     private final UserService userService;
     private final KakaoPayService kakaoPayService;
-    //TODO jwt 관련 인증을 해야할거임. 우선 작업은 햇다고 가정하고 함.
-    //TODO userRepository 익셉셥 한곳으로 모으기.
+    //TODO 우선 카카오페이 상관없이
 
     @Override
     public PaymentPointResponse paymentPoint(long id, PaymentPointRequest request) {
@@ -35,15 +34,16 @@ public class PaymentServiceImpl implements PaymentService{
         if(!ConvertCalculator.isEqualExchangeRate(request))
             throw new UnauthorizedRequestException();
 
-        KakaoPayApiResponse kakaoPayApiResponse =kakaoPayService.approveKakaoPay(request);
+
+        //KakaoPayApiResponse kakaoPayApiResponse =kakaoPayService.approveKakaoPay(request);
 
         user.increasePoint(request.getPoint());
         PaymentRecord paymentRecord =paymentRecordRepository.save(
                 PaymentRecord.builder()
                         .paymentMoney(request.getMoney())
                         .paymentPoint(request.getPoint())
-                        .tid(kakaoPayApiResponse.getTid())
-                        .paymentTime(kakaoPayApiResponse.getApproveAt())
+                        .tid("practice")
+                        .paymentTime(LocalDateTime.now())
                         .user(user)
                         .build()
         );

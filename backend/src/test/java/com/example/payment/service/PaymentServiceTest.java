@@ -72,7 +72,7 @@ class PaymentServiceTest {
                 .paymentTime(kakaoPayApiResponse.getApproveAt())
                 .user(user)
                 .build();
-        when(kakaoPayService.approveKakaoPay(Mockito.any())).thenReturn(kakaoPayApiResponse);
+//        when(kakaoPayService.approveKakaoPay(Mockito.any())).thenReturn(kakaoPayApiResponse);
         when(paymentRecordRepository.save(Mockito.any())).thenReturn(record);
        PaymentPointResponse response = payment.paymentPoint(1, new PaymentPointRequest(1, 2, "cid", "tid", "partner_order_id", "partner_user_id", "pg_token"));
 

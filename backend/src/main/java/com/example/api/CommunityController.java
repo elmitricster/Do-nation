@@ -2,9 +2,8 @@ package com.example.api;
 
 
 import com.example.auth.dto.SessionUser;
-import com.example.community.domain.Comment;
 import com.example.community.domain.Community;
-import com.example.community.dto.CommunityImageResponse;
+import com.example.community.dto.CommentResponse;
 import com.example.community.dto.UpdateCommunityRequest;
 import com.example.community.dto.WriteCommunityRequest;
 import com.example.community.service.CommunityService;
@@ -66,7 +65,7 @@ public class CommunityController {
     }
     @ApiOperation(value = "댓글 전체 보기")
     @GetMapping("/comment/read/{communityId}")
-    public List<Comment> fetchComments(@PathVariable long communityId) {
+    public List<CommentResponse> fetchComments(@PathVariable long communityId) {
         return communityService.fetchComments(communityId);
     }
 
@@ -76,11 +75,12 @@ public class CommunityController {
         communityService.deleteComment(sessionUser.getId(), commentId);
         return ResponseEntity.ok().build();
     }
-    @ApiOperation(value = "커뮤니티 이미지 조회")
-    @GetMapping("/image/read/{communityId}")
-    public List<CommunityImageResponse> fetchCommunityImages(@PathVariable long communityId) {
-        return communityService.fetchCommunityImages(communityId);
-    }
+//TODO 우선뺌.
+//    @ApiOperation(value = "커뮤니티 이미지 조회")
+//    @GetMapping("/image/read/{communityId}")
+//    public List<CommunityImageResponse> fetchCommunityImages(@PathVariable long communityId) {
+//        return communityService.fetchCommunityImages(communityId);
+//    }
 
 
 }
