@@ -67,7 +67,7 @@ export const Icon = styled(Image)`
 
 export const DotsIcon = styled(Image)`
   position: absolute;
-  width: 2rem;
+  width: 1.5rem;
   right: 1rem;
   top: 0.7rem;
 `;
@@ -189,8 +189,8 @@ export const Menu = styled.ul`
 export const MyLi = styled.li`
   list-style: none;
   color: black;
-  height: 1rem;
-  line-height: 1rem;
+  height: 2rem;
+  line-height: 2rem;
 
   &:hover {
     border: solid 1px #94bdfb;

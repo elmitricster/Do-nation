@@ -59,7 +59,6 @@ export function ProfileHeader() {
   useEffect(() => {
     checkIsFollow(params.nickname)
       .then(res => {
-        console.log(res)
         setIsFollow(res)
       })
   }, [profile])
@@ -109,14 +108,22 @@ export function ProfileHeader() {
                 <Row>
                   <div>
                     {isMyProfile ? 
-                      <S.MyButton>프로필 편집</S.MyButton>
+                      <NavLink to="/profile/edit">
+                        <S.MyButton>프로필 편집</S.MyButton>
+                      </NavLink>
                     : 
                       isFollow ?
                         <S.MyButton onClick={() => {onClickUnfollow()}}>언팔로우</S.MyButton>
                       :
                         <S.MyButton onClick={() => {onClickFollow()}}>팔로우</S.MyButton>
                     }
-                    {isMyProfile ? <S.MyButton>글 작성</S.MyButton> : <DonationModal profile={profile} />}
+                    {isMyProfile ?
+                      <NavLink to="/articles/create">
+                        <S.MyButton>글 작성</S.MyButton>
+                      </NavLink>
+                    : 
+                      <DonationModal profile={profile} />
+                    }
                   </div>
                 </Row>
               </div>

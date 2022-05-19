@@ -45,7 +45,7 @@ function App() {
         <Route path="profile/edit" element={<ProfileEditContainer />} />
 
         <Route
-          path="profile/:user_id/articles/:article_id"
+          path="profile/:nickname/articles/:article_id"
           element={<ArticleContainer />}
         />
         <Route path="articles/create" element={<ArticleCreateContainer />} />
