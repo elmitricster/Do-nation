@@ -3,7 +3,6 @@ package com.example.auth.service;
 
 import com.example.auth.dto.*;
 import com.example.auth.exception.DuplicateNicknameException;
-import com.example.auth.exception.UserNotFoundException;
 import com.example.auth.util.JwtUtil;
 import com.example.user.domain.User;
 import com.example.user.domain.UserUrl;
@@ -49,7 +48,7 @@ public class AuthService {
         User user = userService.findMember(sessionUser.getId());
         user.updateProfile(updateUserRequest);
 
-        userUrlRepository.deleteAllByIdInQuery(user);
+        userUrlRepository.deleteAll(userUrlRepository.findAllByUAndUser(user));
         List<UserUrlDto> userUrls = updateUserRequest.getUserUrls();
         for (UserUrlDto url : userUrls) {
             userUrlRepository.save(UserUrl.BasicBuilder()

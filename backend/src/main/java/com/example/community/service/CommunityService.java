@@ -9,6 +9,7 @@ import com.example.community.repository.CommunityRepository;
 import com.example.user.domain.User;
 import com.example.user.service.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +19,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Transactional
+@Slf4j
 public class CommunityService {
     private final FileStore fileStore;
     private final CommunityQueryService communityQueryService;
@@ -33,11 +35,14 @@ public class CommunityService {
     @Transactional
     public void writeContent(Long id, WriteCommunityRequest request) {
         User creator = userService.findMember(id);
+        log.info("creator:{}",creator.getNickname());
+
         Community community=communityRepository.save(Community.builder()
                 .creator(creator)
                 .writeTime(LocalDateTime.now())
                 .content(request.getContent())
                 .build());
+
        // communityImageRepository.saveAll(CommunityImageMaker.ofList(fileStore.storeFiles(request.getImages()), community));
     }
 
