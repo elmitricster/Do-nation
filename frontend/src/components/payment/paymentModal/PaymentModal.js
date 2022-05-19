@@ -84,7 +84,7 @@ export default function PaymentModal({ handleClose }) {
 
         <S.Cards>
           <S.Card>
-            <div onClick={requestPayment(1100, 1000)}>
+            <div onClick={() => {requestPayment(1100, 1000)}}>
               <S.CardSection1>
                 <S.GomPoint>1,000</S.GomPoint>
                 Gom
@@ -93,7 +93,7 @@ export default function PaymentModal({ handleClose }) {
             </div>
           </S.Card>
           <S.Card>
-            <div onClick={requestPayment(3300, 3000)}>
+            <div onClick={() => {requestPayment(3300, 3000)}}>
               <S.CardSection1>
                 <S.GomPoint>3,000</S.GomPoint>
                 Gom
@@ -102,7 +102,7 @@ export default function PaymentModal({ handleClose }) {
             </div>
           </S.Card>
           <S.Card>
-            <div onClick={requestPayment(5500, 5000)}>
+            <div onClick={() => {requestPayment(5500, 5000)}}>
               <S.CardSection1>
                 <S.GomPoint>5,000</S.GomPoint>
                 Gom
@@ -111,7 +111,7 @@ export default function PaymentModal({ handleClose }) {
             </div>
           </S.Card>
           <S.Card>
-            <div onClick={requestPayment(11000, 10000)}>
+            <div onClick={() => {requestPayment(11000, 10000)}}>
               <S.CardSection1>
                 <S.GomPoint>10,000</S.GomPoint>
                 Gom
@@ -120,7 +120,7 @@ export default function PaymentModal({ handleClose }) {
             </div>
           </S.Card>
           <S.Card>
-            <div onClick={requestPayment(55000, 50000)}>
+            <div onClick={() => {requestPayment(55000, 50000)}}>
               <S.CardSection1>
                 <S.GomPoint>50,000</S.GomPoint>
                 Gom
@@ -129,7 +129,7 @@ export default function PaymentModal({ handleClose }) {
             </div>
           </S.Card>
           <S.Card>
-            <div onClick={requestPayment(110000, 100000)}>
+            <div onClick={() => {requestPayment(110000, 100000)}}>
               <S.CardSection1>
                 <S.GomPoint>100,000</S.GomPoint>
                 Gom
