@@ -70,6 +70,7 @@ export function ArticleCreate() {
             <S.ContentImg src={fileImage} />
           </label>
         </div> */}
+        <br />
         <S.MyButton onClick={onSubmit}>작성하기</S.MyButton>
       </S.Contents>
     </div>

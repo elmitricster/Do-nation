@@ -138,8 +138,8 @@ export const CommentButton = styled.button`
 
 export const CreateText = styled.div`
   width: 80%;
+  margin-left: 2.5rem;
   text-align: start;
-  margin: 0.5rem auto;
   font-weight: bold;
   margin-top: 2rem;
 `;
