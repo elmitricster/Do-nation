@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Image } from "react-bootstrap";
 
 export const Contents = styled.div`
   width: 80%;
@@ -18,7 +19,26 @@ export const Contents = styled.div`
   }
 `
 
+export const MainText = styled.div`
+  font-size: 3rem;
+  font-weight: bold;
+`
+
 export const MenuText = styled.div`
   cursor: pointer;
   font-size: 1rem;
+`
+
+export const TopText = styled.div`
+  text-align: start;
+  font-size: 2rem;
+  font-weight: bold;
+`
+
+export const GuideImage = styled(Image)`
+  width: fluid;
+`
+
+export const GuideText = styled.div`
+  font-size: 0.8rem;
 `

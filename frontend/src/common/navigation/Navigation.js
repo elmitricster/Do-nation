@@ -111,7 +111,7 @@ export function Navigation({ jwt }) {
             <Offcanvas.Header closeButton>
               <Offcanvas.Title>
                 {/* <i className="fa-solid fa-user"></i> */}
-                <S.ProfileImg src={profileImg} roundedCircle />
+                <S.ProfileImg src={profileImg} />
                 <NavLink to="" onClick={handleClose} style={S.navLinkStyle}>
                   {profileName ? profileName : nickname}
                 </NavLink>

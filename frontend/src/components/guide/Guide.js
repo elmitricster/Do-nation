@@ -10,7 +10,7 @@ export function Guide() {
   return(
     <div>
       <S.Contents>
-        <h1 style={{ marginTop: '5rem' }}>사용방법</h1>
+        <S.MainText style={{ marginTop: '5rem', marginBottom: '3rem' }}>사용방법</S.MainText>
         <div className="row justify-content-around mt-3">
           <S.MenuText className='col' onClick={() => setStage(0)}>
             도네이션

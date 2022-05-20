@@ -14,10 +14,7 @@ export function ArticleDetail() {
   const api = apiInstance();
 
   const [isOpen, setIsOpen] = useState(false);
-  const [article, setArticle] = useState({
-    content: 'hi',
-    image: 'null'
-  });
+  const [article, setArticle] = useState();
   const [comments, setComments] = useState([]);
   const [myComment, setMyComment] = useState();
 
@@ -34,7 +31,6 @@ export function ArticleDetail() {
 
     getArticle()
       .then(res => {
-        console.log(res.data)
         setArticle(res.data)
       })
 

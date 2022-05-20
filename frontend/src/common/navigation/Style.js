@@ -42,6 +42,8 @@ export const LogoImg = styled.img`
 
 export const ProfileImg = styled(Image)`
   width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 2.5rem;
 `;
 
 export const IconImg = styled.img`
